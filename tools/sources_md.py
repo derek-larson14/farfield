@@ -26,13 +26,11 @@ SECTIONS = [  # (title, test on a source), first match wins
     ("Outside AI", lambda s: "adjacent-fields" in s.get("topics", [])),
 ]
 
-INTRO = """# Reading list
+INTRO = """# What Farfield reads
 
-Farfield starts from these {n} sources. During setup you can keep them, add your own, mute any of them, or use only your own. Each brief reads the last few weeks of whichever are on, then keeps only what bears on your work.
+The default sources. During setup, and any time after, you can add your own or mute any of these.
 
-Paywalled posts are skipped. Podcasts are read from their published transcripts; audio is transcribed only if you turn that on.
-
-Think something is missing? [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml).
+[Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
 """
 
 OUTRO = """
@@ -97,24 +95,21 @@ main{{max-width:680px;margin:0 auto;padding:56px 16px 72px}}
 .top:hover{{color:var(--ink)}}
 h1{{font-size:clamp(32px,6vw,42px);font-weight:400;letter-spacing:-.7px;line-height:1.15;margin:28px 0 14px}}
 .lede{{color:#3d3b36;margin:0 0 10px}}
-.ask{{margin:28px 0 8px;padding:16px 18px;border-left:2px solid var(--glow);background:#fff8}}
-.ask a{{color:var(--glow)}}
-h2{{font-size:13px;font-weight:400;font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:40px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}}
+.suggest{{color:var(--glow);text-underline-offset:3px}}
+h2{{font-size:24px;font-weight:500;letter-spacing:-.3px;margin:44px 0 6px}}
 ul{{list-style:none;margin:0;padding:0}}
-li{{padding:9px 0}}
+li{{padding:8px 0;border-top:1px solid var(--line)}}
+li:first-child{{border-top:0}}
 li a{{color:var(--ink);font-weight:500;text-decoration-color:var(--line);text-underline-offset:3px}}
 li a:hover{{text-decoration-color:var(--glow)}}
 li span{{display:block;color:#55524b;font-size:16.5px}}
-footer{{margin-top:48px;font:12.5px/1.6 "IBM Plex Mono",ui-monospace,Menlo,monospace;color:var(--muted)}}
 </style></head>
 <body><main>
 <a class="top" href="/">← Farfield</a>
 <h1>What Farfield reads</h1>
-<p class="lede">These {len(catalog['sources'])} sources are the starting list. Each brief reads the last few weeks of them, keeps only what bears on the reader's work, and links back to the originals. Everyone can add their own or mute any of these.</p>
-<p class="lede">Paywalled posts are skipped. Podcasts are read from their published transcripts.</p>
-<div class="ask"><strong>What are we missing?</strong> The best additions are people doing the work and writing about it firsthand, independent evaluations, and anything outside AI that explains how technology actually spreads. <a href="{SUGGEST}">Suggest a source</a>, or just tell whoever sent you this link.</div>
+<p class="lede">The default sources. During setup, and any time after, you can add your own or mute any of these.</p>
+<p class="lede"><a class="suggest" href="{SUGGEST}">Suggest a source</a></p>
 {''.join(sections)}
-<footer>Generated from the catalog Farfield installs with, so this page is always the real list.</footer>
 </main></body></html>
 """
 

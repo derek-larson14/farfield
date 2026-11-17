@@ -486,12 +486,14 @@ def parse_feed(body):
         out.append({"title": (item.findtext("title") or "").strip(), "url": (item.findtext("link") or "").strip(),
                     "date": when(item.findtext("pubDate") or item.findtext("{http://purl.org/dc/elements/1.1/}date")),
                     "transcript": item.find(PODCAST_NS + "transcript") is not None,
-                    "audio": enclosure is not None and "audio" in (enclosure.get("type") or "audio")})
+                    "audio": enclosure is not None and "audio" in (enclosure.get("type") or "audio"),
+                    "categories": [(c.text or "").strip() for c in item.findall("category")]})
     for entry in tree.iter(ATOM + "entry"):
         link = next((l.get("href") for l in entry.findall(ATOM + "link") if l.get("rel", "alternate") == "alternate"), "")
         out.append({"title": (entry.findtext(ATOM + "title") or "").strip(), "url": link or "",
                     "date": when(entry.findtext(ATOM + "published") or entry.findtext(ATOM + "updated")),
-                    "transcript": False, "audio": False})
+                    "transcript": False, "audio": False,
+                    "categories": [c.get("term", "") for c in entry.findall(ATOM + "category")]})
     return out
 
 
@@ -505,6 +507,9 @@ def list_source(source, since):
         entries = parse_feed(http(source["url"], limit=16 * 1024 * 1024))
     except Exception as error:  # one broken feed must not stop the others
         return {**base, "status": "failed", "note": str(error)[:200]}
+    wanted = set(source.get("categories") or [])
+    if wanted:   # one feed shared by several sources, e.g. OpenAI's news feed split into Engineering and Research
+        entries = [e for e in entries if wanted & set(e["categories"])]
     dated = [e for e in entries if e["date"]]
     items = sorted((e for e in dated if e["date"] >= since), key=lambda e: e["date"], reverse=True)
     oldest = min((e["date"] for e in dated), default=None)

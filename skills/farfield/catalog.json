@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -353,6 +353,43 @@
       "enabled": true
     },
     {
+      "id": "openai-engineering",
+      "name": "OpenAI Engineering",
+      "kind": "feed",
+      "home": "https://openai.com/news/engineering/",
+      "url": "https://openai.com/news/rss.xml",
+      "categories": [
+        "Engineering"
+      ],
+      "why": "How OpenAI builds and runs its systems: harnesses, infrastructure, and lessons from deployment.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "One news feed for all of OpenAI; only posts tagged Engineering. The site blocks some automated readers; use the feed's links and fetch the originals.",
+      "discovery": "rss-or-atom",
+      "family": "openai",
+      "example_url": "https://openai.com/index/harness-engineering",
+      "checked_on": "2026-11-17"
+    },
+    {
+      "id": "openai-research",
+      "name": "OpenAI Research",
+      "kind": "feed",
+      "home": "https://openai.com/news/research/",
+      "url": "https://openai.com/news/rss.xml",
+      "categories": [
+        "Research"
+      ],
+      "why": "Primary research and system cards from OpenAI. Vendor research; read it next to independent evaluations.",
+      "topics": [
+        "research"
+      ],
+      "access": "Same feed as OpenAI Engineering; only posts tagged Research. Product launches are left out.",
+      "discovery": "rss-or-atom",
+      "family": "openai",
+      "checked_on": "2026-11-17"
+    },
+    {
       "id": "berkeley-bair",
       "name": "Berkeley AI Research",
       "kind": "feed",
@@ -431,6 +468,20 @@
       "example_url": "https://www.ben-evans.com/benedictevans/2026/9/3/ai-tools-and-transformation",
       "checked_on": "2026-11-17",
       "enabled": true
+    },
+    {
+      "id": "substack:derekthompson.org",
+      "name": "Derek Thompson",
+      "kind": "feed",
+      "home": "https://www.derekthompson.org/",
+      "url": "https://www.derekthompson.org/feed",
+      "why": "Big-picture essays on AI, the economy and how people actually adopt new technology.",
+      "topics": [
+        "business"
+      ],
+      "access": "Public Substack feed; some posts paid. Read accessible text only.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
     },
     {
       "id": "construction-physics",

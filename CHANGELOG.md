@@ -1,5 +1,11 @@
 # Changes
 
+## 0.3.1
+
+- Sources: add OpenAI Engineering and OpenAI Research (one shared feed, filtered by its own tags) and bring back Derek Thompson. 40 sources.
+- `radar.py items` can filter a shared feed by category.
+- Site: the homepage links "essays, papers, and podcasts" to the reading list at /sources, which is now just the list and a suggestion link.
+
 ## 0.3.0
 
 - Briefs read like a sharp note from a well-read friend: a headline, a few ideas in plain prose with exact quotes, a "Worth a look" list of links (repos, products, papers, posts) with a line on what each is and why it matters to you, and a one-line footer. No labeled fields. The reply in a conversation is the brief and one link.

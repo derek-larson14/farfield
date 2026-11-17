@@ -1,10 +1,8 @@
-# Reading list
+# What Farfield reads
 
-Farfield starts from these 37 sources. During setup you can keep them, add your own, mute any of them, or use only your own. Each brief reads the last few weeks of whichever are on, then keeps only what bears on your work.
+The default sources. During setup, and any time after, you can add your own or mute any of these.
 
-Paywalled posts are skipped. Podcasts are read from their published transcripts; audio is transcribed only if you turn that on.
-
-Think something is missing? [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml).
+[Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
 
 ## Builders and engineering
 
@@ -16,6 +14,7 @@ Think something is missing? [Suggest a source](https://github.com/derek-larson14
 - **[Hamel Husain](https://hamel.dev/)**: Task-specific evaluations and failure analysis from real AI projects.
 - **[Eugene Yan](https://eugeneyan.com/)**: Production ML, retrieval, evaluation, and deployment tradeoffs.
 - **[Anthropic Engineering](https://www.anthropic.com/engineering)**: Concrete harness, evaluation, and tool-use implementation lessons.
+- **[OpenAI Engineering](https://openai.com/news/engineering/)**: How OpenAI builds and runs its systems: harnesses, infrastructure, and lessons from deployment.
 - **[Hugging Face Blog](https://huggingface.co/blog)**: Open model tooling, reproducible implementations, datasets, and practical experiments.
 - **[Chip Huyen](https://huyenchip.com/)**: Systematic explanations of AI systems and product tradeoffs.
 
@@ -26,6 +25,7 @@ Think something is missing? [Suggest a source](https://github.com/derek-larson14
 - **[Dwarkesh](https://www.dwarkesh.com/)**: Long interviews with researchers and builders, with full transcripts.
 - **[Ahead of AI (Sebastian Raschka)](https://magazine.sebastianraschka.com/)**: Technical explanations connecting papers to model training and evaluation.
 - **[Anthropic Research](https://www.anthropic.com/research)**: Primary experiments in model behavior, safety, and economic use.
+- **[OpenAI Research](https://openai.com/news/research/)**: Primary research and system cards from OpenAI. Vendor research; read it next to independent evaluations.
 - **[Berkeley AI Research](https://bair.berkeley.edu/blog/)**: Researchers explain their own work in learning, robotics, and systems.
 - **[Google DeepMind](https://deepmind.google/blog/)**: Primary work in models, robotics, and scientific applications.
 - **[Lilian Weng](https://lilianweng.github.io/)**: Deep technical surveys linking methods, papers, and limitations.
@@ -41,6 +41,7 @@ Think something is missing? [Suggest a source](https://github.com/derek-larson14
 ## Business and strategy
 
 - **[Benedict Evans](https://www.ben-evans.com/)**: Technology adoption and business-model analysis beyond individual model launches.
+- **[Derek Thompson](https://www.derekthompson.org/)**: Big-picture essays on AI, the economy and how people actually adopt new technology.
 
 ## Outside AI
 
