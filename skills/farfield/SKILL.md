@@ -71,12 +71,12 @@ If `social.json` has `"enabled": true`, also follow [references/social.md](refer
 
 **Select.** Keep ideas that could change how the user approaches a named project or open question in `me.md`. Prefer ideas with two independent sources; a single-source lead is fine if labeled. Skip what `me.md` says they already know and anything in `state/seen.json`. Past briefs are never candidate material. Model releases and tool announcements are at most a third of the brief.
 
-**Write** `briefs/YYYY-MM-DD.md` (add `-2` rather than overwrite). It reads like a short email from a well-read colleague who knows their work: plain, specific prose that makes them want to click. Not a report, not a form. Length comes from `me.md` (default about 400 words, quotes included).
+**Write** `briefs/YYYY-MM-DD.md` (add `-2` rather than overwrite). Write it like a sharp note from a well-read friend who knows their work: plain, specific prose that makes them want to click. Not a report or a form, and not a letter either: no greeting, no sign-off. Length comes from `me.md` (default about 400 words for the ideas, quotes included; the links section is extra).
 
 ```markdown
-# <Subject line: the most useful idea, in plain words>
+# <Headline: the most useful idea, in plain words>
 
-<One or two sentences on what this reading means for their work. No greeting, no preamble.>
+<One or two sentences on what this reading means for their work. No preamble.>
 
 ## <The idea as a plain claim>
 
@@ -87,22 +87,28 @@ If `social.json` has `"enabled": true`, also follow [references/social.md](refer
 
 <Optional: one "Rhymes with your work" note, written the same way.>
 
+## Worth a look
+
+- [<Name>](<url>): <what it is, in a few words: a blog post, a repo, a new product, a paper, a talk, a dataset> <and why they might care, in one clause>.
+- ...
+
 ---
 *Read 32 of 245 new pieces from 37 sources, Oct 18 to Nov 17. Partly covered: Simon Willison, Latent Space. Which of these were useful, already known, or not relevant?*
 ```
 
 Rules:
 
-- 0 to 3 ideas. If nothing clears the bar, the whole brief is two lines saying so.
+- 0 to 3 ideas. If nothing clears the bar, say so in two lines and still give the links.
 - Each idea is at most two short paragraphs and one or two quotes. No labeled fields ("The idea:", "Why it matters:", "Evidence:", "How sure:", "Hypothesis:", "Experiment:"), no bullet scaffolding, no bold run-in labels.
+- **Worth a look** is 3 to 6 links that are worth their click even though they aren't full ideas: the repo behind a finding, a new tool or product someone could try this week, a paper to bookmark, a talk, a dataset, a thoughtful thread. Each gets one line saying what kind of thing it is and why it's interesting to them in particular. Be specific and a little playful; "a 200-line Python repo that does the decision-threshold sweep for you" beats "a useful resource". Prefer things you actually opened. Don't repeat links from the ideas above unless the link adds something new (the code, the dataset).
 - Every quote is exact and linked; everything else is your own prose.
 - The italic footer is the only place for coverage, and it's one or two lines. Details stay in `state/reading/`.
 - No coaching ("ship", "focus"), no predictions presented as fact, no news roundup, no restating their project back to them, no explaining Farfield.
 
 **Rhymes with your work.** This section connects outside work to how they work, not just what they work on. Write it like the other ideas, in under 90 words of prose: what you've noticed, said neutrally and with its basis ("across several recent conversations you've been setting up evaluations by hand"); what someone else is doing about something similar, with the source, an exact quote and date; and where it might fit, as a possibility for them to judge. No "you should", no "inefficient", no verdict on their choices. Assume you are seeing part of the picture: they may have reasons, tools or work you can't see. Search for these with general descriptions of the task, never with their words, names or paths. Never quote their conversations in the brief.
 
-**Edit pass (always, even for a short brief).** Models write long, and the writer can't judge its own padding. After drafting, if the host has subagents, give a fresh one (a small model is fine) the draft, `me.md` and these rules: "Edit this brief into a short, compelling email to one busy, smart reader, within the length in me.md. Cut anything they don't need to grasp each idea and where it fits their work. Turn any labeled fields, bullet scaffolding or report headings into plain prose. Never change a quote, link, date or name, and never add a claim. Return only the edited brief." Without subagents, do that pass yourself. Count the words (prose, quotes excluded) and do one more pass if it is still over by more than a quarter.
+**Edit pass (always, even for a short brief).** Models write long, and the writer can't judge its own padding. After drafting, if the host has subagents, give a fresh one (a small model is fine) the draft, `me.md` and these rules: "Edit this brief for one busy, smart reader. The ideas should be within the length in me.md and read as plain, compelling prose: cut anything they don't need to grasp each idea and where it fits their work, and turn any labeled fields, bullet scaffolding or report headings into sentences. Keep the Worth a look list as one-line bullets; make each line say concretely what the thing is and why this reader would click, and cut any that are vague. No greeting or sign-off. Never change a quote, link, date or name, and never add a claim. Return only the edited brief." Without subagents, do that pass yourself. Count the words (prose, quotes excluded) and do one more pass if it is still over by more than a quarter.
 
-Record each finding's originals as `shown` with `library.py record ... --status shown --brief <path>`. Then update `state/seen.json` (IDs, dates, a few words each; never brief prose). In a conversation, your reply is the brief exactly as written, then one line linking the file. Nothing else: no file list, no privacy note, no summary of the process, no update status unless an update is actually available. Append their answers on usefulness to `feedback.md` with the date and finding ID.
+Record each finding's originals as `shown` with `library.py record ... --status shown --brief <path>`. Then update `state/seen.json` (IDs, dates, a few words each; never brief prose), including the Worth a look links, so later briefs don't repeat them. In a conversation, your reply is the brief exactly as written, then one line linking the file. Nothing else: no file list, no privacy note, no summary of the process, no update status unless an update is actually available. Append their answers on usefulness to `feedback.md` with the date and finding ID.
 
 A brief run never edits `me.md`, changes sources, sends anything, or schedules anything.

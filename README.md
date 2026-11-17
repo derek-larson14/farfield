@@ -30,7 +30,7 @@ After setup, ask for another brief, change your sources, or set up a schedule. I
 
 ## Sources
 
-Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml). Twitter/X and cloud transcription are optional; setup shows cost estimates before enabling either.
+Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](https://farfield.newyorkai.org/sources). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml). Twitter/X and cloud transcription are optional; setup shows cost estimates before enabling either.
 
 ## Privacy
 

@@ -11,6 +11,7 @@ cp install.sh dist/install.sh   # served byte for byte as it is in the repo, so 
 sed -e "s|farfield.newyorkai.org|$DOMAIN|g" -e "s|github.com/derek-larson14/farfield|github.com/$REPO|g" -e "s|](CONTRIBUTING.md)|](https://github.com/$REPO/blob/main/CONTRIBUTING.md)|g" ../AGENTS.md > dist/install.md
 cp dist/install.md dist/setup.md
 python3 package.py .. dist "https://$DOMAIN"
+python3 ../tools/sources_md.py --check --html dist/sources.html   # /sources, from the same catalog
 cp logos/* dist/logos/
 cp social-card.jpg dist/social-card.jpg
 echo "built dist/ for https://$DOMAIN ($REPO)"

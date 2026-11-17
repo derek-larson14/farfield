@@ -2,7 +2,7 @@
 
 ## 0.3.0
 
-- Briefs read like a short email: a subject line, a few ideas in plain prose with exact quotes, and a one-line footer. No labeled fields. The reply in a conversation is the brief and one link.
+- Briefs read like a sharp note from a well-read friend: a headline, a few ideas in plain prose with exact quotes, a "Worth a look" list of links (repos, products, papers, posts) with a line on what each is and why it matters to you, and a one-line footer. No labeled fields. The reply in a conversation is the brief and one link.
 - Every release bumps the version. Installed Claude Code plugins only update when it changes.
 - Install, update and version check all come from farfield.newyorkai.org (a hosted marketplace with a zip, and a tarball for Codex). No git or GitHub needed. The setup prompt points at /install.md.
 
