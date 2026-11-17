@@ -21,6 +21,8 @@ The plugin's commands load in new sessions. Don't make them restart: read `skill
 
 **Claude desktop app or Cowork, without a terminal tool.** You can't install a plugin from inside a chat. Tell them: Customize → Browse plugins → Personal → Add marketplace, paste `https://farfield.newyorkai.org/marketplace.json`, Install, then type `/farfield:start`.
 
+**claude.ai chat, or any sandbox that can't reach farfield.newyorkai.org or ordinary websites.** Farfield can't run there: a brief reads dozens of sites, and these sandboxes only reach an allowlist. Don't offer to set it up by hand from pasted files. Tell the user in two sentences that Farfield runs in Claude Code (terminal or the desktop app's Code tab), Cowork, or Codex, and give the matching step above or below.
+
 **Codex, or any agent with a shell.** Download the skill folder into the user's skills directory:
 
 ```sh
