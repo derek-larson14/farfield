@@ -3,7 +3,45 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "headers": [
-    { "source": "/install.sh", "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }] },
-    { "source": "/setup.md", "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }] }
+    {
+      "source": "/install.sh",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/(install|setup).md",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/markdown; charset=utf-8"
+        }
+      ]
+    },
+    {
+      "source": "/(marketplace|skill).json",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/(farfield.zip|farfield-skill.tar.gz)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
   ]
 }

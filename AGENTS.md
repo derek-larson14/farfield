@@ -6,28 +6,29 @@ If you are here to change this repository rather than install it, read [CONTRIBU
 
 ## 1. Install (pick the first that matches)
 
+Everything installs from https://farfield.newyorkai.org. No git, no GitHub account, no clone. Don't look for the source repository or use anyone's credentials; if a command below fails, tell the user what failed.
+
 **Claude Code, with a shell.** Run:
 
 ```sh
-claude plugin marketplace add derek-larson14/farfield
+claude plugin marketplace add https://farfield.newyorkai.org/marketplace.json
 claude plugin install farfield@farfield
 ```
 
-The plugin's commands load in new sessions. In this session, don't make them restart: read `skills/farfield/SKILL.md` from the installed plugin (`find ~/.claude/plugins -path '*farfield*' -name SKILL.md | head -1`) and continue to step 2 directly. Tell them that next time it's `/farfield:brief`.
+If the first command says a marketplace named `farfield` already exists from somewhere else, run `claude plugin marketplace remove farfield` and both commands again.
 
-**Claude desktop app, Cowork, or claude.ai chat, without a terminal tool.** You can't install a plugin from inside a chat. Tell them: Customize → Browse plugins → Personal → Add marketplace from GitHub → `derek-larson14/farfield` → Install, then type `/farfield:start`.
+The plugin's commands load in new sessions. Don't make them restart: read `skills/farfield/SKILL.md` from the installed plugin (`claude plugin list` shows where it is; or `find ~/.claude/plugins/cache -path '*farfield*' -name SKILL.md | sort | tail -1`) and continue to step 2. Tell them that next time it's `/farfield:brief`.
 
-**Codex.** Copy the one skill folder into the user's skills directory:
+**Claude desktop app or Cowork, without a terminal tool.** You can't install a plugin from inside a chat. Tell them: Customize → Browse plugins → Personal → Add marketplace, paste `https://farfield.newyorkai.org/marketplace.json`, Install, then type `/farfield:start`.
+
+**Codex, or any agent with a shell.** Download the skill folder into the user's skills directory:
 
 ```sh
-tmp=$(mktemp -d) && git clone --depth 1 https://github.com/derek-larson14/farfield "$tmp/repo" \
-  && mkdir -p ~/.agents/skills && rm -rf ~/.agents/skills/farfield \
-  && cp -R "$tmp/repo/skills/farfield" ~/.agents/skills/farfield && rm -rf "$tmp"
+mkdir -p ~/.agents/skills && rm -rf ~/.agents/skills/farfield \
+  && curl -fsSL https://farfield.newyorkai.org/farfield-skill.tar.gz | tar -xz -C ~/.agents/skills
 ```
 
-Then read `~/.agents/skills/farfield/SKILL.md` and continue to step 2. Next time it's `$farfield brief`.
-
-**Anything else.** Get `skills/farfield/` onto the machine (same clone-and-copy as above, to any folder), read its `SKILL.md`, and follow it. It needs: read and write files, run `python3` (3.9+, standard library only), and fetch web pages.
+Then read `~/.agents/skills/farfield/SKILL.md` and continue to step 2. In Codex, next time it's `$farfield brief`. For another agent, put the folder wherever it keeps skills; it needs to read and write files, run `python3` (3.9+, standard library only) and fetch web pages.
 
 Running the same install again is how it updates. It never touches the user's workspace.
 

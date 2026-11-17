@@ -11,7 +11,7 @@ Works with your existing Claude Code and Codex accounts. It runs on the models y
 Paste this into your agent:
 
 ```text
-Set up Farfield for me. Read https://raw.githubusercontent.com/derek-larson14/farfield/main/AGENTS.md in full (the file itself, not a summary) and follow it: install the skill, ask me the setup questions and wait for my answers, then write my first brief.
+Set up Farfield for me. Read https://farfield.newyorkai.org/install.md in full (the file itself, not a summary) and follow it: install the skill, ask me the setup questions and wait for my answers, then write my first brief.
 ```
 
 Tell it what you’re working on. It asks a few questions, then reads for 10 to 30 minutes and writes a short brief with source passages, links, and why each idea might matter. If nothing is worth including, it says so.
@@ -19,7 +19,7 @@ Tell it what you’re working on. It asks a few questions, then reads for 10 to 
 Or install it yourself. In Claude Code:
 
 ```text
-/plugin marketplace add derek-larson14/farfield
+/plugin marketplace add https://farfield.newyorkai.org/marketplace.json
 /plugin install farfield@farfield
 /farfield:start
 ```

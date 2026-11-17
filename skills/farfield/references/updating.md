@@ -13,7 +13,7 @@ Three things change at different speeds. Keep them apart.
 Say one line: "A newer Farfield is available (`<current>` → `<latest>`)." Then, if they want it:
 
 - **Claude Code / desktop:** `/plugin marketplace update farfield`, then `/plugin update farfield@farfield`, then restart the session. From a shell: `claude plugin marketplace update farfield && claude plugin update farfield@farfield`.
-- **Codex or a copied skill folder:** follow the install steps in the repository's AGENTS.md again; it replaces `~/.agents/skills/farfield` and nothing else.
+- **Codex or a copied skill folder:** run the download from https://farfield.newyorkai.org/install.md again; it replaces `~/.agents/skills/farfield` and nothing else.
 - **Cloud schedule (workspace is a repo):** the skill copy in `.claude/skills/farfield/` is theirs to refresh; replace that folder and commit.
 
 After updating, run `HELPER sources <workspace>` so `sources.md` reflects the new curated list, and tell the user what was added or removed.
@@ -27,4 +27,4 @@ After updating, run `HELPER sources <workspace>` so `sources.md` reflects the ne
 
 Plugin and skill copies share one version and one GitHub release tag. Reinstalling a copied skill is an explicit update, not an automatic background operation. A release does not refresh already installed copies. Existing workspace files, including `state/context.md`, remain in place.
 
-While the repository is private, anonymous install and raw-GitHub version checks cannot work. Treat authentication failures as “could not check,” not “up to date”; do not ask for credentials in chat. Existing installed copies can continue writing briefs. Use an already authenticated local checkout to test updates during private iteration.
+Installs, updates and the version check all come from farfield.newyorkai.org, so they work whether or not the source repository is public. If the site can't be reached, that's “could not check”, not “up to date”; never ask for credentials.
