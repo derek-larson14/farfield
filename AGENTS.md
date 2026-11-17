@@ -33,13 +33,14 @@ Running the same install again is how it updates. It never touches the user's wo
 
 ## 2. Start
 
-Follow `SKILL.md` in **start** mode: one open question, four choices, a five-line summary to correct, then the first brief (about 10 to 30 minutes of reading; say so), then an offer to schedule it. The standard brief needs no API key or sign-up. The optional Twitter/X offer can connect OpenRouter; explain estimated costs and keep it off unless chosen. Never request a key in chat.
+Follow `SKILL.md` in **start** mode: one open question, four choices, two optional questions about how they work, a five-line summary to correct, then the first brief (about 10 to 30 minutes of reading; say so), then an offer to schedule it. The standard brief needs no API key or sign-up. The optional Twitter/X offer can connect OpenRouter; explain estimated costs and keep it off unless chosen. Never request a key in chat.
 
 ## What gets written where
 
 - The skill: the plugin cache (Claude) or `~/.agents/skills/farfield` (Codex).
 - The user's workspace: the folder they pick in setup, default `~/farfield`.
 - A one-line pointer to that folder: `~/.config/farfield/workspace`.
+- Only if the user agrees to it during setup: a short digest of what they typed in recent Claude Code and Codex conversations, in `<workspace>/state/threads/`. It reads `~/.claude/projects` and `~/.codex/sessions` and never writes there.
 - Only if the user adds an optional key: `~/.config/farfield/env`, owner-readable only.
 - Only if the user turns on local podcast transcription: a private Parakeet environment in `~/.local/share/farfield/parakeet`, its model in `~/.cache/huggingface/hub`, and ffmpeg through Homebrew if it was missing.
 

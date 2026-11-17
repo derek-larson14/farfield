@@ -18,5 +18,7 @@
 - Cloud transcription has a per-run budget in `audio.json` and refuses before sending anything over it. Test clips stream only the seconds they need. Parakeet is pinned.
 - Source suggestions open a pre-filled GitHub issue. Setup questions mark a recommended option; the first brief's 10 to 30 minutes is stated up front.
 - Every catalog source has a reason and access note.
+- SOURCES.md is generated from the catalog and grouped into sections.
+- Optional "Rhymes with your work": with permission, a local digest of what the user typed in recent Claude Code and Codex conversations (`threads.py`) lets a brief point to outside work that rhymes with how they work, framed as observations rather than advice. Replaces "from another field".
 
 Validation before publishing: helper tests, plugin validation, site build, and a fresh-install/brief rehearsal. Installed versions do not update themselves.

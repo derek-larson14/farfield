@@ -34,7 +34,7 @@ Create the task yourself with the scheduled-task tool: name `farfield`, the prom
 - It runs while the Claude app is open and the computer is awake. After sleep it runs once to catch up.
 - Open **Scheduled → farfield → Run now** once and choose "always allow" on each prompt. After that it runs without asking. If a later run stalls, it's waiting in that same place.
 
-It needs (and nothing else; in particular it never reads the keys file itself, the helper does): read the workspace and any context folders in `me.md`, write inside the workspace, fetch web pages, start subagents, and run the skill's five scripts (`radar.py`, `library.py`, `audio.py`, `social.py`, `feed.py`).
+It needs (and nothing else; in particular it never reads the keys file itself, the helper does): read the workspace and any context folders in `me.md`, write inside the workspace, fetch web pages, start subagents, and run the skill's six scripts (`radar.py`, `library.py`, `threads.py`, `audio.py`, `social.py`, `feed.py`).
 
 ## B. This computer (terminal)
 
@@ -50,6 +50,7 @@ Claude Code's own `/loop` and cron tools end with the session and expire after s
      --allowedTools "Read" "Write" "Edit" "Glob" "Grep" "WebFetch" "WebSearch" "Agent" \
        "Bash(*/farfield/scripts/radar.py *)" "Bash(*/farfield/scripts/library.py *)" \
        "Bash(*/farfield/scripts/audio.py *)" "Bash(*/farfield/scripts/social.py *)" \
+       "Bash(*/farfield/scripts/threads.py *)" \
        "Bash(*/farfield/scripts/feed.py *)" \
      --add-dir "<each context folder from me.md>" \
      </dev/null >> state/run.log 2>&1

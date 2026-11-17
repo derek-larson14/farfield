@@ -16,7 +16,7 @@ One skill, four modes. Read the request (Claude Code arguments: `$ARGUMENTS`) an
 
 ## Running the helpers
 
-The skill's scripts live in `<this skill's folder>/scripts/`: `radar.py` (called `HELPER` below), `library.py`, `audio.py`, `social.py` and `feed.py`. Run each one directly by its absolute path, as its own command: `/abs/path/scripts/radar.py where`. Not through `python3`, and not inside a compound command (no `X=...;` prefix, `cd ... &&`, pipes or `$(...)`). Scheduled runs allow exactly these plain calls and nothing else, so anything fancier is refused there. Use the host's file tools to read and write files and its web tools to fetch pages; don't use `curl`, `ls` or shell parsing.
+The skill's scripts live in `<this skill's folder>/scripts/`: `radar.py` (called `HELPER` below), `library.py`, `threads.py`, `audio.py`, `social.py` and `feed.py`. Run each one directly by its absolute path, as its own command: `/abs/path/scripts/radar.py where`. Not through `python3`, and not inside a compound command (no `X=...;` prefix, `cd ... &&`, pipes or `$(...)`). Scheduled runs allow exactly these plain calls and nothing else, so anything fancier is refused there. Use the host's file tools to read and write files and its web tools to fetch pages; don't use `curl`, `ls` or shell parsing.
 
 **Unattended** means the prompt says "unattended" or there is no one to answer (a scheduled or `-p` run). Unattended runs never ask a question and end with exactly one line: `SUMMARY: OK <brief path> <N> findings` or `SUMMARY: FAILED <reason>`.
 
@@ -45,7 +45,7 @@ Run `HELPER sources <workspace>` to refresh the resolved list, then read `me.md`
 
 *Shared feed.* If `feed.json` has a `manifest_url`, also run `<skill>/scripts/feed.py fetch <manifest_url> <workspace>/state/feed`, adding `--mute <id>` for every muted source ID. Show any `cached`, `stale` or `sample` warning. No shared feed is published yet, so this is normally skipped.
 
-**Read.** Pick at most 40 originals that bear on the projects and questions in `me.md` and `state/context.md`. Spend about a fifth on reading outside the user's usual fields, guided by an actual open question: use the host's web search with a generalized version of that question (or `HELPER search` if an Exa key is set). Podcast audio stays opt-in; see [references/audio.md](references/audio.md).
+**Read.** Pick at most 40 originals that bear on the projects and questions in `me.md` and `state/context.md`. If the "How they work" picture exists, spend about a fifth on work that rhymes with how they work: use the host's web search with a general description of the task (or `HELPER search` if an Exa key is set). Podcast audio stays opt-in; see [references/audio.md](references/audio.md).
 
 Read in parallel when the host can. In Claude Code, split the chosen items into batches of about eight and give each batch to a subagent on a smaller model (Haiku), all launched at once. Each subagent runs `HELPER fetch <workspace> <url>` per item and returns candidates only: source ID, URL, date, the exact quote, the `raw` path, and one line on what it says. You do the selecting and writing. No API key is involved. Without subagents, read the items yourself.
 
@@ -70,9 +70,11 @@ If `social.json` has `"enabled": true`, also follow [references/social.md](refer
 
 - 0 to 3 findings. Nothing clearing the bar is a valid brief; say so in two lines.
 - Each finding: a plain title; the idea in at most three sentences; one sentence on **why it matters to** a named project or question; one or two exact quotes with speaker, link and date; "How sure:" in one sentence. About 120 words per finding, quotes excluded.
-- At most one "from another field" idea: a hypothesis and one small experiment, under 80 words.
+- At most two "Rhymes with your work" notes, only when the "How they work" picture in `state/context.md` is fresh and something genuinely rhymes (see below). Otherwise leave the section out.
 - Last, a "What was read" section of at most four lines: window, sources and items read, what was partial or unreachable. Then one line asking which findings were useful / already known / not relevant.
 - No coaching ("ship", "focus"), no predictions presented as fact, no news roundup, no restating the user's project back to them.
+
+**Rhymes with your work.** This section connects outside work to how they work, not just what they work on. Each note, under 90 words: what you've noticed, said neutrally and with its basis ("across several recent conversations you've been setting up evaluations by hand"); what someone else is doing about something similar, with the source, an exact quote and date; and where it might fit, as a possibility for them to judge. No "you should", no "inefficient", no verdict on their choices. Assume you are seeing part of the picture: they may have reasons, tools or work you can't see. Search for these with general descriptions of the task, never with their words, names or paths. Never quote their conversations in the brief.
 
 **Edit pass (always, even for a short brief).** Models write long, and the writer can't judge its own padding. After drafting, if the host has subagents, give a fresh one (a small model is fine) the draft, `me.md` and these rules: "Cut this brief to the length in me.md. Remove anything a reader doesn't need to understand each idea, why it matters to them, and the evidence. Never change a quote, link, date or name, and never add anything. Return the edited brief." Without subagents, do that pass yourself. Count the words (prose, quotes excluded) and do one more pass if it is still over by more than a quarter.
 

@@ -34,6 +34,21 @@ All four fit one `AskUserQuestion` call in Claude Code.
    - Monthly
    - Only when I ask
 
+Then one more call with two questions, about how they work. Explain first, in one or two sentences: "Besides reading the news for you, I can look for work that rhymes with how you work: people tackling similar problems, new methods that might fit. To do that I'd read what you typed in your recent Claude Code and Codex conversations on this computer. Not tool output or file contents; keys and emails are blanked out. It stays on this computer."
+
+5. **How you work**: "Can I look at your recent agent conversations?"
+   - Yes, the last 30 days (Recommended)
+   - Yes, but only conversations in the project folders I named
+   - No
+6. **How often**: "How often should I look for work that rhymes with yours?"
+   - Monthly (Recommended) *(patterns need a few weeks to show)*
+   - Every brief
+   - Only when I ask
+
+If they said yes, ask once in plain text: "Is there anywhere else that shows how you work, like a notes folder or a Drive folder? Optional." Add any answer under "Read for context". Don't go looking in other systems on your own, even if a connector exists.
+
+Record the answers under "How I work" in `me.md`. If they said no, skip 6.
+
 After these choices, offer the optional Twitter/X question in [social.md](social.md) once. It is a separate opt-in, not required setup.
 
 ## 3. Show the working picture
@@ -54,7 +69,7 @@ For "Only my own", first run `HELPER source-mode <workspace> only-mine`. This ke
 
 If any enabled source is a podcast and the user chose or added it themselves, ask the one audio question in [audio.md](audio.md). Otherwise leave audio on skip and don't mention it.
 
-Create the bounded working summary in `state/context.md` following [context.md](context.md). Link it alongside `me.md`; this is the agent's correctable picture of the work, not another setup questionnaire.
+If they said yes to conversations, run `<skill>/scripts/threads.py digest <workspace>` (add `--days 30`) and use it for the working summary as [context.md](context.md) describes. Create the bounded working summary in `state/context.md` following [context.md](context.md). Link it alongside `me.md`; this is the agent's correctable picture of the work, not another setup questionnaire.
 
 ## 4. Write the first brief now
 

@@ -15,6 +15,11 @@ Setup fills this in from what you said. Edit it any time; the next brief reads i
 ## Skip
 - Topics you don't want
 
+## How I work
+- Read my recent agent conversations: no
+- Look for work that rhymes with mine: only when I ask
+- Other places that show how I work: none
+
 ## Read for context
 Folders or files a brief may read to keep up with your work. Empty means it only uses this page.
 
