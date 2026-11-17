@@ -4,7 +4,7 @@ There’s a lot happening in AI. Most of it doesn’t matter to your work.
 
 Farfield sifts through essays, papers, and podcasts with your work in mind, and brings back a few ideas worth exploring.
 
-Works with your existing Claude Code and Codex accounts.
+Works with your existing Claude Code and Codex accounts. It runs on the models your subscription already gives you, so a brief counts toward your plan's usage like any other session. There's no extra account and no API key. The only paid add-ons are optional (Twitter/X and cloud transcription through OpenRouter), and setup asks before turning either on.
 
 ## Get started
 
@@ -30,7 +30,7 @@ After setup, ask for another brief, change your sources, or set up a schedule. I
 
 ## Sources
 
-Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml). Twitter/X and cloud transcription are optional paid additions; setup shows estimates before enabling either.
+Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml). Twitter/X and cloud transcription are optional; setup shows cost estimates before enabling either.
 
 ## Privacy
 
