@@ -2,7 +2,7 @@
 
 ## 0.3.8
 
-- Sources: remove the Hugging Face blog (Hugging Face daily papers stays). 44 sources.
+- Sources: remove the Hugging Face blog (Hugging Face daily papers stays). 43 sources.
 - The suggestion form asks for a link and an optional sentence, nothing else.
 
 ## 0.3.7
