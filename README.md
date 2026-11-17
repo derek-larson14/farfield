@@ -2,9 +2,9 @@
 
 There’s a lot happening in AI. Most of it doesn’t matter to your work.
 
-Farfield sifts through essays, papers, and podcasts with your work in mind, and brings back a few ideas worth exploring.
+Farfield reads essays, papers and podcasts with your projects in mind, and brings back a short brief of ideas worth exploring, each with its source.
 
-Works with your existing Claude Code and Codex accounts. It runs on the models your subscription already gives you, so a brief counts toward your plan's usage like any other session. There's no extra account and no API key. The only paid add-ons are optional (Twitter/X and cloud transcription through OpenRouter), and setup asks before turning either on.
+Runs in Claude Code or Codex on the subscription you already have. No new account or API key.
 
 ## Get started
 
@@ -28,16 +28,22 @@ In the Claude desktop app: Customize → Plugins → Add marketplace → `derek-
 
 In Codex or a terminal: `curl -fsSL https://farfield.newyorkai.org/install.sh | sh`, then `$farfield start` in Codex. The script is [site/install.sh](site/install.sh); read it first if you like.
 
-After setup, ask for another brief, change your sources, or set up a schedule. In Claude Code: `/farfield:brief`, `/farfield:sources`, `/farfield:schedule`. In Codex: `$farfield brief`, `sources`, or `schedule`.
+## After setup
+
+- **Another brief:** `/farfield:brief` (Codex: `$farfield brief`)
+- **Change sources:** `/farfield:sources` (Codex: `$farfield sources`)
+- **Schedule it:** `/farfield:schedule` (Codex: `$farfield schedule`) runs it weekly or monthly, on this computer, in the Claude desktop app, or in the cloud. It suggests an off-peak time so runs use less of your plan.
 
 ## Sources
 
-Practitioners, researchers, independent evaluations, interviews, and recent papers. [See all of them](https://farfield.newyorkai.org/sources). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml). Twitter/X and cloud transcription are optional; setup shows cost estimates before enabling either.
+Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](https://farfield.newyorkai.org/sources). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml).
+
+Optional, paid: Twitter/X and cloud podcast transcription through OpenRouter. Setup shows cost estimates and keeps both off unless you turn them on.
 
 ## Privacy
 
-Briefs and notes are files in a folder you choose. Your agent reads only the context you permit, such as a project folder or, if you say yes, what you typed in your recent Claude Code and Codex conversations. That text is processed by your existing model provider, and searches use general descriptions, never your words. Farfield does not upload your workspace to this repository. Browsing contacts the source sites; a page that refuses automated requests is read through a public reader service (r.jina.ai), which sees only that public URL. Audio downloads and scheduling require your approval.
+- Briefs and notes stay in a folder you choose. Nothing is uploaded here.
+- Your agent reads only what you allow: a project folder, and if you say yes, your recent Claude Code and Codex prompts.
+- Searches use general descriptions, never your words. [What gets written where](AGENTS.md#what-gets-written-where).
 
-Experimental. Full installation and onboarding have not been verified across every supported host.
-
-[Setup details](AGENTS.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE) · Built by [Derek Larson](https://dtlarson.com)
+Experimental. [Setup details](AGENTS.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE) · Built by [Derek Larson](https://dtlarson.com)
