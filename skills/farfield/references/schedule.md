@@ -46,6 +46,7 @@ Claude Code's own `/loop` and cron tools end with the session and expire after s
    #!/bin/sh
    cd "<workspace>" || exit 1
    "<absolute path from: command -v claude>" -p "/farfield:brief unattended. Workspace: <workspace>. End with the SUMMARY line." \
+     --model sonnet \
      --permission-mode acceptEdits \
      --allowedTools "Read" "Write" "Edit" "Glob" "Grep" "WebFetch" "WebSearch" "Agent" \
        "Bash(*/farfield/scripts/radar.py *)" "Bash(*/farfield/scripts/library.py *)" \
@@ -56,7 +57,9 @@ Claude Code's own `/loop` and cron tools end with the session and expire after s
      </dev/null >> state/run.log 2>&1
    ```
 
-   Codex CLI equivalent: `codex exec -C "<workspace>" -s workspace-write "\$farfield brief, unattended" </dev/null >> state/run.log 2>&1`.
+   Codex CLI equivalent: `codex exec -C "<workspace>" -s workspace-write -m <newest Sol model> "\$farfield brief, unattended" </dev/null >> state/run.log 2>&1`. Find the Sol model's exact name in the Codex model picker (`/model`), not from memory.
+
+   A scheduled brief runs on the everyday tier (Sonnet in Claude Code, Sol in Codex), not the top one, so it doesn't eat into the user's plan. Readers still go to the fast tier as SKILL.md says. Write `sonnet` as is (Claude Code resolves it to the current version); a Codex model name includes a version, so check it again when updating the schedule.
 
    The prompt must say "unattended", or the run will stop to ask for feedback and never print its SUMMARY line. Never use a skip-all-permissions flag. Edits are limited to the workspace because that is the working directory.
 
@@ -79,7 +82,7 @@ A cloud run starts from a fresh clone of a GitHub repository. It cannot see this
 
 ## D. Codex app
 
-Ask Codex to create the scheduled task from this conversation: prompt `$farfield brief, unattended, workspace <path>`, the chosen schedule, running in the local project (not a worktree: the workspace isn't a repo). Tell the user:
+Ask Codex to create the scheduled task from this conversation: prompt `$farfield brief, unattended, workspace <path>`, the newest Sol model if the task lets you set one, running in the local project (not a worktree: the workspace isn't a repo). Tell the user:
 
 - It runs with the app open and the computer on, with their default sandbox settings. Workspace-write is enough.
 - Results show up in the app's **Scheduled** view. Codex CLI has no schedule manager; use B there.
