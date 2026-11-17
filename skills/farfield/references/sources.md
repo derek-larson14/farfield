@@ -24,12 +24,12 @@ Other regular inputs work too: a standing search they want re-run each time (`--
 
 Adding for yourself and suggesting for the shared list are separate. After an add, ask once: "Want to suggest this for the curated list too?" No is a complete answer.
 
-On yes, draft three things and show them: the source URL, one example item (a link), and one sentence on what it adds that the list lacks. Leave out the user's projects, notes and file paths; the suggestion is public.
+On yes, draft two things and show them: the source's link, and one sentence on what it adds that the list lacks. Leave out the user's projects, notes and file paths; the suggestion is public.
 
 Then give them a pre-filled GitHub link that opens a "Suggest a source" issue. They review it and press Create, so nothing is sent without them seeing it. URL-encode each value:
 
 ```
-https://github.com/derek-larson14/farfield/issues/new?template=source.yml&title=Source%20suggestion%3A%20<name>&source=<url>&why=<one sentence>&example=<example url>
+https://github.com/derek-larson14/farfield/issues/new?template=source.yml&title=Source%3A%20<name>&source=<url>&why=<one sentence>
 ```
 
 It needs a GitHub account. If they don't have one, give them the draft text to send however they like. Never claim a suggestion was sent. A pull request adding the source to `catalog.json` is the other route (see CONTRIBUTING.md in the repository).

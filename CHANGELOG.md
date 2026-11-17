@@ -1,5 +1,10 @@
 # Changes
 
+## 0.3.8
+
+- Sources: remove the Hugging Face blog (Hugging Face daily papers stays). 44 sources.
+- The suggestion form asks for a link and an optional sentence, nothing else.
+
 ## 0.3.7
 
 - Sites without a feed (Anthropic, Stanford HAI, Works in Progress, Every) are no longer skipped: `items` lists recent article links from their index pages. DeepMind is read from its RSS feed.

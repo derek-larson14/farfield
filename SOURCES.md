@@ -5,7 +5,6 @@ The default sources. During setup, and any time after, you can add your own or m
 ## Builders and engineering
 
 - **[Anthropic Engineering](https://www.anthropic.com/engineering)**: Concrete harness, evaluation, and tool-use implementation lessons.
-- **[Hugging Face Blog](https://huggingface.co/blog)**: Open model tooling, reproducible implementations, datasets, and practical experiments.
 - **[Hamel Husain](https://hamel.dev/)**: Task-specific evaluations and failure analysis from real AI projects.
 - **[Martin Alderson](https://martinalderson.com/)**: Firsthand work on agent speed, costs, infrastructure, and software economics.
 - **[Armin Ronacher](https://lucumr.pocoo.org/)**: Flask's creator writing firsthand about building software with coding agents.

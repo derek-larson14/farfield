@@ -1,30 +1,16 @@
 name: Suggest a source
-description: Suggest a podcast, channel, feed, or other public source for editorial review.
-title: "Source suggestion: "
+description: A blog, newsletter, podcast or paper feed Farfield should read.
+title: "Source: "
 body:
   - type: input
     id: source
     attributes:
-      label: Source URL
-      description: Link the podcast, channel, publication, or public feed.
+      label: Link
+      description: The blog, newsletter, podcast or feed.
     validations:
       required: true
   - type: textarea
     id: why
     attributes:
-      label: What does it add?
-      description: A perspective, original evidence, or useful coverage we are missing.
-    validations:
-      required: true
-  - type: input
-    id: example
-    attributes:
-      label: One strong example
-      description: Link an episode, post, paper, or release worth sampling.
-    validations:
-      required: true
-  - type: textarea
-    id: access
-    attributes:
-      label: Access or overlap (optional)
-      description: Known RSS/transcripts, paywalls, or the same material on another platform. Do not include credentials or private project context.
+      label: Why (optional)
+      description: What it adds that the list is missing, in a sentence.

@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -20,22 +20,6 @@
       "checked_on": "2026-11-17",
       "enabled": true,
       "article_pattern": "^/(engineering|research)/[^/]+/?$"
-    },
-    {
-      "id": "huggingface-blog",
-      "name": "Hugging Face Blog",
-      "kind": "feed",
-      "home": "https://huggingface.co/blog",
-      "url": "https://huggingface.co/blog/feed.xml",
-      "why": "Open model tooling, reproducible implementations, datasets, and practical experiments.",
-      "topics": [
-        "engineering"
-      ],
-      "access": "Public feed; includes community and vendor posts. Follow primary code and paper links.",
-      "discovery": "rss-or-atom",
-      "example_url": "https://huggingface.co/blog",
-      "checked_on": "2026-11-17",
-      "enabled": true
     },
     {
       "id": "hamel-husain",

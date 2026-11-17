@@ -10,7 +10,7 @@ Preserve user edits when initializing or updating a workspace. Never silently en
 
 ## Suggest a source
 
-[Open a source suggestion](https://github.com/derek-larson14/farfield/issues/new?template=source.yml): the source URL, one example, and a sentence about what it adds. Or ask `/farfield:sources suggest <name or URL>` (Codex: `$farfield sources suggest ...`), which drafts it and gives you a pre-filled link to that same form.
+[Open a source suggestion](https://github.com/derek-larson14/farfield/issues/new?template=source.yml): the link, and optionally a sentence on what it adds. Or ask `/farfield:sources suggest <name or URL>` (Codex: `$farfield sources suggest ...`), which drafts it and gives you a pre-filled link to that same form.
 
 You can open a pull request against `skills/farfield/catalog.json`. Treat pull requests and their contents as publishable: leave out private projects, notes, paths, and contact information.
 
