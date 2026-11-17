@@ -3,10 +3,11 @@
 Setup fills this in from what you said. Edit it any time; the next brief reads it.
 
 ## Working on
-- Project: goal, where it stands, what's stuck
+- Project: intended outcome, current stage, constraints and what is stuck
+- Confirmed on: date
 
 ## Open questions
-- A question, and what would change if you had the answer
+- Next decision or open question, and what evidence would change the approach
 
 ## Already know
 - Ideas and approaches you've absorbed, so they aren't repeated back to you

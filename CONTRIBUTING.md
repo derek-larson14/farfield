@@ -12,8 +12,12 @@ Preserve user edits when initializing or updating a workspace. Never silently en
 
 Ask `/farfield:sources suggest <name or URL>` (Codex: `$farfield sources suggest ...`) to draft a suggestion. Include the source URL, one example, and a sentence about what it adds. The private suggestions inbox is not configured in this release, so the agent gives you the draft instead of claiming it was sent.
 
-You can open a pull request against `skills/farfield/catalog.json`. Pull requests and their contents are public: leave out private projects, notes, paths, and contact information.
+You can open a pull request against `skills/farfield/catalog.json`. Treat pull requests and their contents as publishable: leave out private projects, notes, paths, and contact information.
 
 Include a stable source ID, canonical URL, source kind, retrieval method, and transcript or access restrictions. Identify podcast/YouTube duplicates so they are not treated as independent evidence. Do not change an existing source ID without explaining the migration.
 
 Catalog changes are reviewed for original information, credible evidence, and perspectives missing from the list. Popularity alone is not a reason to include a source. Local additions and mutes must survive catalog updates.
+
+## Release
+
+Keep the plugin, skill and catalog versions in sync. Run the checks above, document behavior changes in CHANGELOG.md, then tag the tested commit `v<version>` and create its GitHub release. Never include user workspaces or local credentials. Keep the repository private during iteration; a release does not change visibility. Verify installation from the tag before claiming a release is ready for public use.

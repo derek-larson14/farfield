@@ -5,8 +5,8 @@ Three things change at different speeds. Keep them apart.
 | What | Where it lives | How it updates |
 |---|---|---|
 | The user's files (`me.md`, `sources.local.json`, briefs, feedback) | their workspace | Never touched by an update |
-| The curated source list and, later, the shared evidence feed | data: `catalog.json`, `feed.json` → GitHub | Data only. New curated sources appear in `sources.md` after an update; anything the user muted stays muted |
-| The skill itself (these instructions and two scripts) | the installed plugin or skill folder | Only when the user asks |
+| The curated source list | `catalog.json` inside the installed skill | Ships with a skill release. Refresh the resolved list after installation; preserve local additions, mutes and only-my-own mode |
+| The skill itself (these instructions and scripts) | the installed plugin or skill folder | Only when the user asks |
 
 ## When `HELPER version --check` says an update is available
 
@@ -22,3 +22,9 @@ After updating, run `HELPER sources <workspace>` so `sources.md` reflects the ne
 
 - Never download and run new code during a brief. A scheduled run that notices an update finishes the brief with the version it has and mentions the update in its summary.
 - If the workspace was created by a newer version than the installed skill (`state/version`), stop and say so rather than guessing at the format.
+
+## Releases and availability
+
+Plugin and skill copies share one version and one GitHub release tag. Reinstalling a copied skill is an explicit update, not an automatic background operation. A release does not refresh already installed copies. Existing workspace files, including `state/context.md`, remain in place.
+
+While the repository is private, anonymous install and raw-GitHub version checks cannot work. Treat authentication failures as “could not check,” not “up to date”; do not ask for credentials in chat. Existing installed copies can continue writing briefs. Use an already authenticated local checkout to test updates during private iteration.

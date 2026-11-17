@@ -50,6 +50,8 @@ For "Only my own", first run `HELPER source-mode <workspace> only-mine`. This ke
 
 If any enabled source is a podcast and the user chose or added it themselves, ask the one audio question in [audio.md](audio.md). Otherwise leave audio on skip and don't mention it.
 
+Create the bounded working summary in `state/context.md` following [context.md](context.md). Link it alongside `me.md`; this is the agent's correctable picture of the work, not another setup questionnaire.
+
 ## 4. Write the first brief now
 
 Run the Brief section of SKILL.md. Don't wait for anything else.
