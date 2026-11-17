@@ -34,6 +34,8 @@ class MemoryTest(unittest.TestCase):
     def test_semantic_query_is_not_stripped(self):
         self.assertNotEqual(library.canonical('https://example.org/?id=1'),library.canonical('https://example.org/?id=2'))
         with self.assertRaises(ValueError): library.canonical('https://example.org/feed?token=secret')
+        self.assertEqual(library.canonical('https://www.Example.org/post/'), library.canonical('https://example.org/post'))
+        self.assertEqual(library.canonical('https://example.org/?b=2&a=1'), library.canonical('https://example.org/?a=1&b=2'))
 
 class SocialTest(unittest.TestCase):
     def test_default_off_and_dry_run_never_call_provider(self):
@@ -101,3 +103,48 @@ class AudioCacheTest(unittest.TestCase):
                 self.assertTrue(audio.transcribe(root,url,max_secs=120)['cached'])
                 with self.assertRaises(ValueError): audio.transcribe(root,url)
                 request.assert_not_called()
+
+
+class AudioBudgetTest(unittest.TestCase):
+    def test_cloud_transcription_over_budget_sends_nothing(self):
+        with tempfile.TemporaryDirectory() as root:
+            audio.use(root, 'openrouter', 'elevenlabs/scribe-v2', budget=0.1)
+
+            def fake_ffmpeg(cmd):
+                if cmd[-1].endswith('c%03d.mp3'):     # 20 five-minute chunks = 100 minutes = about $0.37
+                    folder = Path(cmd[-1]).parent
+                    for n in range(20):
+                        (folder / f'c{n:03d}.mp3').write_bytes(b'x')
+
+            class Reply:
+                def __enter__(self): return self
+                def __exit__(self, *args): pass
+                def read(self, *args): return b''
+            with patch.object(audio.radar, 'keys', return_value={'OPENROUTER_API_KEY': 'fake'}), \
+                    patch.object(audio.shutil, 'which', return_value='/usr/bin/ffmpeg'), \
+                    patch.object(audio.shutil, 'copyfileobj'), \
+                    patch.object(audio.urllib.request, 'urlopen', return_value=Reply()), \
+                    patch.object(audio, 'run', side_effect=fake_ffmpeg), \
+                    patch.object(audio, 'openrouter_chunk') as send:
+                with self.assertRaises(ValueError) as caught:
+                    audio.transcribe(root, 'https://example.org/episode.mp3')
+                send.assert_not_called()
+            self.assertIn('nothing was sent', str(caught.exception))
+
+    def test_test_clip_streams_instead_of_downloading(self):
+        with tempfile.TemporaryDirectory() as root:
+            audio.use(root, 'parakeet')
+            calls = []
+
+            def fake_run(cmd):
+                calls.append(cmd)
+                if 'txt' in cmd:
+                    Path(cmd[cmd.index('--output-dir') + 1], 'a.txt').write_text('hello there')
+            with patch.object(audio.shutil, 'which', return_value='/usr/bin/ffmpeg'), \
+                    patch.object(audio, 'parakeet_bin', return_value='/bin/parakeet'), \
+                    patch.object(audio, 'run', side_effect=fake_run), \
+                    patch.object(audio.urllib.request, 'urlopen') as download:
+                out = audio.transcribe(root, 'https://example.org/ep.mp3', max_secs=60)
+            download.assert_not_called()
+            self.assertEqual(calls[0][calls[0].index('-i') + 1], 'https://example.org/ep.mp3')
+            self.assertEqual(out['words'], 2)

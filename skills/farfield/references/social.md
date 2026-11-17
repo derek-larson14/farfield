@@ -7,21 +7,27 @@ Offer this once after the four setup choices, or when the user asks about social
 - Not now (Recommended): continue with the existing sources.
 - Add Twitter/X: explain the budget and help connect OpenRouter.
 
-Record the answer in `<workspace>/social.json`. No sets `enabled: false`; don't offer again unless asked. No answer leaves it off. A key already present for transcription is not consent to social search. Do not block the first brief on this optional connection.
+Record the answer in `<workspace>/social.json`:
+
+```json
+{"enabled": false, "asked": "2026-11-17"}
+```
+
+No sets `enabled: false`; don't offer again unless asked. No answer leaves it off. A key already present for transcription is not consent to social search. Do not block the first brief on this optional connection.
 
 ## If yes
 
 Use a dedicated key with a $5 monthly limit (or the user's explicitly chosen limit) in [OpenRouter's key settings](https://openrouter.ai/settings/keys). The user creates the account, funds it and sets the limit. Explain that queries go to OpenRouter and its model provider. Open `HELPER keys --open` for them to paste the key locally, never in chat. Verify presence using `HELPER keys`, never print its value.
 
-Write `social.json` with `enabled: true`, `monthly_limit_usd: 5`, and optionally `handles: [...]` only after they have agreed. If a total rather than monthly key limit is available, that stricter limit is fine. Do not claim a limit has been configured without verification. The adapter checks the key's actual limit before sending a paid request.
+Only after they have agreed, write `social.json` as `{"enabled": true, "monthly_limit_usd": 5, "asked": "<date>"}`, optionally with `"handles": ["name", ...]` (at most 20, without @). If a total rather than monthly key limit is available, that stricter limit is fine. Do not claim a limit has been configured without verification. The adapter checks the key's actual limit before sending a paid request.
 
 Then offer the separate cloud transcription choice in [audio.md](audio.md). Connecting OpenRouter never changes audio settings by itself.
 
 ## During a brief
 
-`SOCIAL` means `<skill>/scripts/social.py` via python3. Run `SOCIAL estimate` for the recorded price assumptions. Derive one or two short generalized research questions from confirmed decisions; do not send private project notes, customer names or the context summary. Respect source mutes, including named authors, when choosing handles and candidates.
+`SOCIAL` means `<skill>/scripts/social.py`, run directly. Run `SOCIAL estimate` for the recorded price assumptions. Derive one or two short generalized research questions from confirmed decisions; do not send private project notes, customer names or the context summary. Respect source mutes, including named authors, when choosing handles and candidates.
 
-Run `SOCIAL search <workspace> "<generalized questions>" --since YYYY-MM-DD --until YYYY-MM-DD`. The end date is exclusive, the window is at most 31 days. `--dry-run` builds the request without credentials or spending. A real run requires explicit opt-in and a bounded provider key. One attempt per UTC day prevents accidental repeat charges; reuse the saved result. A timed-out request is not automatically retried because it may have incurred cost.
+Run `SOCIAL search <workspace> "<generalized questions>" --since YYYY-MM-DD --until YYYY-MM-DD`. The end date is exclusive, the window is at most 31 days. `--dry-run` builds the request without credentials or spending. On refusal it prints `FAILED: <reason>`; relay the reason (opt-in missing, key missing, key limit too high, already attempted today). A real run requires explicit opt-in and a bounded provider key. One attempt per UTC day prevents accidental repeat charges; reuse the saved result. A timed-out request is not automatically retried because it may have incurred cost.
 
 Read the returned result file. Inspect tool activity and citations; a generated answer alone does not prove an X search occurred. If there is no evidence of retrieval, mark it unverified and do not include claims as checked evidence. Follow linked papers, repos and articles. Store the original URL, author, date and exact excerpt only after checking it. All X coverage is partial; popularity is not relevance. Related posts from one launch are one evidence chain. Store actual usage/cost when reported; missing cost is unknown, not zero.
 

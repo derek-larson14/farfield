@@ -9,5 +9,14 @@
 - Offer optional X discovery with cost estimates and a capped-key adapter; separate opt-in for cloud transcription with Whisper, Microsoft or ElevenLabs. No paid end-to-end run verified yet.
 - Keep item-level reading history and cached transcripts; revisit promising ideas only when evidence changes.
 - Add a network-themed social link preview.
+- `radar.py items` lists dated items from every RSS/Atom source in parallel and flags feeds that stop inside the window. Briefs read in parallel batches through subagents where the host has them.
+- `radar.py fetch` reads PDFs (pdftotext, or macOS's built-in PDFKit) so paper quotes can be checked; other binary content is refused.
+- Quote checks give one verdict per quote, ignore curly-vs-straight quotes and the gap a link leaves before punctuation, and apply the same rules to excerpts and pages.
+- Briefs have hard length limits (at most 3 findings, about 120 words each) and an edit pass that cuts what a reader doesn't need.
+- Scheduled runs: the prompt says "unattended" so they end with a SUMMARY line, and the allowed tools cover every helper and subagents. Helpers are always run directly as single commands.
+- Adding a source that is already listed (same URL or same site) points to the existing one. The reading ledger treats www. and trailing-slash variants as one item.
+- Cloud transcription has a per-run budget in `audio.json` and refuses before sending anything over it. Test clips stream only the seconds they need. Parakeet is pinned.
+- Source suggestions open a pre-filled GitHub issue. Setup questions mark a recommended option; the first brief's 10 to 30 minutes is stated up front.
+- Every catalog source has a reason and access note.
 
 Validation before publishing: helper tests, plugin validation, site build, and a fresh-install/brief rehearsal. Installed versions do not update themselves.

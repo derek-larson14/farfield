@@ -11,16 +11,26 @@ Works with your existing Claude Code and Codex accounts.
 Paste this into your agent:
 
 ```text
-Set up github.com/derek-larson14/farfield for me. Read its AGENTS.md and follow it: install the skill, ask me the setup questions, then write my first brief.
+Set up Farfield for me. Read https://raw.githubusercontent.com/derek-larson14/farfield/main/AGENTS.md in full (the file itself, not a summary) and follow it: install the skill, ask me the setup questions and wait for my answers, then write my first brief.
 ```
 
-Tell it what you’re working on. It asks a few questions, then writes a short brief with source passages, links, and why each idea might matter. If nothing is worth including, it says so.
+Tell it what you’re working on. It asks a few questions, then reads for 10 to 30 minutes and writes a short brief with source passages, links, and why each idea might matter. If nothing is worth including, it says so.
+
+Or install it yourself. In Claude Code:
+
+```text
+/plugin marketplace add derek-larson14/farfield
+/plugin install farfield@farfield
+/farfield:start
+```
+
+In Codex or a terminal: `curl -fsSL https://farfield.newyorkai.org/install.sh | sh`, then `$farfield start` in Codex. The script is [site/install.sh](site/install.sh); read it first if you like.
 
 After setup, ask for another brief, change your sources, or set up a schedule. In Claude Code: `/farfield:brief`, `/farfield:sources`, `/farfield:schedule`. In Codex: `$farfield brief`, `sources`, or `schedule`.
 
 ## Sources
 
-Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources. Twitter/X and cloud transcription are optional paid additions; setup shows estimates before enabling either.
+Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml). Twitter/X and cloud transcription are optional paid additions; setup shows estimates before enabling either.
 
 ## Privacy
 

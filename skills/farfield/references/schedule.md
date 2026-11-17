@@ -6,7 +6,7 @@ The scheduled prompt is always the same (weekly shown; adjust the wording for mo
 
 > Run the farfield skill in brief mode, unattended. Workspace: `<absolute path>`. End with the SUMMARY line.
 
-In Claude that is `/farfield:brief`; in Codex, `$farfield brief`.
+In Claude that is `/farfield:brief unattended. Workspace: <path>. End with the SUMMARY line.`; in Codex, `$farfield brief, unattended, workspace <path>`. Always include the word "unattended".
 
 ## 1. Which host is this?
 
@@ -34,7 +34,7 @@ Create the task yourself with the scheduled-task tool: name `farfield`, the prom
 - It runs while the Claude app is open and the computer is awake. After sleep it runs once to catch up.
 - Open **Scheduled → farfield → Run now** once and choose "always allow" on each prompt. After that it runs without asking. If a later run stalls, it's waiting in that same place.
 
-It needs (and nothing else; in particular it never reads the keys file itself, the helper does): read the workspace and any context folders in `me.md`, write inside the workspace, fetch web pages, and run the skill's three scripts (`radar.py`, `feed.py`, `audio.py`).
+It needs (and nothing else; in particular it never reads the keys file itself, the helper does): read the workspace and any context folders in `me.md`, write inside the workspace, fetch web pages, start subagents, and run the skill's five scripts (`radar.py`, `library.py`, `audio.py`, `social.py`, `feed.py`).
 
 ## B. This computer (terminal)
 
@@ -45,23 +45,24 @@ Claude Code's own `/loop` and cron tools end with the session and expire after s
    ```sh
    #!/bin/sh
    cd "<workspace>" || exit 1
-   "<absolute path from: command -v claude>" -p "/farfield:brief" \
+   "<absolute path from: command -v claude>" -p "/farfield:brief unattended. Workspace: <workspace>. End with the SUMMARY line." \
      --permission-mode acceptEdits \
-     --allowedTools "Read" "Glob" "Grep" "WebFetch" "WebSearch" \
-       "Bash(*/farfield/scripts/radar.py *)" "Bash(*/farfield/scripts/feed.py *)" \
-       "Bash(*/farfield/scripts/audio.py *)" \
+     --allowedTools "Read" "Write" "Edit" "Glob" "Grep" "WebFetch" "WebSearch" "Agent" \
+       "Bash(*/farfield/scripts/radar.py *)" "Bash(*/farfield/scripts/library.py *)" \
+       "Bash(*/farfield/scripts/audio.py *)" "Bash(*/farfield/scripts/social.py *)" \
+       "Bash(*/farfield/scripts/feed.py *)" \
      --add-dir "<each context folder from me.md>" \
-     >> state/run.log 2>&1
+     </dev/null >> state/run.log 2>&1
    ```
 
    Codex CLI equivalent: `codex exec -C "<workspace>" -s workspace-write "\$farfield brief, unattended" </dev/null >> state/run.log 2>&1`.
 
-   Never use a skip-all-permissions flag. Edits are limited to the workspace because that is the working directory.
+   The prompt must say "unattended", or the run will stop to ask for feedback and never print its SUMMARY line. Never use a skip-all-permissions flag. Edits are limited to the workspace because that is the working directory.
 
 2. Show the user the script and the schedule entry, and get a yes before installing. This is the one approval.
    - macOS: a LaunchAgent at `~/Library/LaunchAgents/com.farfield.brief.plist` with `StartCalendarInterval`, then `launchctl bootstrap gui/$(id -u) <plist>`. launchd runs a missed job when the Mac next wakes.
    - Linux: a `crontab` line. Windows: Task Scheduler via `schtasks`.
-3. Run `state/run.sh` once now and show the last line of `state/run.log`.
+3. Run `state/run.sh` once now (it takes 10 to 30 minutes) and show the last line of `state/run.log`. It must be a `SUMMARY:` line; if the log shows a permission refusal, fix the allowed tools rather than widening permissions.
 
 To stop: `launchctl bootout gui/$(id -u)/com.farfield.brief` and delete the plist (or remove the crontab line). Tell them this.
 

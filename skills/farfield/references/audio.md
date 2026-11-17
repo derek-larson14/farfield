@@ -8,7 +8,7 @@ Default is **skip**: an episode without a transcript contributes its show notes 
 
 Run `AUDIO find` and `AUDIO estimate <workspace>` first so the question has real numbers. Then:
 
-"<N> podcast episodes from the last 30 days have no transcript, about <H> hours. Want me to transcribe them on this computer? It's free and takes one setup: about a 2.3 GB download."
+"<N> podcast episodes from the last 30 days have no transcript, about <H> hours. Want me to transcribe them on this computer? It's free and takes one setup: about 3 GB of downloads (a 2.3 GB model plus 650 MB of software)."
 
 - **Yes, set it up** (Recommended)
 - **No, show notes are fine**
@@ -20,7 +20,7 @@ Keep the local choice simple. If the user is connecting OpenRouter, also offer t
 Run `AUDIO install` and relay its three progress lines. It does everything: ffmpeg through Homebrew if it's missing, Parakeet in a private folder (`~/.local/share/farfield/parakeet`, nothing global), the model download, and a test. It can take several minutes on a slow connection; say so before starting. Then:
 
 1. `AUDIO use <workspace> parakeet`
-2. `AUDIO transcribe <workspace> <one recent episode's audio URL> --max-secs 120` and show the first two sentences, so they see it work.
+2. `AUDIO transcribe <workspace> <audio URL of a recent episode that has no published transcript> --max-secs 120` and show the first two sentences, so they see it work. A clip streams only those seconds; it doesn't download the whole episode. Many shows open with an ad; if the sentences are an ad, say so rather than presenting them as the show.
 
 If `install` fails, read its message: it says exactly what is missing (Homebrew, or Python 3.10+). Fix that one thing with them, or leave audio on skip. Never leave a half-installed state unmentioned.
 
@@ -43,7 +43,7 @@ Show the current choice first as recommended; offer “Compare cloud options” 
 
 Rates checked 2026-11-17 against [OpenRouter's transcription catalog](https://openrouter.ai/api/v1/models?output_modalities=transcription) and model pages. Recheck before paid use. These estimate cost, not quality: no comparative accuracy test has been run. Credit fees/taxes are excluded. Unknown durations mean an incomplete estimate. Feed-only `AUDIO estimate` can overcount missing transcripts; inspect the episode pages first. An episode with a published transcript costs nothing to transcribe because it should not be transcribed.
 
-After they choose, use `AUDIO use <workspace> openrouter --model <id>` with `openai/whisper-large-v3-turbo`, `microsoft/mai-transcribe-2`, or `elevenlabs/scribe-v2`. Use `HELPER keys --open` only if needed. Show the batch's estimated charge before authorizing it; keep it within the user's agreed audio budget and recommend a capped OpenRouter key. Setting up a provider is not blanket approval for unlimited audio. Show actual reported cost afterward; missing usage is unknown.
+After they choose, use `AUDIO use <workspace> openrouter --model <id> --budget <agreed dollars per run>` with `openai/whisper-large-v3-turbo`, `microsoft/mai-transcribe-2`, or `elevenlabs/scribe-v2` (budget default $1). Before sending anything, `transcribe` refuses any episode that would cost more than that budget. Use `HELPER keys --open` only if needed. Show the batch's estimated charge before authorizing it; keep it within the user's agreed audio budget and recommend a capped OpenRouter key. Setting up a provider is not blanket approval for unlimited audio. Show actual reported cost afterward; missing usage is unknown.
 
 Existing local model preferences remain supported. For local Whisper, use `AUDIO use <workspace> whisper --model <path>`.
 

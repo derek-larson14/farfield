@@ -7,8 +7,9 @@
                                          way of transcribing it would cost
   audio.py install                       set up Parakeet in a private folder (Apple Silicon): its own Python
                                          environment, ffmpeg if Homebrew is here, and the 2.3 GB model
-  audio.py use <workspace> skip|parakeet|whisper|openrouter [--model PATH_OR_NAME]
-                                         remember the choice in <workspace>/audio.json
+  audio.py use <workspace> skip|parakeet|whisper|openrouter [--model PATH_OR_NAME] [--budget USD]
+                                         remember the choice in <workspace>/audio.json; --budget caps
+                                         OpenRouter spend per transcribe call (default $1)
   audio.py transcribe <workspace> <audio-url> [--max-secs N]
                                          transcribe with the remembered choice; prints the transcript path
 
@@ -40,6 +41,8 @@ ITUNES = "{http://www.itunes.com/dtds/podcast-1.0.dtd}"
 PODCAST = "{https://podcastindex.org/namespace/1.0}"
 BACKENDS = ("skip", "parakeet", "whisper", "openrouter")
 CHUNK_S = 300
+PARAKEET_PIN = "parakeet-mlx==0.7.0"   # bump deliberately after testing; never install whatever is newest
+DEFAULT_BUDGET_USD = 1.0
 MODEL_DIRS = ("~/.cache/whisper.cpp", "~/.cache/whisper", "~/Library/Application Support/MacWhisper/models",
               "~/Library/Application Support/superwhisper", "~/models", "~/.cache/huggingface/hub")
 
@@ -122,7 +125,7 @@ def install():
         say(f"2/3 installing parakeet-mlx into {VENV}")
         DATA.mkdir(parents=True, exist_ok=True)
         subprocess.run([python, "-m", "venv", str(VENV)], check=True)
-        subprocess.run([str(VENV / "bin" / "pip"), "install", "--quiet", "--upgrade", "parakeet-mlx"], check=True)
+        subprocess.run([str(VENV / "bin" / "pip"), "install", "--quiet", "--disable-pip-version-check", PARAKEET_PIN], check=True)
     else:
         say("2/3 parakeet-mlx is already here")
     say("3/3 fetching the model (2.3 GB the first time) and testing it")
@@ -144,8 +147,10 @@ def find_local():
             continue
         for path in sorted(root.iterdir()):
             name = path.name.lower()
-            if (path.suffix == ".bin" and "ggml" in name) or "parakeet" in name or "whisper" in name:
+            if path.suffix == ".bin" and "ggml" in name:
                 models.append(str(path))
+            elif ("parakeet" in name or "whisper" in name) and path.is_dir() and any(path.rglob("*.safetensors")):
+                models.append(str(path))   # a Hugging Face model folder that actually holds weights
     apple_silicon = sys.platform == "darwin" and platform.machine() == "arm64"
     tools = {name: shutil.which(name) for name in ("ffmpeg", "whisper-cli", "brew")}
     tools["parakeet-mlx"] = parakeet_bin()
@@ -170,6 +175,10 @@ def estimate(root, days=30, fetch=feed_text):
     for source in sources:
         if source.get("kind") != "podcast" or not source.get("enabled", True):
             continue
+        if source.get("discovery") not in (None, "rss-or-atom"):
+            shows.append({"id": source["id"], "name": source.get("name"), "skipped": "no RSS feed; publishes "
+                          "transcripts on its site, so it needs no transcription"})
+            continue
         try:
             found = episodes(fetch(source["url"]), since)
         except Exception as error:
@@ -180,8 +189,11 @@ def estimate(root, days=30, fetch=feed_text):
         unknown += sum(1 for e in need if not e["seconds"])
         covered += len(found) - len(need)
         total += secs
+        missing = sum(1 for e in need if not e["seconds"])
         shows.append({"id": source["id"], "name": source.get("name"), "episodes": len(found),
-                      "need_audio": len(need), "hours": round(secs / 3600, 1)})
+                      "need_audio": len(need),
+                      "hours": round(secs / 3600, 1) if need and missing < len(need) else (0 if not need else "unknown"),
+                      **({"episodes_without_length": missing} if missing else {})})
     hours = total / 3600
     prices = radar.read_json(PRICES)
     return {"days": days, "hours": round(hours, 1), "episodes_with_published_transcript": covered,
@@ -197,7 +209,7 @@ def settings(root):
     return radar.read_json(path) if path.exists() else {"backend": "skip"}
 
 
-def use(root, backend, model=None):
+def use(root, backend, model=None, budget=None):
     if backend not in BACKENDS:
         raise ValueError(f"backend must be one of {', '.join(BACKENDS)}")
     if backend == "whisper":
@@ -210,6 +222,11 @@ def use(root, backend, model=None):
         if model not in supported:
             raise ValueError("unsupported transcription model; choose an option from audio.py estimate")
     value = {"backend": backend, **({"model": model} if model else {})}
+    if backend == "openrouter":
+        budget = DEFAULT_BUDGET_USD if budget is None else budget
+        if not 0 < budget <= 50:
+            raise ValueError("--budget must be between 0 and 50 dollars per run")
+        value["budget_usd"] = budget
     (Path(root).expanduser() / "audio.json").write_text(json.dumps(value, indent=2) + "\n")
     return value
 
@@ -247,13 +264,18 @@ def transcribe(root, url, max_secs=None):
     cut = ["-t", str(max_secs)] if max_secs else []
     cost = 0.0
     with tempfile.TemporaryDirectory(prefix="farfield-audio-") as tmp:
-        src = os.path.join(tmp, "src.audio")
-        request = urllib.request.Request(url, headers={"User-Agent": radar.UA})
-        with urllib.request.urlopen(request, timeout=300) as response, open(src, "wb") as handle:
-            shutil.copyfileobj(response, handle)
+        pre, post = [], cut
+        if max_secs:
+            # A test clip streams only the first seconds; ffmpeg stops reading once it has them.
+            src, pre = url, ["-user_agent", radar.UA]
+        else:
+            src = os.path.join(tmp, "src.audio")
+            request = urllib.request.Request(url, headers={"User-Agent": radar.UA})
+            with urllib.request.urlopen(request, timeout=300) as response, open(src, "wb") as handle:
+                shutil.copyfileobj(response, handle)
         wav = os.path.join(tmp, "a.wav")
         if backend == "whisper":
-            run(["ffmpeg", "-loglevel", "error", "-i", src, *cut, "-map", "0:a:0", "-ac", "1", "-ar", "16000", wav])
+            run(["ffmpeg", "-loglevel", "error", *pre, "-i", src, *post, "-map", "0:a:0", "-ac", "1", "-ar", "16000", wav])
             # -mc 0: no cross-segment context, which stops whisper's repeat loops on long audio
             run(["whisper-cli", "-m", str(Path(chosen["model"]).expanduser()), "-f", wav, "-otxt", "-of",
                  os.path.join(tmp, "o"), "-nt", "-np", "-mc", "0", "-t", str(os.cpu_count() or 4)])
@@ -261,7 +283,7 @@ def transcribe(root, url, max_secs=None):
         elif backend == "parakeet":
             if not parakeet_bin():
                 raise ValueError("Parakeet is not set up; run `audio.py install`")
-            run(["ffmpeg", "-loglevel", "error", "-i", src, *cut, "-map", "0:a:0", "-ac", "1", "-ar", "16000", wav])
+            run(["ffmpeg", "-loglevel", "error", *pre, "-i", src, *post, "-map", "0:a:0", "-ac", "1", "-ar", "16000", wav])
             extra = ["--model", chosen["model"]] if chosen.get("model") else []
             run([parakeet_bin(), wav, "--output-format", "txt", "--output-dir", tmp, *extra])
             text = Path(tmp, "a.txt").read_text()
@@ -269,10 +291,19 @@ def transcribe(root, url, max_secs=None):
             key = radar.keys().get("OPENROUTER_API_KEY")
             if not key:
                 raise ValueError("no OPENROUTER_API_KEY; run `radar.py keys --open`")
-            run(["ffmpeg", "-loglevel", "error", "-i", src, *cut, "-map", "0:a:0", "-ac", "1", "-ar", "16000", "-b:a", "32k",
+            run(["ffmpeg", "-loglevel", "error", *pre, "-i", src, *post, "-map", "0:a:0", "-ac", "1", "-ar", "16000", "-b:a", "32k",
                  "-f", "segment", "-segment_time", str(CHUNK_S), "-reset_timestamps", "1", os.path.join(tmp, "c%03d.mp3")])
+            chunks = sorted(Path(tmp).glob("c*.mp3"))
+            rate = next((o["usd_per_hour"] for o in radar.read_json(PRICES)["options"]
+                         if o.get("model") == chosen.get("model", "openai/whisper-large-v3-turbo")), None)
+            budget = chosen.get("budget_usd", DEFAULT_BUDGET_USD)
+            planned = len(chunks) * CHUNK_S / 3600 * (rate or 0)
+            if rate is None or planned > budget:
+                raise ValueError(f"this episode would cost about ${planned:.2f} with {chosen.get('model')}, over the "
+                                 f"${budget:.2f} per-run budget in audio.json; nothing was sent. Ask the user before "
+                                 "raising it with `audio.py use ... --budget`")
             parts = []
-            for chunk in sorted(Path(tmp).glob("c*.mp3")):
+            for chunk in chunks:
                 piece, spent = openrouter_chunk(chunk, key, chosen.get("model", "openai/whisper-large-v3-turbo"))
                 parts.append(piece)
                 cost = cost + spent if cost is not None and spent is not None else None
@@ -301,6 +332,7 @@ def main(argv=None):
     pick.add_argument("workspace")
     pick.add_argument("backend", choices=BACKENDS)
     pick.add_argument("--model")
+    pick.add_argument("--budget", type=float)
     tr = commands.add_parser("transcribe")
     tr.add_argument("workspace")
     tr.add_argument("url")
@@ -314,7 +346,7 @@ def main(argv=None):
         elif args.command == "estimate":
             out = estimate(args.workspace, args.days)
         elif args.command == "use":
-            out = use(args.workspace, args.backend, args.model)
+            out = use(args.workspace, args.backend, args.model, args.budget)
         else:
             out = transcribe(args.workspace, args.url, args.max_secs)
         print(json.dumps(out, indent=1))

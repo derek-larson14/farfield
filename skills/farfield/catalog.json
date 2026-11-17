@@ -6,465 +6,584 @@
     {
       "id": "simonw",
       "name": "Simon Willison",
-      "url": "https://simonwillison.net/atom/everything/",
       "kind": "feed",
+      "home": "https://simonwillison.net/",
+      "url": "https://simonwillison.net/atom/everything/",
+      "why": "Daily hands-on notes on LLM tools, prompt injection and agents, with links to primary sources.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "Public Atom feed of everything; it holds about 30 recent entries, so older parts of a window need the dated archive (simonwillison.net/YYYY/Mon/).",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "substack:latent.space",
       "name": "Latent Space",
-      "url": "https://www.latent.space/feed",
       "kind": "feed",
+      "home": "https://www.latent.space/",
+      "url": "https://www.latent.space/feed",
+      "why": "Long interviews and essays with people building AI products and infrastructure.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "Substack feed; podcast episodes carry full transcripts on the post page. Some posts are paid.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "substack:importai",
       "name": "Import AI",
-      "url": "https://importai.substack.com/feed",
       "kind": "feed",
+      "home": "https://importai.substack.com/",
+      "url": "https://importai.substack.com/feed",
+      "why": "Jack Clark's weekly digest of notable papers, with his own reading of each.",
+      "topics": [
+        "research"
+      ],
+      "access": "Public Substack feed. Follow the linked papers; the digest is one evidence chain with them.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "substack:interconnects.ai",
       "name": "Interconnects",
-      "url": "https://www.interconnects.ai/feed",
       "kind": "feed",
+      "home": "https://www.interconnects.ai/",
+      "url": "https://www.interconnects.ai/feed",
+      "why": "Nathan Lambert on post-training, open models and RL, from someone doing the work.",
+      "topics": [
+        "research"
+      ],
+      "access": "Substack feed; some posts paid. Read accessible text only.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "substack:dwarkesh.com",
       "name": "Dwarkesh",
-      "url": "https://www.dwarkesh.com/feed",
       "kind": "feed",
+      "home": "https://www.dwarkesh.com/",
+      "url": "https://www.dwarkesh.com/feed",
+      "why": "Long interviews with researchers and builders, with full transcripts.",
+      "topics": [
+        "research"
+      ],
+      "access": "Substack feed; episode posts carry the full transcript, so no audio is needed.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "substack:oneusefulthing.org",
       "name": "One Useful Thing",
-      "url": "https://www.oneusefulthing.org/feed",
       "kind": "feed",
+      "home": "https://www.oneusefulthing.org/",
+      "url": "https://www.oneusefulthing.org/feed",
+      "why": "Ethan Mollick on how people actually use AI at work, often citing new studies.",
+      "topics": [
+        "evaluation-and-adoption"
+      ],
+      "access": "Public Substack feed. Follow the studies he cites.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "hn",
       "name": "Hacker News (front page)",
-      "url": "https://hnrss.org/frontpage?points=150",
       "kind": "feed",
+      "home": "https://news.ycombinator.com/",
+      "url": "https://hnrss.org/frontpage?points=150",
+      "why": "Front-page Hacker News stories above 150 points: a broad net for originals outside the list.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "hnrss.org feed. Use it to find originals; follow the linked page. A popular post is not evidence by itself.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "hfpapers",
       "name": "Hugging Face daily papers",
-      "url": "https://huggingface.co/papers",
       "kind": "site",
-      "enabled": true,
-      "discovery": "dated-hf-papers",
-      "api_url": "https://huggingface.co/api/daily_papers",
+      "home": "https://huggingface.co/papers",
+      "url": "https://huggingface.co/papers",
+      "why": "A daily shortlist of papers the community found interesting.",
+      "topics": [
+        "research"
+      ],
       "access": "Daily shortlist, not all arXiv. Keep first publication and featured dates separate. Deduplicate by arXiv ID.",
-      "family": "paper-origin"
+      "discovery": "dated-hf-papers",
+      "family": "paper-origin",
+      "api_url": "https://huggingface.co/api/daily_papers",
+      "checked_on": "2026-11-17",
+      "enabled": true
     },
     {
       "id": "podcast:hard-fork",
       "name": "Hard Fork",
-      "url": "https://feeds.simplecast.com/6HKOhNgS",
       "kind": "podcast",
+      "home": "https://www.nytimes.com/column/hard-fork",
+      "url": "https://feeds.simplecast.com/6HKOhNgS",
+      "why": "Weekly tech news show from the New York Times; good for how AI is landing with a general audience.",
+      "topics": [
+        "business"
+      ],
+      "access": "RSS audio. Transcripts are on nytimes.com and may be paywalled; otherwise show notes only.",
+      "discovery": "rss-or-atom",
       "transcription": "existing-transcript-only",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "podcast:cognitive-revolution",
       "name": "The Cognitive Revolution",
-      "url": "https://feeds.megaphone.fm/RINTP3108857801",
       "kind": "podcast",
+      "home": "https://www.cognitiverevolution.ai/",
+      "url": "https://feeds.megaphone.fm/RINTP3108857801",
+      "why": "Long technical interviews with founders and researchers.",
+      "topics": [
+        "research"
+      ],
+      "access": "RSS audio; show notes often link a transcript. Use it when published; audio is opt-in.",
+      "discovery": "rss-or-atom",
       "transcription": "existing-transcript-only",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "podcast:training-data",
       "name": "Training Data",
-      "url": "https://feeds.megaphone.fm/trainingdata",
       "kind": "podcast",
+      "home": "https://www.sequoiacap.com/podcast/training-data/",
+      "url": "https://feeds.megaphone.fm/trainingdata",
+      "why": "Sequoia's interviews with founders building AI companies.",
+      "topics": [
+        "business"
+      ],
+      "access": "RSS audio; episode pages on sequoiacap.com carry transcripts.",
+      "discovery": "rss-or-atom",
       "transcription": "existing-transcript-only",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "podcast:odd-lots",
       "name": "Odd Lots",
-      "url": "https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/8a94442e-5a74-4fa2-8b8d-ae27003a8d6b/982f5071-765c-403d-969d-ae27003a8d83/podcast.rss",
       "kind": "podcast",
+      "home": "https://www.bloomberg.com/oddlots",
+      "url": "https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/8a94442e-5a74-4fa2-8b8d-ae27003a8d6b/982f5071-765c-403d-969d-ae27003a8d83/podcast.rss",
+      "why": "Bloomberg's markets podcast; AI economics, energy and compute from outside tech.",
+      "topics": [
+        "adjacent-fields"
+      ],
+      "access": "RSS audio; the published transcript is on Bloomberg and may be paywalled. Audio is opt-in.",
+      "discovery": "rss-or-atom",
       "transcription": "existing-transcript-only",
+      "checked_on": "2026-11-17",
       "enabled": true
     },
     {
       "id": "martin-alderson",
       "name": "Martin Alderson",
-      "url": "https://martinalderson.com/feed.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://martinalderson.com/",
+      "url": "https://martinalderson.com/feed.xml",
+      "why": "Firsthand work on agent speed, costs, infrastructure, and software economics.",
       "topics": [
         "engineering"
       ],
-      "why": "Firsthand work on agent speed, costs, infrastructure, and software economics.",
       "access": "Public RSS and articles.",
+      "discovery": "rss-or-atom",
       "example_url": "https://martinalderson.com/posts/making-agents-fast/",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "every",
       "name": "Every",
-      "url": "https://every.to/",
       "kind": "site",
-      "enabled": true,
+      "home": "https://every.to/",
+      "url": "https://every.to/",
+      "why": "Workflows, creative practice, and organizational adoption from people building with AI.",
       "topics": [
         "applied-ai"
       ],
-      "why": "Workflows, creative practice, and organizational adoption from people building with AI.",
       "access": "Public pages/previews only. Full-text RSS is a personal paid-subscriber feed in Account settings; never put that private URL in the catalog.",
+      "discovery": "dated-site-index",
+      "family": "every",
       "example_url": "https://every.to/also-true-for-humans/how-i-finally-got-ai-to-write-like-me",
       "checked_on": "2026-11-17",
-      "discovery": "dated-site-index",
-      "family": "every"
+      "enabled": true
     },
     {
       "id": "hamel-husain",
       "name": "Hamel Husain",
-      "url": "https://hamel.dev/index.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://hamel.dev/",
+      "url": "https://hamel.dev/index.xml",
+      "why": "Task-specific evaluations and failure analysis from real AI projects.",
       "topics": [
         "engineering"
       ],
-      "why": "Task-specific evaluations and failure analysis from real AI projects.",
       "access": "Public RSS and articles.",
+      "discovery": "rss-or-atom",
       "example_url": "https://hamel.dev/blog/posts/evals/",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "eugene-yan",
       "name": "Eugene Yan",
-      "url": "https://eugeneyan.com/rss/",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://eugeneyan.com/",
+      "url": "https://eugeneyan.com/rss/",
+      "why": "Production ML, retrieval, evaluation, and deployment tradeoffs.",
       "topics": [
         "engineering"
       ],
-      "why": "Production ML, retrieval, evaluation, and deployment tradeoffs.",
       "access": "Public RSS; irregular cadence. Follow original article links.",
+      "discovery": "rss-or-atom",
       "example_url": "https://eugeneyan.com/writing/evals/",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "sebastian-raschka",
       "name": "Ahead of AI (Sebastian Raschka)",
-      "url": "https://magazine.sebastianraschka.com/feed",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://magazine.sebastianraschka.com/",
+      "url": "https://magazine.sebastianraschka.com/feed",
+      "why": "Technical explanations connecting papers to model training and evaluation.",
       "topics": [
         "research"
       ],
-      "why": "Technical explanations connecting papers to model training and evaluation.",
       "access": "RSS can be large; some posts may be subscriber-only. Read accessible text only.",
+      "discovery": "rss-or-atom",
       "example_url": "https://magazine.sebastianraschka.com/p/understanding-positional-embeddings",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "normal-technology",
       "name": "AI as Normal Technology",
-      "url": "https://www.normaltech.ai/feed",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://www.normaltech.ai/",
+      "url": "https://www.normaltech.ai/feed",
+      "why": "Arvind Narayanan and Sayash Kapoor on evaluation quality, adoption, and limits of AI claims.",
       "topics": [
         "evaluation-and-adoption"
       ],
-      "why": "Arvind Narayanan and Sayash Kapoor on evaluation quality, adoption, and limits of AI claims.",
       "access": "Public feed; follow originals and distinguish arguments from empirical results.",
+      "discovery": "rss-or-atom",
       "example_url": "https://www.normaltech.ai/p/new-paper-emerging-trends-in-ai-agent",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "metr",
       "name": "METR",
-      "url": "https://metr.org/feed.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://metr.org/",
+      "url": "https://metr.org/feed.xml",
+      "why": "Independent evaluations of agent capabilities and effects on real work.",
       "topics": [
         "evaluation-and-adoption"
       ],
-      "why": "Independent evaluations of agent capabilities and effects on real work.",
       "access": "Public RSS and reports; preserve task definitions and uncertainty.",
+      "discovery": "rss-or-atom",
       "example_url": "https://metr.org/blog/",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "epoch-ai",
       "name": "Epoch AI",
-      "url": "https://epoch.ai/atom.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://epoch.ai/",
+      "url": "https://epoch.ai/atom.xml",
+      "why": "Measurement of compute, capabilities, inference, and economic adoption.",
       "topics": [
         "evaluation-and-adoption"
       ],
-      "why": "Measurement of compute, capabilities, inference, and economic adoption.",
       "access": "Public Atom feed and reports.",
+      "discovery": "rss-or-atom",
       "example_url": "https://epoch.ai/publications/inference-performance-index",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "anthropic-research",
       "name": "Anthropic Research",
-      "url": "https://www.anthropic.com/research",
       "kind": "site",
-      "enabled": true,
+      "home": "https://www.anthropic.com/research",
+      "url": "https://www.anthropic.com/research",
+      "why": "Primary experiments in model behavior, safety, and economic use.",
       "topics": [
         "research"
       ],
-      "why": "Primary experiments in model behavior, safety, and economic use.",
       "access": "Public index and articles. Vendor research; same family as Anthropic Engineering.",
+      "discovery": "dated-site-index",
+      "family": "anthropic",
       "example_url": "https://www.anthropic.com/research/agents-judgment-calls",
       "checked_on": "2026-11-17",
-      "family": "anthropic",
-      "discovery": "dated-site-index"
+      "enabled": true
     },
     {
       "id": "anthropic-engineering",
       "name": "Anthropic Engineering",
-      "url": "https://www.anthropic.com/engineering",
       "kind": "site",
-      "enabled": true,
+      "home": "https://www.anthropic.com/engineering",
+      "url": "https://www.anthropic.com/engineering",
+      "why": "Concrete harness, evaluation, and tool-use implementation lessons.",
       "topics": [
         "engineering"
       ],
-      "why": "Concrete harness, evaluation, and tool-use implementation lessons.",
       "access": "Public index. Some entries also appear in Research; deduplicate canonical article URLs.",
-      "example_url": "https://www.anthropic.com/research/effective-harnesses-for-long-running-agents",
-      "checked_on": "2026-11-17",
+      "discovery": "dated-site-index",
       "family": "anthropic",
-      "discovery": "dated-site-index"
+      "example_url": "https://www.anthropic.com/engineering",
+      "checked_on": "2026-11-17",
+      "enabled": true
     },
     {
       "id": "berkeley-bair",
       "name": "Berkeley AI Research",
-      "url": "https://bair.berkeley.edu/blog/feed.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://bair.berkeley.edu/blog/",
+      "url": "https://bair.berkeley.edu/blog/feed.xml",
+      "why": "Researchers explain their own work in learning, robotics, and systems.",
       "topics": [
         "research"
       ],
-      "why": "Researchers explain their own work in learning, robotics, and systems.",
       "access": "Public RSS with only a short recent list; inspect the blog archive for older windows.",
+      "discovery": "rss-or-atom",
       "example_url": "https://bair.berkeley.edu/blog/2026/07/29/cuda-to-mlx-k-search/",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "huggingface-blog",
       "name": "Hugging Face Blog",
-      "url": "https://huggingface.co/blog/feed.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://huggingface.co/blog",
+      "url": "https://huggingface.co/blog/feed.xml",
+      "why": "Open model tooling, reproducible implementations, datasets, and practical experiments.",
       "topics": [
         "engineering"
       ],
-      "why": "Open model tooling, reproducible implementations, datasets, and practical experiments.",
       "access": "Public feed; includes community and vendor posts. Follow primary code and paper links.",
+      "discovery": "rss-or-atom",
       "example_url": "https://huggingface.co/blog",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "google-deepmind",
       "name": "Google DeepMind",
-      "url": "https://deepmind.google/blog/",
       "kind": "site",
-      "enabled": true,
+      "home": "https://deepmind.google/blog/",
+      "url": "https://deepmind.google/blog/",
+      "why": "Primary work in models, robotics, and scientific applications.",
       "topics": [
         "research"
       ],
-      "why": "Primary work in models, robotics, and scientific applications.",
       "access": "Public paginated index; distinguish research evidence from product announcements.",
+      "discovery": "dated-site-index",
       "example_url": "https://deepmind.google/research/publications/",
       "checked_on": "2026-11-17",
-      "discovery": "dated-site-index"
+      "enabled": true
     },
     {
       "id": "stanford-hai",
       "name": "Stanford HAI",
-      "url": "https://hai.stanford.edu/news",
       "kind": "site",
-      "enabled": true,
+      "home": "https://hai.stanford.edu/news",
+      "url": "https://hai.stanford.edu/news",
+      "why": "Research on adoption, labor, institutions, and the social effects of AI.",
       "topics": [
         "evaluation-and-adoption"
       ],
-      "why": "Research on adoption, labor, institutions, and the social effects of AI.",
       "access": "Public news index; follow the underlying paper or report rather than treating the news summary as evidence.",
+      "discovery": "dated-site-index",
       "example_url": "https://hai.stanford.edu/news",
       "checked_on": "2026-11-17",
-      "discovery": "dated-site-index"
+      "enabled": true
     },
     {
       "id": "benedict-evans",
       "name": "Benedict Evans",
-      "url": "https://www.ben-evans.com/benedictevans?format=rss",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://www.ben-evans.com/",
+      "url": "https://www.ben-evans.com/benedictevans?format=rss",
+      "why": "Technology adoption and business-model analysis beyond individual model launches.",
       "topics": [
         "business"
       ],
-      "why": "Technology adoption and business-model analysis beyond individual model launches.",
       "access": "Public essay feed; not the entire paid newsletter.",
+      "discovery": "rss-or-atom",
       "example_url": "https://www.ben-evans.com/benedictevans/2026/9/3/ai-tools-and-transformation",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "construction-physics",
       "name": "Construction Physics",
-      "url": "https://www.construction-physics.com/feed",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://www.construction-physics.com/",
+      "url": "https://www.construction-physics.com/feed",
+      "why": "Mechanisms of technological diffusion, production, and cost improvement outside software.",
       "topics": [
         "adjacent-fields"
       ],
-      "why": "Mechanisms of technological diffusion, production, and cost improvement outside software.",
       "access": "RSS; some content may be paid. Use only when it illuminates an actual user question.",
+      "discovery": "rss-or-atom",
       "example_url": "https://www.construction-physics.com/p/technology-as-a-search-problem",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "works-in-progress",
       "name": "Works in Progress",
-      "url": "https://worksinprogress.co/archive/",
       "kind": "site",
-      "enabled": true,
+      "home": "https://worksinprogress.co/",
+      "url": "https://worksinprogress.co/archive/",
+      "why": "Detailed accounts of scientific, institutional, and industrial progress.",
       "topics": [
         "adjacent-fields"
       ],
-      "why": "Detailed accounts of scientific, institutional, and industrial progress.",
       "access": "Public archive; distinguish magazine pieces from the separate newsletter.",
+      "discovery": "dated-site-index",
       "example_url": "https://worksinprogress.co/",
       "checked_on": "2026-11-17",
-      "discovery": "dated-site-index"
+      "enabled": true
     },
     {
       "id": "chip-huyen",
       "name": "Chip Huyen",
-      "url": "https://huyenchip.com/feed.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://huyenchip.com/",
+      "url": "https://huyenchip.com/feed.xml",
+      "why": "Systematic explanations of AI systems and product tradeoffs.",
       "topics": [
         "engineering"
       ],
-      "why": "Systematic explanations of AI systems and product tradeoffs.",
       "access": "Public RSS; sparse/older feed. Do not represent an old essay as a recent publication.",
+      "discovery": "rss-or-atom",
       "example_url": "https://huyenchip.com/2025/01/07/agents.html",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "lilian-weng",
       "name": "Lilian Weng",
-      "url": "https://lilianweng.github.io/index.xml",
       "kind": "feed",
-      "enabled": true,
+      "home": "https://lilianweng.github.io/",
+      "url": "https://lilianweng.github.io/index.xml",
+      "why": "Deep technical surveys linking methods, papers, and limitations.",
       "topics": [
         "research"
       ],
-      "why": "Deep technical surveys linking methods, papers, and limitations.",
       "access": "Public RSS, infrequent publication. Older surveys are background, not new findings.",
+      "discovery": "rss-or-atom",
       "example_url": "https://lilianweng.github.io/posts/2026-07-04-harness/",
       "checked_on": "2026-11-17",
-      "discovery": "rss-or-atom"
+      "enabled": true
     },
     {
       "id": "arxiv",
       "name": "arXiv targeted searches",
-      "url": "https://export.arxiv.org/api/query",
       "kind": "search",
-      "enabled": true,
+      "home": "https://arxiv.org/",
+      "url": "https://export.arxiv.org/api/query",
+      "why": "Narrow, dated searches built from your open questions, so new papers surface without popularity rankings.",
       "topics": [
         "research"
       ],
-      "why": "Find recent work related to the user’s questions without relying on popularity-ranked lists.",
       "access": "Public Atom API. Build dated, narrow queries; abstracts are discovery, not full-paper evidence.",
+      "discovery": "dated-arxiv-search",
       "example_url": "https://info.arxiv.org/help/api/user-manual.html",
       "checked_on": "2026-11-17",
-      "discovery": "dated-arxiv-search"
+      "enabled": true
     },
     {
       "id": "podcast:practical-ai",
       "name": "Practical AI",
-      "url": "https://feeds.transistor.fm/practical-ai-machine-learning-data-science-llm",
       "kind": "podcast",
-      "enabled": true,
-      "transcription": "existing-transcript-only",
-      "discovery": "rss-or-atom",
-      "access": "Publisher transcript links in VTT, SRT and JSON via podcast:transcript.",
-      "example_url": "https://practicalai.fm/",
+      "home": "https://practicalai.fm/",
+      "url": "https://feeds.transistor.fm/practical-ai-machine-learning-data-science-llm",
       "why": "Applied ML systems and practitioner interviews.",
-      "checked_on": "2026-11-17"
+      "access": "Publisher transcript links in VTT, SRT and JSON via podcast:transcript.",
+      "discovery": "rss-or-atom",
+      "transcription": "existing-transcript-only",
+      "example_url": "https://practicalai.fm/",
+      "checked_on": "2026-11-17",
+      "enabled": true
     },
     {
       "id": "podcast:how-i-ai",
       "name": "How I AI with Claire Vo",
-      "url": "https://anchor.fm/s/1035b1568/podcast/rss",
       "kind": "podcast",
-      "enabled": true,
-      "transcription": "existing-transcript-only",
-      "discovery": "rss-or-atom",
-      "access": "Full transcripts on corresponding Lenny’s episode pages; follow episode links.",
-      "example_url": "https://www.lennysnewsletter.com/p/how-to-digest-36-weekly-podcasts/",
+      "home": "https://www.youtube.com/@howiaipodcast",
+      "url": "https://anchor.fm/s/1035b1568/podcast/rss",
       "why": "Demonstrations of how people actually use AI at work.",
+      "access": "Full transcripts on corresponding Lenny’s episode pages; follow episode links.",
+      "discovery": "rss-or-atom",
+      "transcription": "existing-transcript-only",
+      "family": "lennys",
+      "example_url": "https://www.lennysnewsletter.com/p/how-to-digest-36-weekly-podcasts/",
       "checked_on": "2026-11-17",
-      "family": "lennys"
+      "enabled": true
     },
     {
       "id": "podcast:pragmatic-engineer",
       "name": "The Pragmatic Engineer Podcast",
-      "url": "https://newsletter.pragmaticengineer.com/feed",
       "kind": "podcast",
-      "enabled": true,
-      "transcription": "existing-transcript-only",
-      "discovery": "rss-or-atom",
-      "access": "Mixed newsletter and podcast feed. Select podcast entries; use published transcript text, not paid previews.",
-      "example_url": "https://newsletter.pragmaticengineer.com/p/software-engineering-at-google-and",
+      "home": "https://newsletter.pragmaticengineer.com/podcast",
+      "url": "https://newsletter.pragmaticengineer.com/feed",
       "why": "Engineering practice, developer productivity and organizational adoption.",
-      "checked_on": "2026-11-17"
+      "access": "Mixed newsletter and podcast feed. Select podcast entries; use published transcript text, not paid previews.",
+      "discovery": "rss-or-atom",
+      "transcription": "existing-transcript-only",
+      "example_url": "https://newsletter.pragmaticengineer.com/p/software-engineering-at-google-and",
+      "checked_on": "2026-11-17",
+      "enabled": true
     },
     {
       "id": "podcast:lennys",
       "name": "Lenny’s Podcast",
-      "url": "https://www.lennysnewsletter.com/feed",
       "kind": "podcast",
-      "discovery": "rss-or-atom",
-      "family": "lennys",
+      "home": "https://www.lennysnewsletter.com/podcast",
+      "url": "https://www.lennysnewsletter.com/feed",
       "why": "Product decisions, growth and firsthand accounts of adopting AI.",
       "access": "Mixed newsletter feed; filter Lenny’s Podcast episodes. Transcript availability and paid access vary. Use accessible published transcripts, never treat a Transcript tab or show notes as proof of full text.",
-      "example_url": "https://www.lennysnewsletter.com/p/what-openai-and-google-engineers-learned",
-      "enabled": true,
+      "discovery": "rss-or-atom",
       "transcription": "existing-transcript-only",
-      "checked_on": "2026-11-17"
+      "family": "lennys",
+      "example_url": "https://www.lennysnewsletter.com/p/what-openai-and-google-engineers-learned",
+      "checked_on": "2026-11-17",
+      "enabled": true
     },
     {
       "id": "podcast:every",
       "name": "The Every Podcast (formerly AI & I)",
-      "url": "https://every.to/podcast",
       "kind": "podcast",
-      "discovery": "dated-site-index",
-      "family": "every",
+      "home": "https://every.to/podcast",
+      "url": "https://every.to/podcast",
       "why": "Conversations and demonstrations about AI and how people work.",
       "access": "Publisher episode archive with pagination and separate transcript pages. Follow the transcript link and check access; deduplicate episode and transcript pages against Every’s main index.",
-      "example_url": "https://every.to/podcast",
-      "enabled": true,
+      "discovery": "dated-site-index",
       "transcription": "existing-transcript-only",
-      "checked_on": "2026-11-17"
+      "family": "every",
+      "example_url": "https://every.to/podcast",
+      "checked_on": "2026-11-17",
+      "enabled": true
     }
   ]
 }

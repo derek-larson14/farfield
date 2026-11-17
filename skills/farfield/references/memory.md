@@ -1,6 +1,6 @@
 # Reading memory
 
-Store a readable history, not a growing dump of every source page. `LIBRARY` means `<skill>/scripts/library.py` via python3.
+Store a readable history, not a growing dump of every source page. `LIBRARY` means `<skill>/scripts/library.py`, run directly like the other helpers (see SKILL.md).
 
 - `reading-history.md`: generated list for the user, with links, status, date and a short reason.
 - `state/reading-history.jsonl`: append-only item events for reliable lookup. One publication can have many items. The publication list stays in `sources.md`.

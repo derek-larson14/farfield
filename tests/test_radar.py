@@ -5,6 +5,8 @@ import importlib.util
 import tempfile
 import unittest
 import unittest.mock
+import subprocess
+import sys
 from pathlib import Path
 
 spec = importlib.util.spec_from_file_location("radar", Path(__file__).resolve().parents[1] / "skills/farfield/scripts/radar.py")
@@ -22,7 +24,7 @@ class RadarTest(unittest.TestCase):
         resolved = radar.resolve_sources(pack, local)
         self.assertEqual([s["id"] for s in resolved["sources"] if s["enabled"]],
                          ["chosen", "local:mine"])
-        self.assertIn("Selected from catalog (1)", radar.render_sources(resolved))
+        self.assertIn("Picked from the curated list (1)", radar.render_sources(resolved))
         self.assertTrue(pack["sources"][1]["enabled"])
 
     def test_init_preserves_user_edits(self):
@@ -61,16 +63,18 @@ class RadarTest(unittest.TestCase):
         pack = radar.read_json(REPO / "examples/evidence.json")
         radar.check_evidence(pack)
         pack["ideas"][0]["quotes"][0]["quote"] = "Fabricated replacement"
-        with self.assertRaises(ValueError):
-            radar.check_evidence(pack)
+        warnings, failures = radar.check_evidence(pack)
+        self.assertEqual(len(failures), 1)
+        self.assertIn("not verbatim", failures[0])
 
     def test_legacy_pack_reports_missing_provenance(self):
         pack = radar.read_json(REPO / "examples/evidence.json")
         quote = pack["ideas"][0]["quotes"][0]
         del quote["excerpt"]
         del quote["origin_id"]
-        warnings = radar.check_evidence(pack)
-        self.assertTrue(any("original quote unverified" in item for item in warnings))
+        warnings, failures = radar.check_evidence(pack)
+        self.assertEqual(failures, [])
+        self.assertTrue(any("no source excerpt" in item for item in warnings))
         self.assertTrue(any("independence unverified" in item for item in warnings))
 
     def test_add_mute_and_readable_list(self):
@@ -95,15 +99,87 @@ class RadarTest(unittest.TestCase):
     def test_quote_is_checked_against_the_fetched_page(self):
         with tempfile.TemporaryDirectory() as path:
             page = "<html><script>var x='We said nothing'</script><p>He said \u201cthe tide&nbsp;sets the\n roster\u201d today.</p></html>"
-            with unittest.mock.patch.object(radar, "http", return_value=page):
+            with unittest.mock.patch.object(radar, "download", return_value=("text/html", page.encode())):
                 raw = radar.fetch(path, "https://example.org/a")["raw"]
             pack = radar.read_json(REPO / "examples/evidence.json")
             quote = pack["ideas"][0]["quotes"][0]
             quote.update(quote='"the tide sets the roster"', excerpt='He said "the tide sets the roster" today.', raw=raw)
-            self.assertFalse(any("not checked against the page" in w for w in radar.check_evidence(pack)))
+            warnings, failures = radar.check_evidence(pack)
+            self.assertEqual(failures, [])
+            self.assertFalse(any("not checked against the page" in w for w in warnings))
             quote.update(quote="We said nothing", excerpt="We said nothing")
-            with self.assertRaises(ValueError):
-                radar.check_evidence(pack)
+            self.assertIn("not in the fetched page", radar.check_evidence(pack)[1][0])
+
+    def test_quote_ending_at_a_link_and_curly_quotes_still_match(self):
+        with tempfile.TemporaryDirectory() as path:
+            page = "<p>Build a separate judge for each <a href='/x'>failure mode</a>. It’s cheaper.</p>"
+            with unittest.mock.patch.object(radar, "download", return_value=("text/html", page.encode())):
+                raw = radar.fetch(path, "https://example.org/b")["raw"]
+            pack = radar.read_json(REPO / "examples/evidence.json")
+            pack["ideas"][0]["quotes"][0].update(
+                quote="Build a separate judge for each failure mode. It's cheaper.",
+                excerpt="Build a separate judge for each failure mode. It’s cheaper.", raw=raw)
+            self.assertEqual(radar.check_evidence(pack)[1], [])
+
+    def test_one_bad_quote_does_not_sink_the_others(self):
+        pack = radar.read_json(REPO / "examples/evidence.json")
+        good = dict(pack["ideas"][0]["quotes"][0])
+        pack["ideas"][0]["quotes"] = [good, dict(good, quote="Invented words")]
+        warnings, failures = radar.check_evidence(pack)
+        self.assertEqual(len(failures), 1)
+        self.assertTrue(failures[0].startswith(pack["ideas"][0]["id"] + " quote 2"))
+
+    def test_pdf_text_is_saved_and_quotes_check_against_it(self):
+        with tempfile.TemporaryDirectory() as path:
+            with unittest.mock.patch.object(radar, "download", return_value=("application/pdf", b"%PDF-1.7")), \
+                    unittest.mock.patch.object(radar, "pdf_text", return_value="Results\nWe find that evaluation\ndrift is real.\n"):
+                result = radar.fetch(path, "https://arxiv.org/pdf/2601.01234v2")
+            self.assertEqual(result["via"], "pdf")
+            pack = radar.read_json(REPO / "examples/evidence.json")
+            pack["ideas"][0]["quotes"][0].update(quote="We find that evaluation drift is real.",
+                                                 excerpt="We find that evaluation drift is real.", raw=result["raw"])
+            self.assertEqual(radar.check_evidence(pack)[1], [])
+
+    def test_real_pdf_extraction_when_a_reader_exists(self):
+        if not (radar.shutil.which("pdftotext") or radar.sys.platform == "darwin"):
+            self.skipTest("no PDF reader on this machine")
+        pdf = (b"%PDF-1.4\n1 0 obj<</Type/Catalog/Pages 2 0 R>>endobj 2 0 obj<</Type/Pages/Kids[3 0 R]/Count 1>>endobj "
+               b"3 0 obj<</Type/Page/Parent 2 0 R/MediaBox[0 0 300 100]/Contents 4 0 R/Resources<</Font<</F1 5 0 R>>>>>>endobj "
+               b"4 0 obj<</Length 44>>stream\nBT /F1 12 Tf 10 50 Td (Quoted words here) Tj ET\nendstream endobj "
+               b"5 0 obj<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>endobj\ntrailer<</Root 1 0 R>>\n%%EOF")
+        self.assertIn("Quoted words here", radar.pdf_text(pdf))
+
+    def test_same_site_needs_force(self):
+        with tempfile.TemporaryDirectory() as path:
+            radar.init_workspace(path, remember=False)
+            with self.assertRaises(ValueError) as caught:
+                radar.add_source(path, "https://www.hamel.dev/", "Hamel")
+            self.assertIn("hamel-husain", str(caught.exception))
+            self.assertTrue(radar.add_source(path, "https://hamel.dev/notes.xml", "Hamel notes", force=True))
+
+    def test_items_reports_partial_feed_coverage(self):
+        feed = """<?xml version="1.0"?><rss><channel>
+          <item><title>New</title><link>https://ex.org/new</link><pubDate>Mon, 16 Nov 2026 10:00:00 GMT</pubDate></item>
+          <item><title>Mid</title><link>https://ex.org/mid</link><pubDate>Mon, 09 Nov 2026 10:00:00 GMT</pubDate></item>
+        </channel></rss>"""
+        atom = """<feed xmlns="http://www.w3.org/2005/Atom"><entry><title>A</title>
+          <link rel="alternate" href="https://at.org/a"/><published>2026-11-10T00:00:00Z</published></entry>
+          <entry><title>Old</title><link href="https://at.org/old"/><updated>2026-09-01T00:00:00Z</updated></entry></feed>"""
+        with tempfile.TemporaryDirectory() as path:
+            radar.init_workspace(path, remember=False)
+            radar.set_source_mode(path, "only-mine")
+            radar.add_source(path, "https://ex.org/feed", "Ex")
+            radar.add_source(path, "https://at.org/atom", "At")
+            pages = {"https://ex.org/feed": feed, "https://at.org/atom": atom}
+            with unittest.mock.patch.object(radar, "http", side_effect=lambda url, **k: pages[url]):
+                out = radar.list_items(path, radar.date(2026, 11, 1))
+            by_id = {s["id"]: s for s in out["sources"]}
+            self.assertEqual(by_id["local:ex"]["status"], "partial")
+            self.assertEqual(by_id["local:ex"]["count"], 2)
+            self.assertEqual(by_id["local:at"]["status"], "complete")
+            saved = radar.read_json(out["saved"])
+            at = next(s for s in saved["sources"] if s["id"] == "local:at")
+            self.assertEqual([i["url"] for i in at["items"]], ["https://at.org/a"])
 
     def test_keys_come_from_a_private_file_and_are_never_printed(self):
         with tempfile.TemporaryDirectory() as path:
@@ -146,3 +222,15 @@ class RadarTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ReadingListTest(unittest.TestCase):
+    def test_sources_md_matches_catalog(self):
+        result = subprocess.run([sys.executable, str(REPO / "tools" / "sources_md.py"), "--check"],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_every_source_has_a_home_and_a_reason(self):
+        for source in radar.read_json(radar.CATALOG)["sources"]:
+            self.assertTrue(source.get("home", "").startswith("https://"), source["id"])
+            self.assertTrue(source.get("why"), source["id"])

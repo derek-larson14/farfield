@@ -9,7 +9,7 @@
 ## Add (for this user only)
 
 1. Resolve the name or URL to the thing you can actually fetch: an RSS/Atom feed, a podcast feed, a YouTube channel, a site, or a standing search. Fetch it once to prove it works and show one recent item with its date. If the name is ambiguous, ask which one. Never invent a feed URL.
-2. `HELPER add <workspace> <url> --name "<name>" --kind feed|podcast|channel|site|search`. If it reports the source is already listed, unmute that ID instead.
+2. `HELPER add <workspace> <url> --name "<name>" --kind feed|podcast|channel|site|search`. If it says the URL or site is already listed, that publication is already a source: unmute that ID if it's muted, and tell the user it's included. Use `--force` only for a genuinely different feed on the same site.
 3. Say plainly what the next brief can use from it: full text, show notes only, or transcript if one is published. No audio transcription and no paid access happen on their own.
 
 Other regular inputs work too: a standing search they want re-run each time (`--kind search`, with the search URL), or one person's blog. A local folder they drop papers into is context, not a source: list it under "Read for context" in `me.md`.
@@ -24,14 +24,15 @@ Other regular inputs work too: a standing search they want re-run each time (`--
 
 Adding for yourself and suggesting for the shared list are separate. After an add, ask once: "Want to suggest this for the curated list too?" No is a complete answer.
 
-On yes, write three things and show them: the name or URL, one example item, and one sentence on what it adds that the list lacks. Leave out the user's projects and file paths. Ask if they want a reply and at which email (optional). After they say send, post it to `suggestions.url` from the workspace's `feed.json`:
+On yes, draft three things and show them: the source URL, one example item (a link), and one sentence on what it adds that the list lacks. Leave out the user's projects, notes and file paths; the suggestion is public.
 
-```sh
-curl -fsS -X POST "<suggestions.url>" -H 'Content-Type: application/json' \
-  -d '{"url":"...","why":"...","email":"","via":"skill"}'
+Then give them a pre-filled GitHub link that opens a "Suggest a source" issue. They review it and press Create, so nothing is sent without them seeing it. URL-encode each value:
+
+```
+https://github.com/derek-larson14/farfield/issues/new?template=source.yml&title=Source%20suggestion%3A%20<name>&source=<url>&why=<one sentence>&example=<example url>
 ```
 
-If `suggestions.url` is empty or the post fails, give them the draft text and explain that delivery is unavailable; don't invent a form link or claim it was sent. A pull request adding the source to `catalog.json` is the other route (see CONTRIBUTING.md in the repository).
+It needs a GitHub account. If they don't have one, give them the draft text to send however they like. Never claim a suggestion was sent. A pull request adding the source to `catalog.json` is the other route (see CONTRIBUTING.md in the repository).
 
 ## Unattended
 

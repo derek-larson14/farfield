@@ -1,6 +1,5 @@
 {
   "manifest_url": null,
   "mode": "follow",
-  "suggestions": { "url": null, "form": null },
-  "notes": "No shared feed is published yet, so briefs collect from sources live. suggestions.url is the site's /api/suggest endpoint once the site is up."
+  "notes": "No shared feed is published yet, so briefs collect from sources live."
 }
