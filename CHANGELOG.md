@@ -5,6 +5,7 @@
 - Sources: builders first (Anthropic Engineering, Hugging Face, Hamel Husain, Martin Alderson); No Priors replaces Training Data; Hard Fork and Practical AI removed; Cognitive Revolution moved down. 38 sources.
 - Install instructions use the desktop app's current Customize → Plugins → Add plugin → Add marketplace path.
 - Brief footers count abstract-only reads separately; practical numbers need a basis.
+- Schedules default to off-peak times (weekly Sunday 6pm, monthly the 1st at 5am).
 
 ## 0.3.1
 

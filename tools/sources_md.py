@@ -26,7 +26,7 @@ SECTIONS = [  # (title, test on a source), first match wins
     ("Outside AI", lambda s: "adjacent-fields" in s.get("topics", [])),
 ]
 
-INTRO = """# What Farfield reads
+INTRO = """# Reading list
 
 The default sources. During setup, and any time after, you can add your own or mute any of these. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
 """
@@ -105,7 +105,7 @@ li span{{display:block;color:#55524b;font-size:16px;margin-top:1px}}
 </style></head>
 <body><main>
 <a class="top" href="/">← Farfield</a>
-<h1>What Farfield reads</h1>
+<h1>Reading list</h1>
 <p class="lede">The default sources. During setup, and any time after, you can add your own or mute any of these. <a class="suggest" href="{SUGGEST}" target="_blank" rel="noopener">Suggest a source</a></p>
 {''.join(sections)}
 </main></body></html>
