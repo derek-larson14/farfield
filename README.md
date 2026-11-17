@@ -34,7 +34,7 @@ Practitioners, researchers, independent evaluations, interviews, and recent pape
 
 ## Privacy
 
-Briefs and notes are files in a folder you choose. Your agent reads only the context you permit, such as a project folder or, if you say yes, what you typed in your recent Claude Code and Codex conversations. That text is processed by your existing model provider, and searches use general descriptions, never your words. Farfield does not upload your workspace to this repository. Browsing contacts the source sites. Audio downloads and scheduling require your approval.
+Briefs and notes are files in a folder you choose. Your agent reads only the context you permit, such as a project folder or, if you say yes, what you typed in your recent Claude Code and Codex conversations. That text is processed by your existing model provider, and searches use general descriptions, never your words. Farfield does not upload your workspace to this repository. Browsing contacts the source sites; a page that refuses automated requests is read through a public reader service (r.jina.ai), which sees only that public URL. Audio downloads and scheduling require your approval.
 
 Experimental. Full installation and onboarding have not been verified across every supported host.
 

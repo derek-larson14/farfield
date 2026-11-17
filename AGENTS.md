@@ -15,6 +15,8 @@ claude plugin marketplace add https://farfield.newyorkai.org/marketplace.json
 claude plugin install farfield@farfield
 ```
 
+If it was already installed, update it instead: `claude plugin marketplace update farfield && claude plugin update farfield@farfield` (`install` alone keeps the old version).
+
 If the first command says a marketplace named `farfield` already exists from somewhere else, run `claude plugin marketplace remove farfield` and both commands again.
 
 The plugin's commands load in new sessions. Don't make them restart: read `skills/farfield/SKILL.md` from the installed plugin (`claude plugin list` shows where it is; or `find ~/.claude/plugins/cache -path '*farfield*' -name SKILL.md | sort | tail -1`) and continue to step 2. Tell them that next time it's `/farfield:brief`.
@@ -32,7 +34,7 @@ mkdir -p ~/.agents/skills && rm -rf ~/.agents/skills/farfield \
 
 Then read `~/.agents/skills/farfield/SKILL.md` and continue to step 2. In Codex, next time it's `$farfield brief`. For another agent, put the folder wherever it keeps skills; it needs to read and write files, run `python3` (3.9+, standard library only) and fetch web pages.
 
-Running the same install again is how it updates. It never touches the user's workspace.
+Running the install again updates it (for Claude Code, with the update command above). It never touches the user's workspace.
 
 ## 2. Start
 

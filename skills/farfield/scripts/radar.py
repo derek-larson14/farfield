@@ -181,6 +181,28 @@ def exa(path, payload):
                            {"x-api-key": key, "Content-Type": "application/json"}))
 
 
+READER = "https://r.jina.ai/"   # free public reader for sites that refuse direct requests; it sees only the URL
+
+
+def unmarkdown(text):
+    """Reader output is Markdown; keep the words so quotes still match the page."""
+    text = text.split("Markdown Content:", 1)[-1]
+    text = re.sub(r"!\[[^\]]*\]\([^)]*\)", " ", text)                 # images
+    text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)              # links -> their text
+    text = re.sub(r"(?m)^\s{0,3}(#{1,6}|[-*+]|\d+\.|>)\s+", "", text)   # headings, bullets, quotes
+    text = re.sub(r"(\*\*|__|`)", "", text)
+    text = re.sub(r"(?<!\w)[*_](?=\S)|(?<=\S)[*_](?!\w)", "", text)    # *emphasis* / _emphasis_
+    return text
+
+
+def via_reader(url):
+    kind, body = download(READER + url, headers={"Accept": "text/plain", "X-Return-Format": "markdown"})
+    text = unmarkdown(body.decode("utf-8", "replace"))
+    if len(text.split()) < 50:
+        raise ValueError("reader returned almost no text")
+    return squash(text)
+
+
 def fetch(root, url):
     """Raw page text on disk, so a quote can be checked against the page and not against a summary of it."""
     if urlparse(url).scheme not in ("http", "https"):
@@ -195,12 +217,16 @@ def fetch(root, url):
         else:
             text = to_text(body.decode("utf-8", "replace"))
     except (urllib.error.URLError, TimeoutError, ConnectionError) as error:
-        if not keys().get("EXA_API_KEY"):
-            raise ValueError(f"could not fetch {url}: {error}")
-        results = exa("/contents", {"urls": [url], "text": True}).get("results") or []
-        if not results or not results[0].get("text"):
-            raise ValueError(f"could not fetch {url} directly or through Exa")
-        text, via = squash(results[0]["text"]), "exa"
+        # Some publishers (openai.com, for one) block every automated request. Try a public reader, then Exa.
+        try:
+            text, via = via_reader(url), "reader"
+        except (urllib.error.URLError, TimeoutError, ConnectionError, ValueError) as reader_error:
+            if not keys().get("EXA_API_KEY"):
+                raise ValueError(f"could not fetch {url}: {error}; reader also failed: {reader_error}")
+            results = exa("/contents", {"urls": [url], "text": True}).get("results") or []
+            if not results or not results[0].get("text"):
+                raise ValueError(f"could not fetch {url} directly, through the reader or through Exa")
+            text, via = squash(results[0]["text"]), "exa"
     folder = Path(root).expanduser() / "evidence" / "raw"
     folder.mkdir(parents=True, exist_ok=True)
     path = folder / (hashlib.sha256(url.encode()).hexdigest()[:16] + ".txt")

@@ -1,5 +1,11 @@
 # Changes
 
+## 0.3.6
+
+- Sources: add SemiAnalysis. 44 sources.
+- Fix: rerunning install.sh now actually updates Claude Code installs (`plugin install` succeeds as "already installed" and never updated).
+- Pages that refuse automated requests (openai.com) are read through a free public reader (r.jina.ai), so their quotes can be checked. The reader only sees the public page URL.
+
 ## 0.3.5
 
 - Sources: remove Understanding AI. 43 sources.

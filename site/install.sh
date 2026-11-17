@@ -19,7 +19,10 @@ if command -v claude >/dev/null 2>&1; then
     claude plugin marketplace add "$SITE/marketplace.json" >/dev/null
   fi
   claude plugin marketplace update farfield >/dev/null
-  claude plugin install farfield@farfield >/dev/null 2>&1 || claude plugin update farfield@farfield >/dev/null
+  # install says "already installed" (and succeeds) on a second run, so always ask for the update too.
+  claude plugin install farfield@farfield >/dev/null
+  claude plugin update farfield@farfield >/dev/null
+  echo "  installed version: $(curl -fsSL "$SITE/skill.json" 2>/dev/null | sed -n 's/.*"version": *"\([^"]*\)".*/\1/p')"
   echo "  done. In Claude Code, type:  /farfield:start"
 fi
 

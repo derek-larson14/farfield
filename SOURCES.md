@@ -45,6 +45,7 @@ The default sources. During setup, and any time after, you can add your own or m
 - **[Stratechery](https://stratechery.com/)**: Ben Thompson on the strategy and business models of tech companies, and where AI shifts them.
 - **[Derek Thompson](https://www.derekthompson.org/)**: Big-picture essays on AI, the economy and how people actually adopt new technology.
 - **[Exponential View](https://www.exponentialview.co/)**: Azeem Azhar on AI, energy and the economy, with the data behind each argument.
+- **[SemiAnalysis](https://newsletter.semianalysis.com/)**: Dylan Patel's team on the economics of AI hardware: chips, datacenters, power and what inference really costs.
 
 ## Outside AI
 

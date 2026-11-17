@@ -242,3 +242,23 @@ class VersionTest(unittest.TestCase):
         self.assertEqual(plugin, radar.read_json(radar.SKILL / "skill.json")["version"])
         self.assertEqual(plugin, radar.read_json(radar.CATALOG)["version"])
         self.assertIn(f"## {plugin}", (REPO / "CHANGELOG.md").read_text())
+
+
+class ReaderFallbackTest(unittest.TestCase):
+    def test_blocked_page_is_read_through_the_reader_and_quotes_still_match(self):
+        markdown = ("Title: X\n\nMarkdown Content:\n## Scaling\n\nWe built **Pando**, a new [backend](https://x.org) for "
+                    "Git repositories, without interrupting any engineering work. " + "More words here. " * 20)
+        def fake(url, data=None, headers=None, limit=None):
+            if url.startswith(radar.READER):
+                return "text/plain", markdown.encode()
+            raise radar.urllib.error.HTTPError(url, 403, "Forbidden", {}, None)
+        with tempfile.TemporaryDirectory() as path:
+            with unittest.mock.patch.object(radar, "download", side_effect=fake):
+                result = radar.fetch(path, "https://openai.com/index/scaling-git")
+            self.assertEqual(result["via"], "reader")
+            pack = radar.read_json(REPO / "examples/evidence.json")
+            pack["ideas"][0]["quotes"][0].update(
+                quote="We built Pando, a new backend for Git repositories, without interrupting any engineering work.",
+                excerpt="We built Pando, a new backend for Git repositories, without interrupting any engineering work.",
+                raw=result["raw"])
+            self.assertEqual(radar.check_evidence(pack)[1], [])

@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -109,7 +109,7 @@
       "topics": [
         "engineering"
       ],
-      "access": "One news feed for all of OpenAI; only posts tagged Engineering. The site blocks some automated readers; use the feed's links and fetch the originals.",
+      "access": "One news feed for all of OpenAI; only posts tagged Engineering. openai.com refuses direct automated requests; `radar.py fetch` reads its pages through the public reader fallback.",
       "discovery": "rss-or-atom",
       "family": "openai",
       "example_url": "https://openai.com/index/harness-engineering",
@@ -253,7 +253,7 @@
       "topics": [
         "research"
       ],
-      "access": "Same feed as OpenAI Engineering; only posts tagged Research. Product launches are left out.",
+      "access": "Same feed as OpenAI Engineering; only posts tagged Research. Product launches are left out. openai.com refuses direct automated requests; `radar.py fetch` reads its pages through the public reader fallback.",
       "discovery": "rss-or-atom",
       "family": "openai",
       "checked_on": "2026-11-17"
@@ -501,6 +501,20 @@
         "business"
       ],
       "access": "Substack feed; many posts paid. Read accessible text only.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
+    },
+    {
+      "id": "semianalysis",
+      "name": "SemiAnalysis",
+      "kind": "feed",
+      "home": "https://newsletter.semianalysis.com/",
+      "url": "https://newsletter.semianalysis.com/feed",
+      "why": "Dylan Patel's team on the economics of AI hardware: chips, datacenters, power and what inference really costs.",
+      "topics": [
+        "business"
+      ],
+      "access": "Substack feed. Posts give several thousand free words before the paywall; the detailed models are for subscribers. Read accessible text only.",
       "discovery": "rss-or-atom",
       "checked_on": "2026-11-17"
     },
