@@ -43,6 +43,7 @@ The default sources. During setup, and any time after, you can add your own or m
 ## Business and strategy
 
 - **[Benedict Evans](https://www.ben-evans.com/)**: Technology adoption and business-model analysis beyond individual model launches.
+- **[Stratechery](https://stratechery.com/)**: Ben Thompson on the strategy and business models of tech companies, and where AI shifts them.
 - **[Derek Thompson](https://www.derekthompson.org/)**: Big-picture essays on AI, the economy and how people actually adopt new technology.
 - **[Exponential View](https://www.exponentialview.co/)**: Azeem Azhar on AI, energy and the economy, with the data behind each argument.
 

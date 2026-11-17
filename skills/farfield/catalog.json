@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -475,6 +475,20 @@
       "example_url": "https://www.ben-evans.com/benedictevans/2026/9/3/ai-tools-and-transformation",
       "checked_on": "2026-11-17",
       "enabled": true
+    },
+    {
+      "id": "stratechery",
+      "name": "Stratechery",
+      "kind": "feed",
+      "home": "https://stratechery.com/",
+      "url": "https://stratechery.com/feed/",
+      "why": "Ben Thompson on the strategy and business models of tech companies, and where AI shifts them.",
+      "topics": [
+        "business"
+      ],
+      "access": "Public feed. The free weekly article is full text; daily Updates and most interviews are for subscribers, so only their openings are readable. A subscriber's personal feed URL belongs in their own sources, never the shared list.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
     },
     {
       "id": "substack:derekthompson.org",

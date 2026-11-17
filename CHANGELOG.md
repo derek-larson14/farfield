@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.4
+
+- Sources: add Stratechery (Ben Thompson). 44 sources.
+
 ## 0.3.3
 
 - Sources: add Armin Ronacher, Thorsten Ball, Vicki Boykis, Understanding AI and Exponential View. 43 sources.
