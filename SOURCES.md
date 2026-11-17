@@ -8,8 +8,11 @@ The default sources. During setup, and any time after, you can add your own or m
 - **[Hugging Face Blog](https://huggingface.co/blog)**: Open model tooling, reproducible implementations, datasets, and practical experiments.
 - **[Hamel Husain](https://hamel.dev/)**: Task-specific evaluations and failure analysis from real AI projects.
 - **[Martin Alderson](https://martinalderson.com/)**: Firsthand work on agent speed, costs, infrastructure, and software economics.
+- **[Armin Ronacher](https://lucumr.pocoo.org/)**: Flask's creator writing firsthand about building software with coding agents.
+- **[Thorsten Ball](https://registerspill.thorstenball.com/)**: Builds the Amp coding agent; a weekly, personal list of what he's reading and learning.
 - **[OpenAI Engineering](https://openai.com/news/engineering/)**: How OpenAI builds and runs its systems: harnesses, infrastructure, and lessons from deployment.
 - **[Eugene Yan](https://eugeneyan.com/)**: Production ML, retrieval, evaluation, and deployment tradeoffs.
+- **[Vicki Boykis](https://vickiboykis.com/)**: Retrieval, ranking and ML engineering explained plainly. Posts rarely.
 - **[Every](https://every.to/)**: Workflows, creative practice, and organizational adoption from people building with AI.
 - **[Chip Huyen](https://huyenchip.com/)**: Systematic explanations of AI systems and product tradeoffs.
 - **[Simon Willison](https://simonwillison.net/)**: Daily hands-on notes on LLM tools, prompt injection and agents, with links to primary sources.
@@ -33,6 +36,7 @@ The default sources. During setup, and any time after, you can add your own or m
 - **[METR](https://metr.org/)**: Independent evaluations of agent capabilities and effects on real work.
 - **[AI as Normal Technology](https://www.normaltech.ai/)**: Arvind Narayanan and Sayash Kapoor on evaluation quality, adoption, and limits of AI claims.
 - **[Epoch AI](https://epoch.ai/)**: Measurement of compute, capabilities, inference, and economic adoption.
+- **[Understanding AI](https://www.understandingai.org/)**: Timothy B. Lee's reported explainers on what AI can and can't do, from interviews with people in the field.
 - **[One Useful Thing](https://www.oneusefulthing.org/)**: Ethan Mollick on how people actually use AI at work, often citing new studies.
 - **[Stanford HAI](https://hai.stanford.edu/news)**: Research on adoption, labor, institutions, and the social effects of AI.
 
@@ -40,6 +44,7 @@ The default sources. During setup, and any time after, you can add your own or m
 
 - **[Benedict Evans](https://www.ben-evans.com/)**: Technology adoption and business-model analysis beyond individual model launches.
 - **[Derek Thompson](https://www.derekthompson.org/)**: Big-picture essays on AI, the economy and how people actually adopt new technology.
+- **[Exponential View](https://www.exponentialview.co/)**: Azeem Azhar on AI, energy and the economy, with the data behind each argument.
 
 ## Outside AI
 

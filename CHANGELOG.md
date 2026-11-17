@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.3
+
+- Sources: add Armin Ronacher, Thorsten Ball, Vicki Boykis, Understanding AI and Exponential View. 43 sources.
+
 ## 0.3.2
 
 - Sources: builders first (Anthropic Engineering, Hugging Face, Hamel Husain, Martin Alderson); No Priors replaces Training Data; Hard Fork and Practical AI removed; Cognitive Revolution moved down. 38 sources.

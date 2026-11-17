@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -69,6 +69,34 @@
       "enabled": true
     },
     {
+      "id": "armin-ronacher",
+      "name": "Armin Ronacher",
+      "kind": "feed",
+      "home": "https://lucumr.pocoo.org/",
+      "url": "https://lucumr.pocoo.org/feed.atom",
+      "why": "Flask's creator writing firsthand about building software with coding agents.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "Public Atom feed and articles.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
+    },
+    {
+      "id": "thorsten-ball",
+      "name": "Thorsten Ball",
+      "kind": "feed",
+      "home": "https://registerspill.thorstenball.com/",
+      "url": "https://registerspill.thorstenball.com/feed",
+      "why": "Builds the Amp coding agent; a weekly, personal list of what he's reading and learning.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "Substack feed. The weekly list links out; follow the originals.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
+    },
+    {
       "id": "openai-engineering",
       "name": "OpenAI Engineering",
       "kind": "feed",
@@ -102,6 +130,20 @@
       "example_url": "https://eugeneyan.com/writing/evals/",
       "checked_on": "2026-11-17",
       "enabled": true
+    },
+    {
+      "id": "vicki-boykis",
+      "name": "Vicki Boykis",
+      "kind": "feed",
+      "home": "https://vickiboykis.com/",
+      "url": "https://vickiboykis.com/index.xml",
+      "why": "Retrieval, ranking and ML engineering explained plainly. Posts rarely.",
+      "topics": [
+        "engineering"
+      ],
+      "access": "Public RSS and articles.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
     },
     {
       "id": "every",
@@ -374,6 +416,20 @@
       "enabled": true
     },
     {
+      "id": "understanding-ai",
+      "name": "Understanding AI",
+      "kind": "feed",
+      "home": "https://www.understandingai.org/",
+      "url": "https://www.understandingai.org/feed",
+      "why": "Timothy B. Lee's reported explainers on what AI can and can't do, from interviews with people in the field.",
+      "topics": [
+        "evaluation-and-adoption"
+      ],
+      "access": "Substack feed; some posts paid. Read accessible text only.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
+    },
+    {
       "id": "substack:oneusefulthing.org",
       "name": "One Useful Thing",
       "kind": "feed",
@@ -431,6 +487,20 @@
         "business"
       ],
       "access": "Public Substack feed; some posts paid. Read accessible text only.",
+      "discovery": "rss-or-atom",
+      "checked_on": "2026-11-17"
+    },
+    {
+      "id": "exponential-view",
+      "name": "Exponential View",
+      "kind": "feed",
+      "home": "https://www.exponentialview.co/",
+      "url": "https://www.exponentialview.co/feed",
+      "why": "Azeem Azhar on AI, energy and the economy, with the data behind each argument.",
+      "topics": [
+        "business"
+      ],
+      "access": "Substack feed; many posts paid. Read accessible text only.",
       "discovery": "rss-or-atom",
       "checked_on": "2026-11-17"
     },
