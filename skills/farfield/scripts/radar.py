@@ -27,6 +27,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import textwrap
 import unicodedata
 import urllib.error
 import urllib.request
@@ -203,7 +204,8 @@ def fetch(root, url):
     folder = Path(root).expanduser() / "evidence" / "raw"
     folder.mkdir(parents=True, exist_ok=True)
     path = folder / (hashlib.sha256(url.encode()).hexdigest()[:16] + ".txt")
-    path.write_text(f"{url}\n{text}\n")
+    # Wrapped so file viewers show all of it; quote checks ignore line breaks.
+    path.write_text(f"{url}\n" + "\n".join(textwrap.wrap(text, 160, break_long_words=False, break_on_hyphens=False)) + "\n")
     return {"raw": str(path), "chars": len(text), "via": via}
 
 
@@ -542,8 +544,16 @@ def list_items(root, since=None, only=()):
     while path.exists():
         path, n = folder / f"items-{date.today().isoformat()}-{n}.json", n + 1
     path.write_text(json.dumps(out, indent=1, ensure_ascii=False) + "\n")
+    listing = path.with_suffix(".md")
+    lines = [f"# Items since {out['since']}", ""]
+    for r in results:
+        lines.append(f"## {r['id']} ({r['status']}{', ' + str(r.get('count')) + ' items' if r.get('count') is not None else ''})")
+        lines += [f"- {i['date']} [{i['title']}]({i['url']})" + (" (transcript)" if i.get("transcript") else "")
+                  for i in r.get("items", [])]
+        lines.append("")
+    listing.write_text("\n".join(lines))
     summary = [{k: r.get(k) for k in ("id", "status", "count", "note")} for r in results]
-    return {"saved": str(path), "since": out["since"], "sources": summary}
+    return {"saved": str(path), "list": str(listing), "since": out["since"], "sources": summary}
 
 
 def version(check=False):

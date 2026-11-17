@@ -41,7 +41,7 @@ Run `HELPER sources <workspace>` to refresh the resolved list, then read `me.md`
 
 **Memory.** Follow [references/memory.md](references/memory.md). Check the item ledger before fetching or transcribing. Keep "discovered", "read" and "shown" separate; failed retrieval is retryable.
 
-**Discover.** Run `HELPER items <workspace>` (add `--since YYYY-MM-DD` for a window other than the last 30 days). It lists dated items from every enabled RSS/Atom source in parallel, saves them in `state/reading/items-<date>.json`, and reports each source as `complete`, `partial` (the feed stops inside the window: check its archive) or `not-a-feed` (site archives, arXiv, Hugging Face papers: follow [references/reading.md](references/reading.md)). Feed links, not the feed text, are what you read.
+**Discover.** Run `HELPER items <workspace>` (add `--since YYYY-MM-DD` for a window other than the last 30 days). It lists dated items from every enabled RSS/Atom source in parallel, saves them in `state/reading/items-<date>.json` plus a readable list next to it (`list` in its output; open that with your file tool), and reports each source as `complete`, `partial` (the feed stops inside the window: check its archive) or `not-a-feed` (site archives, arXiv, Hugging Face papers: follow [references/reading.md](references/reading.md)). Feed links, not the feed text, are what you read.
 
 *Shared feed.* If `feed.json` has a `manifest_url`, also run `<skill>/scripts/feed.py fetch <manifest_url> <workspace>/state/feed`, adding `--mute <id>` for every muted source ID. Show any `cached`, `stale` or `sample` warning. No shared feed is published yet, so this is normally skipped.
 
