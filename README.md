@@ -1,6 +1,8 @@
 # Farfield
 
-There’s a lot happening in AI. Farfield reads essays, papers, and podcasts with your work in mind, and brings back a few ideas worth looking into.
+There’s a lot happening in AI. Most of it doesn’t matter to your work.
+
+Farfield sifts through essays, papers, and podcasts with your work in mind, and brings back a few ideas worth exploring.
 
 A skill for Claude Code and Codex (CLI or desktop). It runs through your existing agent account. No additional account or API key is needed.
 
