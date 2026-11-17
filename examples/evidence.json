@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "sample": true,
+  "as_of": "2026-11-16",
+  "ideas": [
+    {
+      "id": "fictional-example",
+      "name": "Fictional format example, not a research finding",
+      "summary": "Demonstrates provenance and exact quote storage only.",
+      "quotes": [
+        {
+          "quote": "This is fictional evidence for a format example.",
+          "url": "https://example.org/fictional",
+          "date": "2026-11-15",
+          "source": "fictional-example",
+          "origin_id": "fictional-example",
+          "excerpt": "This is fictional evidence for a format example. It is not a real finding."
+        }
+      ]
+    }
+  ]
+}

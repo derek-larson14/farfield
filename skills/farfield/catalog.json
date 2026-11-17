@@ -1,0 +1,20 @@
+{
+  "id": "curated",
+  "version": "0.1.0-draft",
+  "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
+  "sources": [
+    {"id": "simonw", "name": "Simon Willison", "url": "https://simonwillison.net/atom/everything/", "kind": "feed", "enabled": true},
+    {"id": "substack:latent.space", "name": "Latent Space", "url": "https://www.latent.space/feed", "kind": "feed", "enabled": true},
+    {"id": "substack:importai", "name": "Import AI", "url": "https://importai.substack.com/feed", "kind": "feed", "enabled": true},
+    {"id": "substack:interconnects.ai", "name": "Interconnects", "url": "https://www.interconnects.ai/feed", "kind": "feed", "enabled": true},
+    {"id": "substack:dwarkesh.com", "name": "Dwarkesh", "url": "https://www.dwarkesh.com/feed", "kind": "feed", "enabled": true},
+    {"id": "substack:oneusefulthing.org", "name": "One Useful Thing", "url": "https://www.oneusefulthing.org/feed", "kind": "feed", "enabled": true},
+    {"id": "substack:derekthompson.org", "name": "Derek Thompson", "url": "https://www.derekthompson.org/feed", "kind": "feed", "enabled": true},
+    {"id": "hn", "name": "Hacker News (front page)", "url": "https://hnrss.org/frontpage?points=150", "kind": "feed", "enabled": true},
+    {"id": "hfpapers", "name": "Hugging Face daily papers", "url": "https://huggingface.co/papers", "kind": "site", "enabled": true},
+    {"id": "podcast:hard-fork", "name": "Hard Fork", "url": "https://feeds.simplecast.com/6HKOhNgS", "kind": "podcast", "transcription": "existing-transcript-only", "enabled": true},
+    {"id": "podcast:cognitive-revolution", "name": "The Cognitive Revolution", "url": "https://feeds.megaphone.fm/RINTP3108857801", "kind": "podcast", "transcription": "existing-transcript-only", "enabled": true},
+    {"id": "podcast:training-data", "name": "Training Data", "url": "https://feeds.megaphone.fm/trainingdata", "kind": "podcast", "transcription": "existing-transcript-only", "enabled": true},
+    {"id": "podcast:odd-lots", "name": "Odd Lots", "url": "https://www.omnycontent.com/d/playlist/e73c998e-6e60-432f-8610-ae210140c5b1/8a94442e-5a74-4fa2-8b8d-ae27003a8d6b/982f5071-765c-403d-969d-ae27003a8d83/podcast.rss", "kind": "podcast", "transcription": "existing-transcript-only", "enabled": true}
+  ]
+}

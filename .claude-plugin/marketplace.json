@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "farfield",
+  "description": "A research brief skill for Claude Code and Codex",
+  "owner": { "name": "derek-larson14", "email": "derek-larson14@users.noreply.github.com" },
+  "plugins": [
+    {
+      "name": "farfield",
+      "description": "A short, quote-backed brief of ideas you haven't seen that matter to your projects.",
+      "author": { "name": "derek-larson14" },
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "as_of": "2026-11-16",
+  "note": "Supported transcription options. Cloud prices are estimates as of the recorded date; check current pricing before paid use.",
+  "options": [
+    {
+      "id": "parakeet",
+      "name": "Parakeet v3, on this computer",
+      "usd_per_hour": 0,
+      "wired": true,
+      "note": "Apple Silicon. 25 languages including English. One-time model download. Speed depends on hardware and audio."
+    },
+    {
+      "id": "whisper",
+      "name": "Whisper large-v3-turbo, on this computer",
+      "usd_per_hour": 0,
+      "wired": true,
+      "note": "Mac or Linux with whisper.cpp. Uses a model already on the computer when available."
+    },
+    {
+      "id": "openrouter",
+      "name": "Whisper large-v3-turbo, OpenRouter",
+      "usd_per_hour": 0.012,
+      "wired": true,
+      "note": "Optional cloud backup. Requires an OpenRouter key; never used by default."
+    }
+  ]
+}
