@@ -15,6 +15,8 @@ Record discovery, successful full reading, failure or deliberate skipping separa
 
 `LIBRARY record <workspace> <url> --source <id> --title "<title>" --status discovered|read|failed|skipped --note "<short reason>" [--revision <version>] [--raw <path>]`
 
+To record many items at once, write them as JSON lines (`{"url", "source", "title", "status", "note", "raw", "brief"}`) to a file in the workspace's `state/` folder with the host's file tool, then run `LIBRARY record-batch <workspace> <that file>`. Don't write shell loops or scripts.
+
 Only `read` and `shown` count as successfully consumed. Never mark an abstract or show notes as a fully read paper/interview; record the limited access in the note and keep status discovered until the original is read. When used in a brief, record `shown` with `--brief <path>` and preserve `--revision`/`--raw` from its read event. A later failed check does not erase a successful earlier read.
 
 On each run, consider whether new evidence meets a watch item's revisit trigger. If it does, explain what changed; do not recycle the earlier finding. Remove obsolete watch items and honor “already knew” feedback. Old items can be useful background without being presented as news.

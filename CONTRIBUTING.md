@@ -20,4 +20,4 @@ Catalog changes are reviewed for original information, credible evidence, and pe
 
 ## Release
 
-Keep the plugin, skill and catalog versions in sync. Run the checks above, document behavior changes in CHANGELOG.md, then tag the tested commit `v<version>` and create its GitHub release. Never include user workspaces or local credentials. Keep the repository private during iteration; a release does not change visibility. Verify installation from the tag before claiming a release is ready for public use.
+Bump the version for every change you push to main: installed Claude Code plugins are cached by version and ignore new commits under the same number. Keep the plugin, skill and catalog versions in sync (a test checks). Run the checks above, document behavior changes in CHANGELOG.md, then tag the tested commit `v<version>` and create its GitHub release. Never include user workspaces or local credentials. Keep the repository private during iteration; a release does not change visibility. Verify installation from the tag before claiming a release is ready for public use.

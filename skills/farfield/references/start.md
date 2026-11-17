@@ -63,7 +63,7 @@ Then show five lines and ask for corrections, once:
 > **Will read for context:** `<paths>` (or "nothing")
 > **Skip:** …
 
-Write the corrected version to `me.md` using its headings. Tell them: the text I read goes to the model provider you're already using, under your account; nothing goes to the shared source list or this skill's repository.
+Write the corrected version to `me.md` using its headings. When you ask about the folder (question 1), that question's description already says what is read and where it goes; don't repeat it later.
 
 For "Only my own", first run `HELPER source-mode <workspace> only-mine`. This keeps future catalog additions off too. Then follow [sources.md](sources.md) to resolve each named source: add a new URL, or unmute its existing ID if already in the catalog. Only explicitly selected sources should be enabled. A catalog match is still their choice, shown as "Picked from the curated list". For the curated choices, use `HELPER source-mode <workspace> curated`; existing individual mutes stay respected. If a source they name is already in the curated list, `add` says so: tell them it's already included rather than adding it twice.
 
@@ -77,14 +77,7 @@ Run the Brief section of SKILL.md. Don't wait for anything else.
 
 ## 5. Hand over
 
-After the brief, show these links using the host's supported local-file format:
-
-- Your brief: `briefs/<date>.md`
-- What I think you're working on (edit any time): `me.md`
-- What I read (add or mute any time): `sources.md`
-- Commands: `brief`, `sources`, `schedule`
-
-Ask which findings were useful, already known, or not relevant, and record the answers in `feedback.md`.
+After the brief, add one short paragraph, the only one in setup that isn't the brief: where the brief is saved, that `me.md` (what you think they're working on) and `sources.md` (what you read) are theirs to edit, and that next time it's `brief`, `sources` or `schedule`. Give the paths as links. Record their answers on which ideas were useful in `feedback.md`.
 
 ## 6. Schedule
 

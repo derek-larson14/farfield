@@ -148,3 +148,15 @@ class AudioBudgetTest(unittest.TestCase):
             download.assert_not_called()
             self.assertEqual(calls[0][calls[0].index('-i') + 1], 'https://example.org/ep.mp3')
             self.assertEqual(out['words'], 2)
+
+
+class LibraryBatchTest(unittest.TestCase):
+    def test_record_batch(self):
+        with tempfile.TemporaryDirectory() as root:
+            items = Path(root) / 'items.jsonl'
+            items.write_text(json.dumps({'url': 'https://a.org/x', 'source': 's', 'title': 'X', 'status': 'read'}) + '\n'
+                             + json.dumps({'url': 'not a url', 'source': 's', 'title': 'Y', 'status': 'read'}) + '\n')
+            out = library.record_batch(root, items)
+            self.assertEqual(out['recorded'], 1)
+            self.assertEqual(len(out['failed']), 1)
+            self.assertTrue(library.lookup(root, 'https://a.org/x')['already_read'])

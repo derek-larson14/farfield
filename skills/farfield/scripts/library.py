@@ -3,6 +3,8 @@
 
   library.py lookup <workspace> <url> [--revision R]     was this item already read (and is its text cached)?
   library.py record <workspace> <url> --source ID --title T --status S [--note N] [--revision R] [--raw PATH] [--brief PATH]
+  library.py record-batch <workspace> <items.jsonl>     record many at once; one JSON object per line with
+                                                         url, source, title, status and optional note/revision/raw/brief
   library.py render <workspace>                          rewrite reading-history.md
 """
 import argparse
@@ -85,6 +87,22 @@ def record(root, url, source, title, status, revision=None, raw=None, note="", b
     return item
 
 
+def record_batch(root, items_file):
+    """Record many items in one call, so an agent doesn't need a shell loop."""
+    done, failed = 0, []
+    for n, line in enumerate(Path(items_file).expanduser().read_text().splitlines(), 1):
+        if not line.strip():
+            continue
+        try:
+            item = json.loads(line)
+            record(root, item["url"], item["source"], item["title"], item["status"], item.get("revision"),
+                   item.get("raw"), item.get("note", ""), item.get("brief"))
+            done += 1
+        except (ValueError, KeyError, TypeError) as error:
+            failed.append(f"line {n}: {error}")
+    return {"recorded": done, "failed": failed}
+
+
 def render(root):
     root = Path(root).expanduser()
     latest = {}
@@ -123,11 +141,14 @@ def main(argv=None):
             sub.add_argument("--raw")
             sub.add_argument("--note", default="")
             sub.add_argument("--brief")
+    batch = commands.add_parser("record-batch")
+    batch.add_argument("workspace")
+    batch.add_argument("items_file")
     commands.add_parser("render").add_argument("workspace")
     args = vars(parser.parse_args(argv))
     command, root = args.pop("command"), args.pop("workspace")
     try:
-        out = {"lookup": lookup, "record": record, "render": render}[command](root, **args)
+        out = {"lookup": lookup, "record": record, "record-batch": record_batch, "render": render}[command](root, **args)
         print(json.dumps(out, ensure_ascii=False))
     except (ValueError, OSError, json.JSONDecodeError) as error:
         print(f"FAILED: {error}", file=__import__("sys").stderr)

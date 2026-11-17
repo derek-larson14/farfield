@@ -234,3 +234,11 @@ class ReadingListTest(unittest.TestCase):
         for source in radar.read_json(radar.CATALOG)["sources"]:
             self.assertTrue(source.get("home", "").startswith("https://"), source["id"])
             self.assertTrue(source.get("why"), source["id"])
+
+
+class VersionTest(unittest.TestCase):
+    def test_versions_match_and_changelog_names_it(self):
+        plugin = radar.read_json(REPO / ".claude-plugin" / "plugin.json")["version"]
+        self.assertEqual(plugin, radar.read_json(radar.SKILL / "skill.json")["version"])
+        self.assertEqual(plugin, radar.read_json(radar.CATALOG)["version"])
+        self.assertIn(f"## {plugin}", (REPO / "CHANGELOG.md").read_text())

@@ -1,6 +1,11 @@
 # Changes
 
-## 0.2.0 (unreleased)
+## 0.3.0
+
+- Briefs read like a short email: a subject line, a few ideas in plain prose with exact quotes, and a one-line footer. No labeled fields. The reply in a conversation is the brief and one link.
+- Every release bumps the version. Installed Claude Code plugins only update when it changes.
+
+## 0.2.0
 
 - Expand the starting catalog to 37 sources, including Martin Alderson, Every, independent evaluations, targeted paper discovery and five additional podcasts with published-transcript retrieval. Remove Derek Thompson.
 - Define one dated discovery process for feeds and site archives, with pagination, deduplication and explicit incomplete coverage. Restore arXiv and dated Hugging Face paper instructions; these use the host's tools, not a new standalone collector.
