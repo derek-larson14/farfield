@@ -1,6 +1,6 @@
 {
   "name": "farfield",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A short, quote-backed brief of ideas you haven't seen that matter to your projects. Markdown in a folder you own; no server, no key.",
   "author": {
     "name": "derek-larson14"

@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -18,7 +18,8 @@
       "family": "anthropic",
       "example_url": "https://www.anthropic.com/engineering",
       "checked_on": "2026-11-17",
-      "enabled": true
+      "enabled": true,
+      "article_pattern": "^/(engineering|research)/[^/]+/?$"
     },
     {
       "id": "huggingface-blog",
@@ -160,7 +161,8 @@
       "family": "every",
       "example_url": "https://every.to/also-true-for-humans/how-i-finally-got-ai-to-write-like-me",
       "checked_on": "2026-11-17",
-      "enabled": true
+      "enabled": true,
+      "article_pattern": "^/(?!c/|p/|podcast/|company/|@)[a-z0-9-]+/[a-z0-9]+(-[a-z0-9]+){2,}/?$"
     },
     {
       "id": "chip-huyen",
@@ -238,7 +240,8 @@
       "family": "anthropic",
       "example_url": "https://www.anthropic.com/research/agents-judgment-calls",
       "checked_on": "2026-11-17",
-      "enabled": true
+      "enabled": true,
+      "article_pattern": "^/research/[^/]+/?$"
     },
     {
       "id": "openai-research",
@@ -261,15 +264,15 @@
     {
       "id": "google-deepmind",
       "name": "Google DeepMind",
-      "kind": "site",
+      "kind": "feed",
       "home": "https://deepmind.google/blog/",
-      "url": "https://deepmind.google/blog/",
+      "url": "https://deepmind.google/blog/rss.xml",
       "why": "Primary work in models, robotics, and scientific applications.",
       "topics": [
         "research"
       ],
-      "access": "Public paginated index; distinguish research evidence from product announcements.",
-      "discovery": "dated-site-index",
+      "access": "Public RSS. Distinguish research evidence from product announcements.",
+      "discovery": "rss-or-atom",
       "example_url": "https://deepmind.google/research/publications/",
       "checked_on": "2026-11-17",
       "enabled": true
@@ -444,7 +447,8 @@
       "discovery": "dated-site-index",
       "example_url": "https://hai.stanford.edu/news",
       "checked_on": "2026-11-17",
-      "enabled": true
+      "enabled": true,
+      "article_pattern": "^/news/[^/]+/?$"
     },
     {
       "id": "benedict-evans",
@@ -548,7 +552,8 @@
       "discovery": "dated-site-index",
       "example_url": "https://worksinprogress.co/",
       "checked_on": "2026-11-17",
-      "enabled": true
+      "enabled": true,
+      "article_pattern": "^/issue/[^/]+/?$"
     },
     {
       "id": "arxiv",
@@ -649,13 +654,14 @@
       "home": "https://every.to/podcast",
       "url": "https://every.to/podcast",
       "why": "Conversations and demonstrations about AI and how people work.",
-      "access": "Publisher episode archive with pagination and separate transcript pages. Follow the transcript link and check access; deduplicate episode and transcript pages against Every’s main index.",
+      "access": "Publisher episode archive; episode pages carry transcripts. Follow the transcript link and check access; deduplicate against Every's main index.",
       "discovery": "dated-site-index",
       "transcription": "existing-transcript-only",
       "family": "every",
       "example_url": "https://every.to/podcast",
       "checked_on": "2026-11-17",
-      "enabled": true
+      "enabled": true,
+      "article_pattern": "^/podcast/(?!feed)[a-z0-9]+(-[a-z0-9]+)+/?$"
     },
     {
       "id": "podcast:odd-lots",

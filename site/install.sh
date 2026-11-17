@@ -42,6 +42,6 @@ fi
 if [ "$found" = 0 ]; then
   echo "Neither Claude Code nor Codex was found on this machine."
   echo "Install one, or paste this into any agent that can read the web:"
-  echo "  Set up Farfield for me. Read $SITE/install.md in full and follow it: install the skill, ask me the setup questions and wait for my answers, then write my first brief."
+  echo "  Set up Farfield for me. Fetch $SITE/install.md with curl (or open it if you can't run commands), read all of it, and follow it: install the skill, ask me the setup questions and wait for my answers, then write my first brief."
   exit 1
 fi

@@ -523,9 +523,35 @@ def parse_feed(body):
     return out
 
 
+def index_links(source):
+    """Article links from a site's index page, in page order (usually newest first). No dates: the index has none."""
+    from urllib.parse import urljoin
+    html = download(source["url"])[1].decode("utf-8", "replace")
+    pattern = re.compile(source["article_pattern"])
+    seen, out = set(), []
+    for href in re.findall(r'href="([^"#?]+)', html):
+        url = urljoin(source["url"], href)
+        parsed = urlparse(url)
+        if site(url) != site(source["url"]) or not pattern.search(parsed.path):
+            continue
+        url = f"https://{parsed.netloc}{parsed.path.rstrip('/')}"
+        if url not in seen:
+            seen.add(url)
+            out.append(url)
+    return out[:30]
+
+
 def list_source(source, since):
     """One source's dated items in the window, and whether the feed reaches back to the window's start."""
     base = {"id": source["id"], "name": source.get("name"), "url": source.get("url")}
+    if source.get("article_pattern"):
+        try:
+            links = index_links(source)
+        except Exception as error:
+            return {**base, "status": "failed", "note": str(error)[:200]}
+        return {**base, "status": "undated", "count": len(links),
+                "note": "links from the index page, newest first as listed; open the ones that look relevant and check each one's date",
+                "items": [{"title": u.rsplit("/", 1)[-1].replace("-", " "), "url": u, "date": "undated"} for u in links]}
     if source.get("discovery") not in FEED_DISCOVERY or source.get("kind") == "search":
         return {**base, "status": "not-a-feed", "how": source.get("discovery") or source.get("kind"),
                 "note": "discover through its archive or API as references/reading.md describes"}

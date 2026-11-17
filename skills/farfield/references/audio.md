@@ -49,7 +49,14 @@ Existing local model preferences remain supported. For local Whisper, use `AUDIO
 
 ## During a brief
 
-For each podcast episode in the window with no published transcript, if `audio.json` is not `skip`: `AUDIO transcribe <workspace> <audio url>`. Identical audio URL, model and clip length reuse the saved transcript without downloading or paying again. A short test clip is not a complete episode. It prints a `raw` path; quotes from that episode use it like any other raw page, and the brief marks them "machine transcript" because names and numbers can be wrong. Cap: 6 hours of audio per run unless `me.md` says otherwise; say what was left out. A failed transcription is a skipped episode noted under "what was read", not a failed brief.
+If `audio.json` is not `skip`, podcasts are read like articles, from their transcripts:
+
+1. Right after discovery, pick the episodes worth hearing: the ones whose titles and show notes bear on `me.md`, not every episode. Skip any with a published transcript (read that instead).
+2. Start their transcriptions first, before or alongside the text reading, one `AUDIO transcribe <workspace> <audio url>` per episode. Each can take several minutes.
+3. Wait for them. Don't select ideas or write the brief until every started transcription has finished or failed. A transcript that arrives after the brief is wasted.
+4. Read each transcript (`raw` path) like any other page. Quotes from it are checked against that file, and the brief marks them "machine transcript" because names and numbers can be wrong.
+
+Identical audio URL, model and clip length reuse the saved transcript without downloading or paying again. A short test clip is not a complete episode. Cap: 6 hours of audio per run unless `me.md` says otherwise; say what was left out. A failed transcription is a skipped episode noted in the footer, not a failed brief.
 
 ## Unattended
 

@@ -1,5 +1,12 @@
 # Changes
 
+## 0.3.7
+
+- Sites without a feed (Anthropic, Stanford HAI, Works in Progress, Every) are no longer skipped: `items` lists recent article links from their index pages. DeepMind is read from its RSS feed.
+- Audio: pick relevant episodes, start transcribing first, and wait for transcripts before writing (a full episode transcribed after the brief was wasted).
+- Desktop app instructions: add the marketplace as the GitHub repo `derek-larson14/farfield`, or upload farfield.zip; the app doesn't take a website URL.
+- The setup prompt fetches install.md with curl; the conversation-reading question no longer claims nothing leaves the computer.
+
 ## 0.3.6
 
 - Sources: add SemiAnalysis. 44 sources.

@@ -262,3 +262,16 @@ class ReaderFallbackTest(unittest.TestCase):
                 excerpt="We built Pando, a new backend for Git repositories, without interrupting any engineering work.",
                 raw=result["raw"])
             self.assertEqual(radar.check_evidence(pack)[1], [])
+
+
+class IndexLinksTest(unittest.TestCase):
+    def test_article_links_come_from_the_index_page(self):
+        html = (b'<a href="/research/agent-memory">x</a><a href="/_next/a.css">c</a><a href="/research/agent-memory/">dup</a>'
+                b'<a href="https://other.org/research/x">o</a><a href="/careers">j</a><a href="/engineering/harness-design">h</a>')
+        source = {"id": "anthropic-engineering", "url": "https://www.anthropic.com/engineering",
+                  "article_pattern": r"^/(engineering|research)/[^/]+/?$"}
+        with unittest.mock.patch.object(radar, "download", return_value=("text/html", html)):
+            out = radar.list_source(source, radar.datetime(2026, 11, 1, tzinfo=radar.timezone.utc))
+        self.assertEqual(out["status"], "undated")
+        self.assertEqual([i["url"] for i in out["items"]], ["https://www.anthropic.com/research/agent-memory",
+                                                             "https://www.anthropic.com/engineering/harness-design"])

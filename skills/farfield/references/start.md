@@ -34,7 +34,7 @@ All four fit one `AskUserQuestion` call in Claude Code.
    - Monthly
    - Only when I ask
 
-Then one more call with two questions, about how they work. Explain first, in one or two sentences: "Besides reading the news for you, I can look for work that rhymes with how you work: people tackling similar problems, new methods that might fit. To do that I'd read what you typed in your recent Claude Code and Codex conversations on this computer. Not tool output or file contents; keys and emails are blanked out. It stays on this computer."
+Then one more call with two questions, about how they work. Explain first, in one or two sentences: "Besides reading the news for you, I can look for work that rhymes with how you work: people tackling similar problems, new methods that might fit. To do that I'd read what you typed in your recent Claude Code and Codex conversations on this computer. Not tool output or file contents; keys and emails are blanked out. The digest is saved only in your Farfield folder; like everything I read, the model provider you already use processes it. Your words are never put into searches."
 
 5. **How you work**: "Can I look at your recent agent conversations?"
    - Yes, the last 30 days (Recommended)
