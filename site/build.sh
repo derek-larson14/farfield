@@ -14,4 +14,5 @@ python3 package.py .. dist "https://$DOMAIN"
 python3 ../tools/sources_md.py --check --html dist/sources.html   # /sources, from the same catalog
 cp logos/* dist/logos/
 cp social-card.jpg dist/social-card.jpg
+cp favicon.svg apple-touch-icon.png dist/
 echo "built dist/ for https://$DOMAIN ($REPO)"

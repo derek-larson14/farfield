@@ -28,9 +28,7 @@ SECTIONS = [  # (title, test on a source), first match wins
 
 INTRO = """# What Farfield reads
 
-The default sources. During setup, and any time after, you can add your own or mute any of these.
-
-[Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
+The default sources. During setup, and any time after, you can add your own or mute any of these. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
 """
 
 OUTRO = """
@@ -83,6 +81,7 @@ def render_html(catalog):
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Farfield reading list</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="The {len(catalog['sources'])} sources Farfield starts from. What are we missing?">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
@@ -93,22 +92,21 @@ body{{margin:0;background:var(--paper);color:var(--ink);font:18px/1.55 Newsreade
 main{{max-width:680px;margin:0 auto;padding:56px 16px 72px}}
 .top{{font:12.5px/1.4 "IBM Plex Mono",ui-monospace,Menlo,monospace;color:var(--muted);text-decoration:none}}
 .top:hover{{color:var(--ink)}}
-h1{{font-size:clamp(32px,6vw,42px);font-weight:400;letter-spacing:-.7px;line-height:1.15;margin:28px 0 14px}}
-.lede{{color:#3d3b36;margin:0 0 10px}}
+h1{{font-size:clamp(32px,6vw,42px);font-weight:400;letter-spacing:-.7px;line-height:1.15;margin:24px 0 10px}}
+.lede{{color:#3d3b36;margin:0 0 6px}}
 .suggest{{color:var(--glow);text-underline-offset:3px}}
-h2{{font-size:24px;font-weight:500;letter-spacing:-.3px;margin:44px 0 6px}}
+h2{{font-size:24px;font-weight:500;letter-spacing:-.3px;margin:34px 0 2px}}
 ul{{list-style:none;margin:0;padding:0}}
-li{{padding:8px 0;border-top:1px solid var(--line)}}
+li{{padding:6px 0;border-top:1px solid var(--line);line-height:1.4}}
 li:first-child{{border-top:0}}
 li a{{color:var(--ink);font-weight:500;text-decoration-color:var(--line);text-underline-offset:3px}}
 li a:hover{{text-decoration-color:var(--glow)}}
-li span{{display:block;color:#55524b;font-size:16.5px}}
+li span{{display:block;color:#55524b;font-size:16px;margin-top:1px}}
 </style></head>
 <body><main>
 <a class="top" href="/">← Farfield</a>
 <h1>What Farfield reads</h1>
-<p class="lede">The default sources. During setup, and any time after, you can add your own or mute any of these.</p>
-<p class="lede"><a class="suggest" href="{SUGGEST}">Suggest a source</a></p>
+<p class="lede">The default sources. During setup, and any time after, you can add your own or mute any of these. <a class="suggest" href="{SUGGEST}" target="_blank" rel="noopener">Suggest a source</a></p>
 {''.join(sections)}
 </main></body></html>
 """

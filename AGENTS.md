@@ -19,7 +19,7 @@ If the first command says a marketplace named `farfield` already exists from som
 
 The plugin's commands load in new sessions. Don't make them restart: read `skills/farfield/SKILL.md` from the installed plugin (`claude plugin list` shows where it is; or `find ~/.claude/plugins/cache -path '*farfield*' -name SKILL.md | sort | tail -1`) and continue to step 2. Tell them that next time it's `/farfield:brief`.
 
-**Claude desktop app or Cowork, without a terminal tool.** You can't install a plugin from inside a chat. Tell them: Customize → Browse plugins → Personal → Add marketplace, paste `https://farfield.newyorkai.org/marketplace.json`, Install, then type `/farfield:start`.
+**Claude desktop app or Cowork, without a terminal tool.** You can't install a plugin from inside a chat. Tell them: Customize → Plugins → Add plugin → Add marketplace, paste `https://farfield.newyorkai.org/marketplace.json`, then install Farfield and type `/farfield:start` in the Code tab (labels vary a little between app versions). A plugin installed in Claude Code isn't automatically available in ordinary chats.
 
 **claude.ai chat, or any sandbox that can't reach farfield.newyorkai.org or ordinary websites.** Farfield can't run there: a brief reads dozens of sites, and these sandboxes only reach an allowlist. Don't offer to set it up by hand from pasted files. Tell the user in two sentences that Farfield runs in Claude Code (terminal or the desktop app's Code tab), Cowork, or Codex, and give the matching step above or below.
 
