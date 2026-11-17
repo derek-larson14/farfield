@@ -36,7 +36,6 @@ The default sources. During setup, and any time after, you can add your own or m
 - **[METR](https://metr.org/)**: Independent evaluations of agent capabilities and effects on real work.
 - **[AI as Normal Technology](https://www.normaltech.ai/)**: Arvind Narayanan and Sayash Kapoor on evaluation quality, adoption, and limits of AI claims.
 - **[Epoch AI](https://epoch.ai/)**: Measurement of compute, capabilities, inference, and economic adoption.
-- **[Understanding AI](https://www.understandingai.org/)**: Timothy B. Lee's reported explainers on what AI can and can't do, from interviews with people in the field.
 - **[One Useful Thing](https://www.oneusefulthing.org/)**: Ethan Mollick on how people actually use AI at work, often citing new studies.
 - **[Stanford HAI](https://hai.stanford.edu/news)**: Research on adoption, labor, institutions, and the social effects of AI.
 

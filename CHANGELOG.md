@@ -1,5 +1,9 @@
 # Changes
 
+## 0.3.5
+
+- Sources: remove Understanding AI. 43 sources.
+
 ## 0.3.4
 
 - Sources: add Stratechery (Ben Thompson). 44 sources.

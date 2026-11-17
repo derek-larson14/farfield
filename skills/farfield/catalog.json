@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {
@@ -414,20 +414,6 @@
       "example_url": "https://epoch.ai/publications/inference-performance-index",
       "checked_on": "2026-11-17",
       "enabled": true
-    },
-    {
-      "id": "understanding-ai",
-      "name": "Understanding AI",
-      "kind": "feed",
-      "home": "https://www.understandingai.org/",
-      "url": "https://www.understandingai.org/feed",
-      "why": "Timothy B. Lee's reported explainers on what AI can and can't do, from interviews with people in the field.",
-      "topics": [
-        "evaluation-and-adoption"
-      ],
-      "access": "Substack feed; some posts paid. Read accessible text only.",
-      "discovery": "rss-or-atom",
-      "checked_on": "2026-11-17"
     },
     {
       "id": "substack:oneusefulthing.org",
