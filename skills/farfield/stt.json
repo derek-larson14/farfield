@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-16",
-  "note": "Supported transcription options. Cloud prices are estimates as of the recorded date; check current pricing before paid use.",
+  "as_of": "2026-11-17",
+  "note": "Planning rates checked against OpenRouter model catalog and model pages. Verify before paid use; actual usage.cost takes precedence.",
   "options": [
     {
       "id": "parakeet",
@@ -19,9 +19,27 @@
     {
       "id": "openrouter",
       "name": "Whisper large-v3-turbo, OpenRouter",
-      "usd_per_hour": 0.012,
+      "usd_per_hour": 0.011988,
       "wired": true,
-      "note": "Optional cloud backup. Requires an OpenRouter key; never used by default."
+      "note": "Optional cloud backup. Requires an OpenRouter key; never used by default.",
+      "model": "openai/whisper-large-v3-turbo"
+    },
+    {
+      "id": "openrouter-microsoft",
+      "name": "Microsoft MAI-Transcribe 2, OpenRouter",
+      "model": "microsoft/mai-transcribe-2",
+      "usd_per_hour": 0.1,
+      "wired": true,
+      "note": "Optional cloud transcription. Sends audio to OpenRouter and its provider; separate opt-in."
+    },
+    {
+      "id": "openrouter-elevenlabs",
+      "name": "ElevenLabs Scribe v2, OpenRouter",
+      "model": "elevenlabs/scribe-v2",
+      "usd_per_hour": 0.22,
+      "wired": true,
+      "note": "Optional cloud transcription. Sends audio to OpenRouter and its provider; separate opt-in."
     }
-  ]
+  ],
+  "pricing_source": "https://openrouter.ai/api/v1/models?output_modalities=transcription"
 }

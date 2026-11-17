@@ -137,7 +137,7 @@ class RadarTest(unittest.TestCase):
         skill = REPO / "skills/farfield"
         for name in ("SKILL.md", "skill.json", "catalog.json", "templates/me.md", "templates/feed.json",
                      "templates/sources.local.json", "references/start.md", "references/sources.md",
-                     "references/reading.md", "references/context.md", "references/social.md",
+                     "references/memory.md", "scripts/library.py", "scripts/social.py", "references/reading.md", "references/context.md", "references/social.md",
                      "references/schedule.md", "references/updating.md", "references/audio.md", "scripts/feed.py",
                      "scripts/audio.py", "stt.json"):
             self.assertTrue((skill / name).exists(), name)

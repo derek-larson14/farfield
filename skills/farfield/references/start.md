@@ -32,6 +32,8 @@ Use the question UI described in SKILL.md. Group these within the host's limits,
    - Monthly
    - Only when I ask
 
+After these choices, offer the optional Twitter/X question in [social.md](social.md) once. It is a separate opt-in, not required setup.
+
 ## 3. Show the working picture
 
 Run `HELPER init <workspace>`. If they offered a folder: list file names and dates first, then read at most five files per project (an overview, the most recent notes, anything that states an open problem). Skip credentials, `.env`, binaries, dependency folders. Stay inside the folder they named.

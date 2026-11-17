@@ -13,7 +13,7 @@ Run `AUDIO find` and `AUDIO estimate <workspace>` first so the question has real
 - **Yes, set it up** (Recommended)
 - **No, show notes are fine**
 
-No API key, no account, no model choice. Don't list alternatives unless they ask.
+Keep the local choice simple. If the user is connecting OpenRouter, also offer the cloud choice below once; otherwise do not list alternatives unless asked.
 
 ## Setting it up (on yes)
 
@@ -28,14 +28,28 @@ If `install` fails, read its message: it says exactly what is missing (Homebrew,
 
 `AUDIO find` says `"suggested": "whisper"`. Whisper large-v3-turbo through whisper.cpp: they need `whisper-cli` and a ggml model file (`AUDIO find` lists any already on the machine). `AUDIO use <workspace> whisper --model <path>`. Parakeet covers English and about 25 European languages; anything else is also Whisper.
 
-## Backups, only if they ask
+## Optional cloud choice when connecting OpenRouter
 
-- **They already have a model and prefer it:** use it. `AUDIO find` lists what's in the usual folders, or they give a path.
-- **They want cloud transcription:** `AUDIO use <workspace> openrouter`, key through `HELPER keys --open` (never in chat). `AUDIO estimate` shows the monthly cost for the supported providers.
+Ask separately: “Now that OpenRouter is connected, do you want to keep transcription local, or use a cloud model for episodes without transcripts?” Explain that cloud transcription sends the audio to OpenRouter and the provider. A yes to Twitter does not mean yes to audio uploads.
+
+Show the current choice first as recommended; offer “Compare cloud options” and “Skip audio” alongside it. Record that the offer was answered in `audio-cloud-offer.json` so it is not repeated. No answer leaves the existing setting unchanged. On compare, use the actual selected, unread, uncached episodes and known duration to show:
+
+| Model | Per audio hour | Example: 10 hours |
+|---|---:|---:|
+| Local Parakeet / Whisper | $0 API spend | $0 |
+| Whisper Turbo via OpenRouter | about $0.012 | $0.12 |
+| Microsoft MAI-Transcribe 2 via OpenRouter | $0.10 | $1.00 |
+| ElevenLabs Scribe v2 via OpenRouter | $0.22 | $2.20 |
+
+Rates checked 2026-11-17 against [OpenRouter's transcription catalog](https://openrouter.ai/api/v1/models?output_modalities=transcription) and model pages. Recheck before paid use. These estimate cost, not quality: no comparative accuracy test has been run. Credit fees/taxes are excluded. Unknown durations mean an incomplete estimate. Feed-only `AUDIO estimate` can overcount missing transcripts; inspect the episode pages first. An episode with a published transcript costs nothing to transcribe because it should not be transcribed.
+
+After they choose, use `AUDIO use <workspace> openrouter --model <id>` with `openai/whisper-large-v3-turbo`, `microsoft/mai-transcribe-2`, or `elevenlabs/scribe-v2`. Use `HELPER keys --open` only if needed. Show the batch's estimated charge before authorizing it; keep it within the user's agreed audio budget and recommend a capped OpenRouter key. Setting up a provider is not blanket approval for unlimited audio. Show actual reported cost afterward; missing usage is unknown.
+
+Existing local model preferences remain supported. For local Whisper, use `AUDIO use <workspace> whisper --model <path>`.
 
 ## During a brief
 
-For each podcast episode in the window with no published transcript, if `audio.json` is not `skip`: `AUDIO transcribe <workspace> <audio url>`. It prints a `raw` path; quotes from that episode use it like any other raw page, and the brief marks them "machine transcript" because names and numbers can be wrong. Cap: 6 hours of audio per run unless `me.md` says otherwise; say what was left out. A failed transcription is a skipped episode noted under "what was read", not a failed brief.
+For each podcast episode in the window with no published transcript, if `audio.json` is not `skip`: `AUDIO transcribe <workspace> <audio url>`. Identical audio URL, model and clip length reuse the saved transcript without downloading or paying again. A short test clip is not a complete episode. It prints a `raw` path; quotes from that episode use it like any other raw page, and the brief marks them "machine transcript" because names and numbers can be wrong. Cap: 6 hours of audio per run unless `me.md` says otherwise; say what was left out. A failed transcription is a skipped episode noted under "what was read", not a failed brief.
 
 ## Unattended
 

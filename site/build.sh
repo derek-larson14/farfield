@@ -9,4 +9,5 @@ sed -e "s|__DOMAIN__|$DOMAIN|g" -e "s|__REPO__|$REPO|g" index.html > dist/index.
 cp install.sh dist/install.sh   # served byte for byte as it is in the repo, so people can check it
 sed -e "s|github.com/derek-larson14/farfield|github.com/$REPO|g" -e "s|derek-larson14/farfield|$REPO|g" -e "s|](CONTRIBUTING.md)|](https://github.com/$REPO/blob/main/CONTRIBUTING.md)|g" ../AGENTS.md > dist/setup.md
 cp logos/* dist/logos/
+cp social-card.png dist/social-card.png
 echo "built dist/ for https://$DOMAIN ($REPO)"

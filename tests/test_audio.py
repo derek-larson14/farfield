@@ -47,7 +47,7 @@ class AudioTest(unittest.TestCase):
         by = {o["id"]: o for o in out["options"]}
         self.assertEqual(by["parakeet"]["usd"], 0)
         self.assertEqual(by["openrouter"]["usd"], 0.02)
-        self.assertEqual(set(by), {"parakeet", "whisper", "openrouter"})
+        self.assertEqual(set(by), {"parakeet", "whisper", "openrouter", "openrouter-microsoft", "openrouter-elevenlabs"})
         self.assertTrue(all(option["wired"] for option in by.values()))
 
     def test_feed_cut_off_mid_item_still_yields_the_complete_items(self):

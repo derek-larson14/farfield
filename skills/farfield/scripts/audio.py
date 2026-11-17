@@ -185,7 +185,8 @@ def estimate(root, days=30, fetch=feed_text):
     hours = total / 3600
     prices = radar.read_json(PRICES)
     return {"days": days, "hours": round(hours, 1), "episodes_with_published_transcript": covered,
-            "episodes_with_unknown_length": unknown, "shows": shows, "prices_as_of": prices["as_of"],
+            "episodes_with_unknown_length": unknown,
+            "estimate_basis": "Feed-only upper estimate: episode pages may have transcripts not declared in RSS. Failed feeds and unknown durations make coverage incomplete. Reconcile against the selected unread episodes before approving spend.", "shows": shows, "prices_as_of": prices["as_of"],
             "options": [{"id": o["id"], "name": o["name"], "usd": round(hours * o["usd_per_hour"], 2),
                          "usd_per_hour": o["usd_per_hour"], "wired": o["wired"], "note": o["note"]}
                         for o in prices["options"]]}
@@ -203,6 +204,11 @@ def use(root, backend, model=None):
         model = model or next((m for m in find_local()["models"] if m.endswith(".bin")), None)
         if not model or not Path(model).expanduser().exists():
             raise ValueError("whisper needs a ggml model file; pass --model PATH")
+    if backend == "openrouter":
+        model = model or "openai/whisper-large-v3-turbo"
+        supported = {o.get("model") for o in radar.read_json(PRICES)["options"] if o.get("model")}
+        if model not in supported:
+            raise ValueError("unsupported transcription model; choose an option from audio.py estimate")
     value = {"backend": backend, **({"model": model} if model else {})}
     (Path(root).expanduser() / "audio.json").write_text(json.dumps(value, indent=2) + "\n")
     return value
@@ -212,14 +218,15 @@ def run(cmd):
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def openrouter_chunk(path, key):
-    body = json.dumps({"model": "openai/whisper-large-v3-turbo",
+def openrouter_chunk(path, key, model="openai/whisper-large-v3-turbo"):
+    body = json.dumps({"model": model,
                        "input_audio": {"data": base64.b64encode(Path(path).read_bytes()).decode(), "format": "mp3"}}).encode()
     request = urllib.request.Request("https://openrouter.ai/api/v1/audio/transcriptions", data=body, headers={
         "Authorization": f"Bearer {key}", "Content-Type": "application/json", "User-Agent": radar.UA})
     with urllib.request.urlopen(request, timeout=180) as response:
         out = json.loads(response.read())
-    return (out.get("text") or "").strip(), float((out.get("usage") or {}).get("cost") or 0)
+    reported = (out.get("usage") or {}).get("cost")
+    return (out.get("text") or "").strip(), float(reported) if reported is not None else None
 
 
 def transcribe(root, url, max_secs=None):
@@ -227,6 +234,14 @@ def transcribe(root, url, max_secs=None):
     backend = chosen["backend"]
     if backend == "skip":
         raise ValueError("audio is set to skip; choose a backend with `audio.py use`")
+    folder = Path(root).expanduser() / "evidence" / "raw"
+    cache_key = json.dumps([url, backend, chosen.get("model"), max_secs])
+    path = folder / (hashlib.sha256(cache_key.encode()).hexdigest()[:20] + ".transcript.txt")
+    meta_path = path.with_suffix(".json")
+    if path.is_file() and path.stat().st_size and meta_path.is_file():
+        return {**json.loads(meta_path.read_text()), "raw": str(path), "cached": True, "usd": 0}
+    if backend == "openrouter" and not radar.keys().get("OPENROUTER_API_KEY"):
+        raise ValueError("no OPENROUTER_API_KEY; run `radar.py keys --open`")
     if not shutil.which("ffmpeg"):
         raise ValueError("ffmpeg is not installed (macOS: brew install ffmpeg)")
     cut = ["-t", str(max_secs)] if max_secs else []
@@ -258,18 +273,20 @@ def transcribe(root, url, max_secs=None):
                  "-f", "segment", "-segment_time", str(CHUNK_S), "-reset_timestamps", "1", os.path.join(tmp, "c%03d.mp3")])
             parts = []
             for chunk in sorted(Path(tmp).glob("c*.mp3")):
-                piece, spent = openrouter_chunk(chunk, key)
+                piece, spent = openrouter_chunk(chunk, key, chosen.get("model", "openai/whisper-large-v3-turbo"))
                 parts.append(piece)
-                cost += spent
+                cost = cost + spent if cost is not None and spent is not None else None
             text = "\n\n".join(p for p in parts if p)
     text = " ".join(text.split())
     if not text:
         raise ValueError("transcription produced no text")
     folder = Path(root).expanduser() / "evidence" / "raw"
     folder.mkdir(parents=True, exist_ok=True)
-    path = folder / (hashlib.sha256(url.encode()).hexdigest()[:16] + ".transcript.txt")
     path.write_text(f"{url}\nmachine transcript, {backend}{' (first %ss)' % max_secs if max_secs else ''}\n{text}\n")
-    return {"raw": str(path), "words": len(text.split()), "backend": backend, "usd": round(cost, 4)}
+    result = {"raw": str(path), "words": len(text.split()), "backend": backend,
+              "model": chosen.get("model"), "max_secs": max_secs, "usd": round(cost, 4) if cost is not None else None, "cached": False}
+    meta_path.write_text(json.dumps(result, indent=2) + "\n")
+    return result
 
 
 def main(argv=None):

@@ -20,7 +20,7 @@ After setup, ask for another brief, change your sources, or set up a schedule. I
 
 ## Sources
 
-Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources.
+Practitioners, researchers, independent evaluations, interviews, and recent papers. [See the reading list](SOURCES.md). Add your own, mute anyone, or use only your sources. Twitter/X and cloud transcription are optional paid additions; setup shows estimates before enabling either.
 
 ## Privacy
 

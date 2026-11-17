@@ -35,7 +35,7 @@ CONFIG = Path(os.environ.get("FARFIELD_CONFIG", Path.home() / ".config" / "farfi
 POINTER = CONFIG / "workspace"
 KEYFILE = CONFIG / "env"
 KEYS = {"EXA_API_KEY": "optional: better search and page text (exa.ai)",
-        "OPENROUTER_API_KEY": "optional: cloud transcription of podcasts that publish no transcript (openrouter.ai)"}
+        "OPENROUTER_API_KEY": "optional: X search and cloud transcription, each separately enabled (openrouter.ai)"}
 UA = "Mozilla/5.0 (compatible; farfield/0.1; personal research reader)"
 MAX_PAGE = 4 * 1024 * 1024
 KINDS = ("feed", "podcast", "channel", "site", "search")

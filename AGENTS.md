@@ -33,7 +33,7 @@ Running the same install again is how it updates. It never touches the user's wo
 
 ## 2. Start
 
-Follow `SKILL.md` in **start** mode: one open question, four choices, a five-line summary to correct, then the first brief, then an offer to schedule it. No API key, account or sign-up is involved at any point; if you find yourself asking for one, you've left the path.
+Follow `SKILL.md` in **start** mode: one open question, four choices, a five-line summary to correct, then the first brief, then an offer to schedule it. The standard brief needs no API key or sign-up. The optional Twitter/X offer can connect OpenRouter; explain estimated costs and keep it off unless chosen. Never request a key in chat.
 
 ## What gets written where
 
