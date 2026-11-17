@@ -8,7 +8,7 @@
 - Shorten README and separate the detailed reading list. Clarify skill updates and private-repository limitations.
 - Offer optional X discovery with cost estimates and a capped-key adapter; separate opt-in for cloud transcription with Whisper, Microsoft or ElevenLabs. No paid end-to-end run verified yet.
 - Keep item-level reading history and cached transcripts; revisit promising ideas only when evidence changes.
-- Add a network-themed social link preview.
+- Link preview: a photo of the Very Large Array radio telescopes (CGP Grey, CC BY 2.0; credit in site/CREDITS.md).
 - `radar.py items` lists dated items from every RSS/Atom source in parallel and flags feeds that stop inside the window. Briefs read in parallel batches through subagents where the host has them.
 - `radar.py fetch` reads PDFs (pdftotext, or macOS's built-in PDFKit) so paper quotes can be checked; other binary content is refused.
 - Quote checks give one verdict per quote, ignore curly-vs-straight quotes and the gap a link leaves before punctuation, and apply the same rules to excerpts and pages.
