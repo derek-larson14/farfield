@@ -25,7 +25,7 @@ When there is a real choice (B or C), ask one question:
 - **This computer** (Recommended): reads your local folders; runs when the machine is awake.
 - **Cloud**: runs with the laptop closed; only sees a private GitHub repo, so your workspace moves there and local context folders are not read.
 
-Then ask day and time in one question. Recommend off-peak times: weekday working hours are peak, and the Claude app warns that runs then use plan limits faster. Defaults: weekly on Sunday at 6pm, so it's ready Monday morning; monthly on the 1st at 5am. Offer one other off-peak option and "Other".
+Then ask day and time in one question, recommending an off-peak time. Claude's peak is roughly weekdays 5 to 11am Pacific (8am to 2pm Eastern); runs then use plan limits faster, and the Claude app warns about it. Check the computer's time zone (`date`). Default weekly: Monday at 6am local, if that's before 5am Pacific (Eastern and Central time, Europe); otherwise Sunday at 6pm. Default monthly: the 1st at the same time. Offer the other of the two and "Other". Peak hours change; if the app warns about the chosen time, offer to move it.
 
 ## A. Claude desktop app
 

@@ -1,4 +1,4 @@
-# Reading list
+# Farfield sources
 
 The default sources. During setup, and any time after, you can add your own or mute any of these. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
 

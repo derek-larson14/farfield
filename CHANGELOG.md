@@ -3,6 +3,7 @@
 ## 0.3.3
 
 - Sources: add Armin Ronacher, Thorsten Ball, Vicki Boykis, Understanding AI and Exponential View. 43 sources.
+- Schedule default: Monday 6am where that's before Claude's weekday peak, otherwise Sunday 6pm.
 
 ## 0.3.2
 

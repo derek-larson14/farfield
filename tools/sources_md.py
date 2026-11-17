@@ -26,7 +26,7 @@ SECTIONS = [  # (title, test on a source), first match wins
     ("Outside AI", lambda s: "adjacent-fields" in s.get("topics", [])),
 ]
 
-INTRO = """# Reading list
+INTRO = """# Farfield sources
 
 The default sources. During setup, and any time after, you can add your own or mute any of these. [Suggest a source](https://github.com/derek-larson14/farfield/issues/new?template=source.yml)
 """
@@ -80,7 +80,7 @@ def render_html(catalog):
         sections.append(f"<h2>{escape(title)}</h2><ul>{items}</ul>")
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Farfield reading list</title>
+<title>Farfield sources</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="The {len(catalog['sources'])} sources Farfield starts from. What are we missing?">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +105,7 @@ li span{{display:block;color:#55524b;font-size:16px;margin-top:1px}}
 </style></head>
 <body><main>
 <a class="top" href="/">← Farfield</a>
-<h1>Reading list</h1>
+<h1>Farfield sources</h1>
 <p class="lede">The default sources. During setup, and any time after, you can add your own or mute any of these. <a class="suggest" href="{SUGGEST}" target="_blank" rel="noopener">Suggest a source</a></p>
 {''.join(sections)}
 </main></body></html>
