@@ -8,7 +8,7 @@
 
 ## Add (for this user only)
 
-1. Resolve the name or URL to the thing you can actually fetch: an RSS/Atom feed, a podcast feed, a YouTube channel, a site, or a standing search. Fetch it once to prove it works and show one recent item with its date. If the name is ambiguous, ask which one. Never invent a feed URL.
+1. Resolve the name or URL to the thing you can actually fetch: an RSS/Atom feed, a podcast feed, a YouTube channel, a site, or a standing search. Fetch it once to prove it works and show one recent item with its date. If the name is ambiguous, use the question picker to show the plausible matches with their URLs and allow a custom answer. Never invent a feed URL.
 2. `HELPER add <workspace> <url> --name "<name>" --kind feed|podcast|channel|site|search`. If it says the URL or site is already listed, that publication is already a source: unmute that ID if it's muted, and tell the user it's included. Use `--force` only for a genuinely different feed on the same site.
 3. Say plainly what the next brief can use from it: full text, show notes only, or transcript if one is published. No audio transcription and no paid access happen on their own.
 
@@ -22,7 +22,7 @@ Other regular inputs work too: a standing search they want re-run each time (`--
 
 ## Suggest (for everyone)
 
-Adding for yourself and suggesting for the shared list are separate. After an add, ask once: "Want to suggest this for the curated list too?" No is a complete answer.
+Adding for yourself and suggesting for the shared list are separate. After a standalone add, offer **Draft a suggestion** and **Keep it private** in the picker once. Skip this offer during setup. If the user explicitly asks to suggest a source, go straight to the draft.
 
 On yes, draft two things and show them: the source's link, and one sentence on what it adds that the list lacks. Leave out the user's projects, notes and file paths; the suggestion is public.
 

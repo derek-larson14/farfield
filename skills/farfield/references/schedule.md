@@ -2,6 +2,8 @@
 
 Goal: the user says "weekly" and it is running, with at most one approval click. Work out where you are, pick the option that fits, do the setup yourself, and prove it with one run while they watch.
 
+Use the host's structured question UI for choices and confirmations in both standalone scheduling and setup. Reuse details the user already provided.
+
 The scheduled prompt is always the same (weekly shown; adjust the wording for monthly):
 
 > Run the farfield skill in brief mode, unattended. Workspace: `<absolute path>`. End with the SUMMARY line.
@@ -36,6 +38,8 @@ Create the task yourself with the scheduled-task tool: name `farfield`, the prom
 
 It needs (and nothing else; in particular it never reads the keys file itself, the helper does): read the workspace and any context folders in `me.md`, write inside the workspace, fetch web pages, start subagents, and run the skill's six scripts (`radar.py`, `library.py`, `threads.py`, `audio.py`, `social.py`, `feed.py`).
 
+For connected app context, use only scoped read tools already available to the scheduled session. If a scheduled session can't read an approved location, skip it and report the gap. Don't grant new connector access while scheduling or during a run.
+
 ## B. This computer (terminal)
 
 Claude Code's own `/loop` and cron tools end with the session and expire after seven days, so they are not a schedule. Use the operating system.
@@ -53,7 +57,7 @@ Claude Code's own `/loop` and cron tools end with the session and expire after s
        "Bash(*/farfield/scripts/audio.py *)" "Bash(*/farfield/scripts/social.py *)" \
        "Bash(*/farfield/scripts/threads.py *)" \
        "Bash(*/farfield/scripts/feed.py *)" \
-     --add-dir "<each context folder from me.md>" \
+       --add-dir "<each approved local context folder from me.md>" \
      </dev/null >> state/run.log 2>&1
    ```
 

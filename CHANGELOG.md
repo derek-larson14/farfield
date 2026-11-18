@@ -1,5 +1,12 @@
 # Changes
 
+## 0.3.9
+
+- Setup uses the structured question picker to ask where to find project files or collect a brain dump. Farfield reads the chosen files before asking about brief preferences.
+- A single setup answer can include several local folders or specific locations in connected apps. Farfield saves only the approved read scopes in `me.md`.
+- Source choices, scheduling, optional audio, and brief feedback use each host's question picker when available. Codex waits for actual answers to async questions before using them.
+- Claude desktop setup documents the public GitHub marketplace and ZIP upload paths.
+
 ## 0.3.8
 
 - Sources: remove the Hugging Face blog (Hugging Face daily papers stays). 43 sources.

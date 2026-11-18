@@ -20,14 +20,21 @@ The skill's scripts live in `<this skill's folder>/scripts/`: `radar.py` (called
 
 **Unattended** means the prompt says "unattended" or there is no one to answer (a scheduled or `-p` run). Unattended runs never ask a question and end with exactly one line: `SUMMARY: OK <brief path> <N> findings` or `SUMMARY: FAILED <reason>`.
 
-## Every run begins the same way
+## Find the workspace for an existing run
+
+For an explicit `start` or setup request, go straight to [references/start.md](references/start.md). That flow opens the context picker before running workspace or version commands. For other modes:
 
 1. Find the workspace: `HELPER where`. Exit code 3 means there is none: in a conversation, go to start; unattended, stop with `SUMMARY: FAILED no workspace, run start`. Never guess a folder or scan the home directory.
 2. At most once a week (date in `state/update-check`), run `HELPER version --check`. If `update_available` is true, mention it in one line at the end and point to [references/updating.md](references/updating.md). Otherwise say nothing about updates; `null` means it couldn't check, which the user doesn't need to hear. Never update the skill's code yourself during a run.
 
 ## How to ask questions
 
-Use the host's structured question tool: Claude Code's `AskUserQuestion`, or a Codex question tool when available. Respect its limits (Claude Code: up to 4 questions per call, 2 to 4 options each). If no such tool exists, use a short numbered list with lettered options in chat. Wait for actual answers before dependent work. A preselected option is not an answer.
+Use a structured picker for decisions, missing details, confirmations, and feedback whenever the host offers one:
+
+- **Claude:** Use `AskUserQuestion`. It supports up to four questions per call and two to four options each. Use its custom answer for open input.
+- **Codex:** Use `request_user_input_async` when available, or `request_user_input` in an interactive session that exposes it. Use the tool's free-text input for paths, brain dumps, and corrections. The async tool can return before the user answers. Stop work that depends on the choice and resume when the answer arrives. If the turn must end, resume the pending step in the next turn.
+
+Follow the tool's schema and keep each picker focused. A preselected option, a dismissal, or elapsed time is not an answer. Start mode requires the picker throughout, including follow-ups and confirmations. If setup can't show a picker, follow the setup reference's guidance for switching sessions. In other modes, skip unsolicited optional offers when the picker is unavailable. If an explicitly requested action genuinely needs a missing detail, ask only for that detail and wait. Unattended runs never open a picker.
 
 Explain each choice in one sentence, put the recommended option first and label it "(Recommended)", and do the work after they answer. Reuse answers already given. Don't send them to the README or make them choose runtimes, models or API providers. The standard brief needs no key. Optional Twitter/X and cloud transcription use a key entered in a private local editor; never ask for, accept or repeat a key, token or password in chat. If one is pasted, tell them to revoke it.
 
@@ -37,7 +44,7 @@ When you mention a file, give its full path as a clickable link in the host's fo
 
 Run `HELPER sources <workspace>` to refresh the resolved list, then read `me.md`, `sources.md` and `feedback.md`. If `me.md` is still the unfilled template, go to start (unattended: `SUMMARY: FAILED setup not finished`). In a conversation, tell the user it takes a while (typically 10 to 30 minutes) and give one-line progress updates per phase.
 
-**Context.** Follow [references/context.md](references/context.md): keep a dated, source-backed working summary in `state/context.md` from `me.md` and only the context paths the user permitted. Refresh it before choosing research questions.
+**Context.** Follow [references/context.md](references/context.md): keep a dated, source-backed working summary in `state/context.md` from `me.md` and only the local or connected locations the user approved there. Refresh it before choosing research questions.
 
 **Memory.** Follow [references/memory.md](references/memory.md). Check the item ledger before fetching or transcribing. Keep "discovered", "read" and "shown" separate; failed retrieval is retryable.
 
@@ -93,7 +100,7 @@ If `social.json` has `"enabled": true`, also follow [references/social.md](refer
 - ...
 
 ---
-*Read 32 of 245 new pieces from 37 sources, Oct 18 to Nov 17. Partly covered: Simon Willison, Latent Space. Which of these were useful, already known, or not relevant?*
+*Read 32 of 245 new pieces from 37 sources, Oct 18 to Nov 17. Partly covered: Simon Willison, Latent Space.*
 ```
 
 Rules:
@@ -110,6 +117,6 @@ Rules:
 
 **Edit pass (always, even for a short brief).** Models write long, and the writer can't judge its own padding. After drafting, if the host has subagents, give a fresh one (a small model is fine) the draft, `me.md` and these rules: "Edit this brief for one busy, smart reader. The ideas should be within the length in me.md and read as plain, compelling prose: cut anything they don't need to grasp each idea and where it fits their work, and turn any labeled fields, bullet scaffolding or report headings into sentences. Keep the Worth a look list as one-line bullets; make each line say concretely what the thing is and why this reader would click, and cut any that are vague. No greeting or sign-off. Never change a quote, link, date or name, and never add a claim. Return only the edited brief." Without subagents, do that pass yourself. Count the words (prose, quotes excluded) and do one more pass if it is still over by more than a quarter.
 
-Record each finding's originals as `shown` with `library.py record ... --status shown --brief <path>`. Then update `state/seen.json` (IDs, dates, a few words each; never brief prose), including the Worth a look links, so later briefs don't repeat them. In a conversation, your reply is the brief exactly as written, then one line linking the file. Nothing else: no file list, no privacy note, no summary of the process, no update status unless an update is actually available. Append their answers on usefulness to `feedback.md` with the date and finding ID.
+Record each finding's originals as `shown` with `library.py record ... --status shown --brief <path>`. Then update `state/seen.json` (IDs, dates, a few words each; never brief prose), including the Worth a look links, so later briefs don't repeat them. In a conversation, show the brief exactly as written and link the file. Offer feedback separately through the picker, after showing the brief. Ask which finding was useful, already known, or off target and use custom input for the finding and a note. Include an explicit skip option. Record only feedback they actually give in `feedback.md`, with the date and finding ID. A skipped or unanswered picker never delays delivery of the brief.
 
 A brief run never edits `me.md`, changes sources, sends anything, or schedules anything.

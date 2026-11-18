@@ -6,7 +6,7 @@ If you are here to change this repository rather than install it, read [CONTRIBU
 
 ## 1. Install (pick the first that matches)
 
-Everything installs from https://farfield.newyorkai.org. No git, no GitHub account, no clone. Don't look for the source repository or use anyone's credentials; if a command below fails, tell the user what failed.
+Use the install route for your app below. None requires a GitHub account or a manual clone. If a command fails, tell the user what failed.
 
 **Claude Code, with a shell.** Run:
 
@@ -21,7 +21,15 @@ If the first command says a marketplace named `farfield` already exists from som
 
 The plugin's commands load in new sessions. Don't make them restart: read `skills/farfield/SKILL.md` from the installed plugin (`claude plugin list` shows where it is; or `find ~/.claude/plugins/cache -path '*farfield*' -name SKILL.md | sort | tail -1`) and continue to step 2. Tell them that next time it's `/farfield:brief`.
 
-**Claude desktop app or Cowork, without a terminal tool.** You can't install a plugin from inside a chat. Tell them: Customize → Plugins → Add marketplace, enter `derek-larson14/farfield` (the app's marketplace screen takes a GitHub repository, not a website URL), then install Farfield and type `/farfield:start` in the Code tab or Cowork. Or download https://farfield.newyorkai.org/farfield.zip and use the upload option on the same Plugins page. A plugin added there is saved to their Claude account. A plugin installed from a terminal with `claude plugin install` doesn't show up in the app's chats.
+**Claude desktop app or Cowork, without a terminal tool.** Install through the plugin screens:
+
+1. Open **Customize → Plugins → + Add → Add marketplace → Add from a repository**.
+2. Click **Select a repository**, enter `derek-larson14/farfield`, choose **Use “derek-larson14/farfield”**, then click **Sync**. The public repo works without connecting GitHub. **Grant access** is for automatic syncing. The hosted `marketplace.json` URL is only for Claude Code's terminal install.
+3. Under **Discover**, open **Farfield** and click **Add**.
+
+Alternatively, download [farfield.zip](https://farfield.newyorkai.org/farfield.zip). In **Customize → Plugins → + Add → Upload plugin**, browse for the ZIP, click **Open**, then **Upload**.
+
+To start, open a new session in the **Code** tab, type `/farfield`, and select **farfield:start**. In other Claude chats the command may appear as **start**, but setup requires the structured question tool and local file access. The plugin added through **Customize** is saved to your Claude account. A terminal install with `claude plugin install` is separate from this account install.
 
 **claude.ai chat, or any sandbox that can't reach farfield.newyorkai.org or ordinary websites.** Farfield can't run there: a brief reads dozens of sites, and these sandboxes only reach an allowlist. Don't offer to set it up by hand from pasted files. Tell the user in two sentences that Farfield runs in Claude Code (terminal or the desktop app's Code tab), Cowork, or Codex, and give the matching step above or below.
 
@@ -38,7 +46,7 @@ Running the install again updates it (for Claude Code, with the update command a
 
 ## 2. Start
 
-Follow `SKILL.md` in **start** mode: one open question, four choices, two optional questions about how they work, a five-line summary to correct, then the first brief (about 10 to 30 minutes of reading; say so), then an offer to schedule it. The standard brief needs no API key or sign-up. The optional Twitter/X offer can connect OpenRouter; explain estimated costs and keep it off unless chosen. Never request a key in chat.
+Follow `SKILL.md` in **start** mode. Use the structured question tool throughout. Ask where to look, with the option to describe the work and name multiple local folders or specific places in connected apps in one answer. Read only the approved locations, save those scopes in `me.md`, and confirm the working picture before writing the first brief (about 10 to 30 minutes of reading). Offer scheduling afterward. The standard brief needs no API key or sign-up. The optional Twitter/X offer can connect OpenRouter; explain estimated costs and keep it off unless chosen. Never request a key in chat.
 
 ## What gets written where
 

@@ -18,10 +18,9 @@ Setup fills this in from what you said. Edit it any time; the next brief reads i
 ## How I work
 - Read my recent agent conversations: no
 - Look for work that rhymes with mine: only when I ask
-- Other places that show how I work: none
 
 ## Read for context
-Folders or files a brief may read to keep up with your work. Empty means it only uses this page.
+Approved local folders, files, and specific locations in connected apps. List the path or link and any limits, one per entry. Leave empty to use only this page.
 
 ## Brief
 - How often: when I ask

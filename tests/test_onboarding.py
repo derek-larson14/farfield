@@ -30,8 +30,11 @@ class OnboardingTest(unittest.TestCase):
                 return result.stdout
 
             run("where", code=3)
+            self.assertEqual(run("where", "--optional"), "")
+            self.assertFalse(config.exists())
             run("init", workspace)
             self.assertEqual(run("where").strip(), str(workspace))
+            self.assertEqual(run("where", "--optional").strip(), str(workspace))
             self.assertEqual((config / "workspace").read_text().strip(), str(workspace))
             self.assertFalse(any(json.loads(run("keys")).values()))
             run("source-mode", workspace, "only-mine")

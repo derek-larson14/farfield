@@ -1,6 +1,6 @@
 {
   "id": "curated",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Starting source list for Farfield. Add, mute, or use only your own sources.",
   "sources": [
     {

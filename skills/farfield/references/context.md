@@ -1,15 +1,27 @@
 # Keep a useful picture of the work
 
-`me.md` is the user's corrected description, preferences and allowed context paths. `state/context.md` is a short working summary for the agent, refreshed before each brief. Neither belongs in the distributed skill or a shared feed.
+`me.md` is the user's corrected description, preferences, and approved context locations. `state/context.md` is a short working summary for the agent, refreshed before each brief. Neither belongs in the distributed skill or a shared feed.
 
-During setup, use the conversation and the permitted project files to identify one to three active projects, their current stage, constraints and decisions. Prefer a current project overview or recent decision note over a pile of old documents. Read at most five files per project and only within the paths the user allowed. Skip secrets and dependency folders. Don't scan other projects or connected services just because access exists.
+Use the conversation, the user's brain dump, and approved context to identify one to three active projects, their current stage, constraints and decisions. List names and dates inside the approved scope where possible. Prefer a current overview or decision note. Read at most five files or records per project across all locations. Skip secrets, dependencies, and links outside the selected scope.
+
+## Read for context
+
+Store one entry per approved place in `me.md`, with the actual path or stable link, what it's for, and any limits the user gave. For example:
+
+> - Local: `/Users/name/projects/kiosk` · Current project notes.
+> - Local: `/Users/name/notes/kiosk.md` · Just this file.
+> - Google Drive: [Kiosk decisions](<folder link>) · This folder only, for recent decision notes.
+
+Existing entries with just local paths still work. An empty section means use the profile only. A provider name, a connected plugin, a source in the public reading list, or a link from an approved document is not permission to read a new place. Never save credentials or access tokens.
+
+For connected apps, use tools that can read within the approved file, folder, page, or other named resource. Never substitute a broad provider search, move up to a parent folder, follow external shortcuts, or change access, files, or account settings. If the session lacks the connector, permission, or a way to restrict the read, skip that location and note the gap in the brief's coverage. Keep its saved scope for later runs; ask for a narrower location only in an interactive session. If the scope is removed from `me.md`, stop reading it and drop its derived context from subsequent summaries.
 
 Write at most 500 words in `state/context.md`, dated, with:
 
 - Each project's name, intended outcome and current stage.
 - Its next unresolved decision or bottleneck, and what new evidence would change the approach.
 - Approaches already tried or understood; avoid rediscovering them.
-- Supporting local paths and document dates, or the dated user statement. Distinguish confirmed facts from inferences and stale information.
+- Supporting file paths or approved resource links and dates, or the dated user statement. Distinguish confirmed facts from inferences and stale information.
 - Two or three research questions derived from those decisions, plus one adjacent mechanism worth exploring.
 
 At each brief, read `me.md` and the previous context summary first, then check permitted files for changes. Update the derived summary with supported changes. The user's explicit corrections override inference. Never silently rewrite `me.md` or turn a speculative interpretation into a new goal. If work appears to have changed, label it tentative, propose a correction after the brief, and use the confirmed goals until corrected. In unattended mode record the uncertainty without asking a question.

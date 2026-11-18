@@ -1,6 +1,6 @@
 # Optional Twitter / X discovery
 
-Offer this once after the four setup choices, or when the user asks about social sources. Use the host's question UI:
+Offer this once after setup has a workspace, or when the user asks about social sources. Use the host's question UI:
 
 “Want to include Twitter/X? It can find firsthand posts related to your work. It needs an OpenRouter account and credits. A small pass is estimated at $0.15–$0.75 per brief, roughly $1–$4 a month for weekly briefs. That is an estimate, not a spending cap.”
 

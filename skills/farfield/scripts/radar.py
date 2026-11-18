@@ -2,7 +2,7 @@
 """Workspace helper. Local setup; fetch/search/version checks use the network. No model calls.
 
   radar.py init <workspace>            create the folder, remember where it is
-  radar.py where                       print the remembered workspace (exit 3 if none)
+  radar.py where [--optional]          print the remembered workspace (exit 3 if none unless optional)
   radar.py sources <workspace>         rewrite sources.md (the readable list) and print it
   radar.py source-mode <workspace> only-mine|curated   choose whether future curated defaults are enabled
   radar.py add <workspace> <url> --name NAME [--kind feed|podcast|channel|site|search]
@@ -632,7 +632,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("init").add_argument("workspace")
-    commands.add_parser("where")
+    commands.add_parser("where").add_argument(
+        "--optional", action="store_true", help="succeed with no output if there is no workspace",
+    )
     commands.add_parser("check").add_argument("pack")
     sources = commands.add_parser("sources")
     sources.add_argument("workspace")
@@ -667,6 +669,8 @@ def main(argv=None):
         elif args.command == "where":
             root = where()
             if root is None:
+                if args.optional:
+                    return 0
                 print("No workspace yet. Run start.", file=sys.stderr)
                 return 3
             print(root)

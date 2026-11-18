@@ -6,7 +6,7 @@ Default is **skip**: an episode without a transcript contributes its show notes 
 
 ## The one question (in start, or when a podcast is added)
 
-Run `AUDIO find` and `AUDIO estimate <workspace>` first so the question has real numbers. Then:
+Run `AUDIO find` and `AUDIO estimate <workspace>` first so the question has real numbers. Ask in the host's structured question UI:
 
 "<N> podcast episodes from the last 30 days have no transcript, about <H> hours. Want me to transcribe them on this computer? It's free and takes one setup: about 3 GB of downloads (a 2.3 GB model plus 650 MB of software)."
 
@@ -30,7 +30,7 @@ If `install` fails, read its message: it says exactly what is missing (Homebrew,
 
 ## Optional cloud choice when connecting OpenRouter
 
-Ask separately: “Now that OpenRouter is connected, do you want to keep transcription local, or use a cloud model for episodes without transcripts?” Explain that cloud transcription sends the audio to OpenRouter and the provider. A yes to Twitter does not mean yes to audio uploads.
+Open a separate picker: “Now that OpenRouter is connected, do you want to keep transcription local, or use a cloud model for episodes without transcripts?” Explain that cloud transcription sends the audio to OpenRouter and the provider. A yes to Twitter does not mean yes to audio uploads.
 
 Show the current choice first as recommended; offer “Compare cloud options” and “Skip audio” alongside it. Record that the offer was answered in `audio-cloud-offer.json` so it is not repeated. No answer leaves the existing setting unchanged. On compare, use the actual selected, unread, uncached episodes and known duration to show:
 

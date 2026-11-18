@@ -14,17 +14,19 @@ Paste this into your agent:
 Set up Farfield for me. Fetch https://farfield.newyorkai.org/install.md with curl (or open it if you can't run commands), read all of it, and follow it: install the skill, ask me the setup questions and wait for my answers, then write my first brief.
 ```
 
-Tell it what you’re working on. It asks a few questions, then reads for 10 to 30 minutes and writes a short brief with source passages, links, and why each idea might matter. If nothing is worth including, it says so.
+Farfield asks where to look for project context. You can name the current project, other folders on your computer, or a specific folder in a connected app like Drive. You can include all of that in a brain dump about what you’re working on. Farfield finds the relevant files and saves the locations you approve in `me.md`. After a few choices, it reads for 10 to 30 minutes and writes a short brief with source passages, links, and why each idea might matter. If nothing is worth including, it says so.
 
-Or install it yourself. In Claude Code:
+In **Claude desktop**, open **Customize → Plugins → + Add → Add marketplace → Add from a repository**. Click **Select a repository**, enter `derek-larson14/farfield`, choose **Use “derek-larson14/farfield”**, and click **Sync**. Under **Discover**, open **Farfield** and click **Add**. No GitHub connection is needed. You can also download [farfield.zip](https://farfield.newyorkai.org/farfield.zip) and select it under **Plugins → + Add → Upload plugin**.
+
+In a new session in the desktop **Code** tab, type `/farfield` and select **farfield:start** to open the setup picker.
+
+In the **Claude Code terminal**, use the hosted marketplace:
 
 ```text
 /plugin marketplace add https://farfield.newyorkai.org/marketplace.json
 /plugin install farfield@farfield
 /farfield:start
 ```
-
-In the Claude desktop app: Customize → Plugins → Add marketplace → `derek-larson14/farfield`, or upload [farfield.zip](https://farfield.newyorkai.org/farfield.zip) on the same page.
 
 In Codex or a terminal: `curl -fsSL https://farfield.newyorkai.org/install.sh | sh`, then `$farfield start` in Codex. The script is [site/install.sh](site/install.sh); read it first if you like.
 
@@ -43,7 +45,7 @@ Optional, paid: Twitter/X and cloud podcast transcription through OpenRouter. Se
 ## Privacy
 
 - Briefs and notes stay in a folder you choose. Nothing is uploaded here.
-- Your agent reads only what you allow: a project folder, and if you say yes, your recent Claude Code and Codex prompts.
+- Your agent reads the project locations you approve. Reading recent Claude Code and Codex prompts is a separate choice.
 - Searches use general descriptions, never your words. [What gets written where](AGENTS.md#what-gets-written-where).
 
 Experimental. [Setup details](AGENTS.md) · [Contributing](CONTRIBUTING.md) · [MIT license](LICENSE) · Built by [Derek Larson](https://dtlarson.com)
